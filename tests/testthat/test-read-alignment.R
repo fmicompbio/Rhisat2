@@ -49,4 +49,20 @@ test_that("correctly formatted input works", {
                        "-2", shQuote(system.file("extdata/reads/reads2.fastq",
                                                  package="Rhisat2")),
                        "-S", shQuote(file.path(tmp, "alignments.sam"))))
+
+    ## single-end reads but with type="paired" should not work
+    expect_error(hisat2(sequences=system.file("extdata/reads/reads1.fastq",
+                                              package="Rhisat2"),
+                        outfile=file.path(tmp, "alignments.sam"),
+                        index=file.path(outdir, "index"), force=TRUE,
+                        execute=FALSE, type="paired"))
+
+    ## paired-end reads but with type="single" should not work
+    expect_error(hisat2(sequences=list(system.file("extdata/reads/reads1.fastq",
+                                                   package="Rhisat2"),
+                                       system.file("extdata/reads/reads2.fastq",
+                                                   package="Rhisat2")),
+                        outfile=file.path(tmp, "alignments.sam"),
+                        index=file.path(outdir, "index"), force=TRUE,
+                        execute=FALSE, type="single"))
 })
