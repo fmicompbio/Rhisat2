@@ -169,7 +169,8 @@ hisat2 <- function(sequences, index, ...,
                                        collapse=","),
                                  " ", sep="")
                 }
-                tmp
+                ## Remove trailing whitespaces
+                gsub(" +$", "", tmp)
             })
 
         if (!is.character(index) || !file.exists(dirname(index))) {
