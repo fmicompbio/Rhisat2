@@ -2,3 +2,6 @@
 
 export(hisat2)
 export(hisat2_build)
+export(hisat2_build_usage)
+export(hisat2_usage)
+export(hisat2_version)

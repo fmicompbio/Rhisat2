@@ -10,8 +10,8 @@
 #' a single comma-separated string (e.g., \code{k=2} is translated into \code{-k
 #' 2}, \code{bmax=100} into \code{--bmax 100}). Some arguments to the HISAT2
 #' binaries will be ignored if they are already handled as explicit function
-#' arguments. See the output of \code{hisat2_usage()} and
-#' \code{hisat2_build_usage()} for details about available parameters.
+#' arguments. See the output of \code{hisat2_build_usage()} for details about
+#' available parameters.
 #'
 #' @param references Character vector. The path to the files containing the
 #'   reference sequences from which to build the HISAT2 index.
@@ -48,7 +48,8 @@
 #'
 hisat2_build <- function(references, outdir, ..., prefix="index",
                          force=FALSE, strict=TRUE, execute=TRUE) {
-    if (strict && (!is.character(references) || !all(file.exists(references)))) {
+    if (strict && (!is.character(references) ||
+                   !all(file.exists(references)))) {
         stop("Argument 'references' has to be a character vector of names ",
              "of existing fasta files for building the sequence index.")
     }
@@ -71,46 +72,69 @@ hisat2_build <- function(references, outdir, ..., prefix="index",
 
 #' Align reads with HISAT2
 #'
-#' @param sequences Character vector (for single-end experiments) or list of two
-#'   character vectors (for paired-end experiments) of file names of fasta or
-#'   fastq files that will be aligned by HISAT2. The character vectors can contain
-#'   more than one file name, in which case the reads will be combined across
-#'   all the provided files in the corresponding vector.
-#' @param index Character scalar, giving the directory where the genome
-#'   index is stored.
-#' @param type Character scalar, either "single" or "paired", giving the type of
-#'   the experiment.
-#' @param outfile (optional) Character scalar, the prefix of the
-#'   alignment files (including the output directory). If not provided, will be
-#'   set to the current directory (\code{./}).
-#' @param force Logical scalar, whether or not to overwrite an existing output
-#'   directory.
-#' @param strict Logical scalar, whether strict checking of input arguments
-#'   should be enforced.
-#' @param execute Logical scalar, whether to execute the command. If FALSE,
-#'   return a string with the shell command.
-#' @param ... Additional arguments provided to STAR in the genome index
-#'   generation.
+#' The function can be used to call the \code{hisat2} binary.
 #'
-#' @author Charlotte Soneson
+#' All additional arguments in \code{...} are interpreted as additional
+#' arguments to the HISAT2 binaries. Any flags are supposed to be represented as
+#' logical values (e.g., \code{quiet=TRUE} will be translated into
+#' \code{--quiet}). Parameters with additional input are supposed to be
+#' character or numeric vectors, and the individual elements are collapsed into
+#' a single comma-separated string (e.g., \code{k=2} is translated into \code{-k
+#' 2}, \code{bmax=100} into \code{--bmax 100}). Some arguments to the HISAT2
+#' binaries will be ignored if they are already handled as explicit function
+#' arguments. See the output of \code{hisat2_usage()} for details about
+#' available parameters.
+#'
+#' @param sequences If \code{type} is \code{single}, a character vector of file
+#'   names if the additional argument \code{c} is FALSE, otherwise a vector of
+#'   read sequences. If \code{type} is \code{paired}, a length-2 list of file
+#'   names or sequences, where the first list item corresponds to the first mate
+#'   pair sequences, and the second list item to the second mate pair sequences.
+#' @param index Character scalar. The path+prefix of the HISAT2 index to align
+#'   against (in the form \code{<path/to/index>/<prefix>}).
+#' @param type Character scalar, either "single" or "paired". If \code{single},
+#'   the input sequences are interpreted as single-end reads. If \code{paired},
+#'   they are supposed to be paired reads.
+#' @param outfile (optional) Character scalar. The path to the output file. If
+#'   missing, the alignments will be returned as an R character vector.
+#' @param force Logical scalar. Whether to force overwriting of \code{outdir}.
+#' @param execute Logical scalar. Whether to execute the assembled shell
+#'   command. If FALSE, return a string with the command.
+#' @param strict Logical scalar. Whether strict checking of input arguments
+#'   should be enforced.
+#' @param ... Additional arguments passed to the binaries.
+#'
+#' @author Charlotte Soneson, based on code from Florian Hahne.
 #'
 #' @export
 #'
-#' @return If \code{execute} is TRUE, invisibly returns the console output of
-#'   running the read alignment. If \code{execute} is FALSE, invisibly returns
-#'   the shell command.
+#' @references
+#' Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low
+#' memory requirements. Nature Methods 12:357-360 (2015).
+#'
+#' @return If \code{execute} is TRUE, the output generated by calling the
+#'   \code{hisat2} binary. If \code{execute} is FALSE, the \code{hisat2}
+#'   command.
 #'
 #' @examples
-#' \dontrun{
-#' starAlign(readFilesIn="", genomeDir="genome", type="single",
-#'           outFileNamePrefix="output/sample1")
-#' }
+#' tmp <- tempdir()
+#' refs <- dir(system.file(package="Rhisat2", "extdata/refs"), full=TRUE)
+#' x <- hisat2_build(references=refs, outdir=file.path(tmp, "index"),
+#'                   force=TRUE)
+#' head(x)
+#' dir(file.path(tmp, "index"))
+#'
 hisat2 <- function(sequences, index, ...,
-                   type=c("single", "paired", "crossbow"), outfile,
+                   type=c("single", "paired"), outfile,
                    force=FALSE, strict=TRUE, execute=TRUE) {
     type <- match.arg(type)
     args <- list(...)
-    args <- args[setdiff(names(args), c("1", "2", "12"))]
+
+    ## The read files and the index  are given by the 'sequences' and 'index'
+    ## arguments, so don't specify them separately.
+    args <- args[setdiff(names(args), c("1", "2", "U", "x"))]
+
+    ## Input sequences given directly as string?
     seqIn <- !is.null(args[["c"]]) && args[["c"]]
     seqArg <- ""
     if (strict) {
@@ -124,7 +148,8 @@ hisat2 <- function(sequences, index, ...,
                          "a character of read sequences if the additional ",
                          "argument c==TRUE.")
                 }
-                paste(shQuote(path.expand(sequences)), collapse=",")
+                paste("-U", paste(shQuote(path.expand(sequences)),
+                                  collapse=","))
             },
             paired={
                 if (!is.list(sequences) || length(sequences) != 2) {
@@ -132,7 +157,7 @@ hisat2 <- function(sequences, index, ...,
                 }
                 tmp <- NULL
                 for (i in seq_len(2)) {
-                    if(!is.character(sequences[[i]]) ||
+                    if (!is.character(sequences[[i]]) ||
                        (!seqIn && !all(file.exists(sequences[[i]])))) {
                         stop("Argument 'sequences[[", i, "]]' has to be a ",
                              "character vector of filenames to align ",
@@ -145,13 +170,6 @@ hisat2 <- function(sequences, index, ...,
                                  " ", sep="")
                 }
                 tmp
-            },
-            crossbow={
-                if(!is.character(sequences) || (!seqIn && !all(file.exists(sequences))))
-                    stop("Argument 'sequences' has to be a character vector of filenames ",
-                         "to align against the bowtie index or a character of read ",
-                         "sequences if the additional argument c==TRUE.")
-                paste("-12 ", paste(shQuote(path.expand(sequences)), collapse=","))
             })
 
         if (!is.character(index) || !file.exists(dirname(index))) {
@@ -161,31 +179,55 @@ hisat2 <- function(sequences, index, ...,
     }
     outfile <- if (!missing(outfile)) {
         if (strict && (!is.character(outfile) || length(outfile) != 1)) {
-            stop("Argument 'outfile' must be a character scalar giving the output ",
-                 "file name to store the HISAT2 alignments in.")
+            stop("Argument 'outfile' must be a character scalar giving the ",
+                 "output file name to store the HISAT2 alignments in.")
         }
         if (strict && (file.exists(outfile) && !force)) {
             stop("File '", outfile, "' exists. Use 'force=TRUE' to overwrite.")
         }
-        sprintf(" %s", shQuote(path.expand(outfile)))
+        sprintf("-S %s", shQuote(path.expand(outfile)))
     } else {
         ""
     }
 
-    args <- sprintf("%s %s %s %s", .createFlags(args),
+    args <- sprintf("%s -x %s %s %s", .createFlags(args),
                     shQuote(path.expand(index)), seqArg, outfile)
 
     return(invisible(.hisat2Bin("hisat2", args, execute=execute)))
 }
 
+#' Print usage of hisat2-build
+#'
+#' @export
+#'
+#' @author Charlotte Soneson
+#'
+#' @examples
+#' hisat2_build_usage()
 hisat2_build_usage <- function() {
     print(.hisat2Bin(bin="hisat2-build", args="--help", execute=TRUE))
 }
 
+#' Print usage of hisat2
+#'
+#' @export
+#'
+#' @author Charlotte Soneson
+#'
+#' @examples
+#' hisat2_usage()
 hisat2_usage <- function() {
     print(.hisat2Bin(bin="hisat2", args="--help", execute=TRUE))
 }
 
+#' Print HISAT2 version
+#'
+#' @export
+#'
+#' @author Charlotte Soneson
+#'
+#' @examples
+#' hisat2_version()
 hisat2_version <- function() {
     print(.hisat2Bin(bin="hisat2", args="--version", execute=TRUE))
 }

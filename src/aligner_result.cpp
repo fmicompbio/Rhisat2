@@ -105,7 +105,7 @@ void AlnRes::setShape(
 	// TODO: The division of labor between the aligner and the AlnRes is not
 	// clean.  Perhaps the trimming and *all* of its side-effects should be
 	// handled by the aligner.
-    
+
     // daehwan - check this out - this doesn't seem to work with SAWHI
 	// size_t trimBeg = fw ? trim5p : trim3p;
     size_t trimBeg = trim5p;
@@ -175,8 +175,8 @@ void AlnRes::init(
         assert(ned_node_ != NULL && aed_node_ != NULL);
         ned_ = &(ned_node_->payload);
         aed_ = &(aed_node_->payload);
-    }    
-    
+    }
+
 	rdlen_  = rdlen;
     rdid_   = rdid;
 	rdrows_ = rdlen;
@@ -230,7 +230,7 @@ void AlnRes::init(
 		trim5p,         // # poss trimmed form 5p end during alignment
 		trim3p);        // # poss trimmed form 3p end during alignment
 	shapeSet_ = true;
-    
+
     num_spliced_ = 0;
     for(size_t i = 0; i < ned_->size(); i++) {
         if((*ned_)[i].type == EDIT_TYPE_SPL) {
@@ -297,7 +297,7 @@ void AlnRes::clipRight(size_t rd_amt, size_t rf_amt) {
  * there isn't any other clipping.
  *
  * Note that all clipping is expressed in terms of read positions.  So if there
- * are reference gaps in the overhanging portion, we must 
+ * are reference gaps in the overhanging portion, we must
  */
 void AlnRes::clipOutside(bool soft, TRefOff refi, TRefOff reff) {
 	// Overhang on LHS
@@ -381,7 +381,7 @@ bool AlnRes::overlap(AlnRes& res) {
 	// Reference and strand are the same and hulls overlap.  Now go read
 	// position by read position testing if any align identically with the
 	// reference.
-	
+
 	// Edits are ordered and indexed from 5' to 3' to start with.  We
 	// reorder them to go from left to right along the Watson strand.
 	if(!fw()) {
@@ -528,7 +528,7 @@ bool AlnRes::matchesRef(
         assert_lt(trim3p_, rdlen);
 		Edit::invertPoss(const_cast<EList<Edit>&>(*ned_), rdlen - trim5p_ - trim3p_, false);
 	}
-    
+
 	// Adjust reference string length according to edits
 #ifndef NDEBUG
     if(reflens.size() == 1) {
@@ -562,7 +562,7 @@ bool AlnRes::matchesRef(
         assert_leq(off, 16);
         raw_refbuf.append(raw_refbuf2.wbuf() + off, reflens[i]);
     }
-    char *refbuf = raw_refbuf.wbuf();    
+    char *refbuf = raw_refbuf.wbuf();
 	size_t trim5 = 0, trim3 = 0;
 	if(trimSoft_) {
 		trim5 += trim5p_;
@@ -1264,7 +1264,7 @@ bool AlnFlags::printYF(BTString& o, bool first) const {
 	else if(!nfilt_  ) flag = "NS";
 	else if(!scfilt_ ) flag = "SC";
 	else if(!qcfilt_ ) flag = "QC";
-	if(flag > 0) {
+	if(flag[0] != '\0') {
 		if(!first) o.append('\t');
 		o.append("YF:Z:");
 		o.append(flag);
@@ -1338,7 +1338,7 @@ int main() {
 			Coord(0, 0, true),
 			false);
 		assert(res1.overlap(res2));
-		
+
 		// Try again, but using the redundant-alignment database
 		RedundantAlns ra;
 		ra.reset();
@@ -2021,7 +2021,7 @@ int main() {
 		ra.add(res1);
 		assert(ra.overlap(res1));
 		assert(!ra.overlap(res2));
-		
+
 		char buf1[1024];
 		res1.printCigar(false, false, false, op, run, NULL, buf1);
 		assert_eq(0, strcmp(buf1, "5M2I3M"));
@@ -2080,7 +2080,7 @@ int main() {
 			NULL,
 			Coord(0, -1, true),
 			false);
-		
+
 		char buf[1024];
 		res.printCigar(false, false, false, op, run, NULL, buf);
 		assert_eq(0, strcmp(buf, "10M"));
@@ -2088,7 +2088,7 @@ int main() {
 		assert_eq(0, strcmp(buf, "1X4=1X4="));
 		res.printMD(false, false, op, ch, run, NULL, buf);
 		assert_eq(0, strcmp(buf, "0N4C4"));
-		
+
 		#if 0
 		AlnRes res2(res);
 		// Now soft-clip away the overhang
