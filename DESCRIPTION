@@ -11,6 +11,8 @@ Encoding: UTF-8
 RoxygenNote: 6.1.0
 Suggests: testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    BiocStyle
 VignetteBuilder: knitr
 biocViews: Alignment, Sequencing
+

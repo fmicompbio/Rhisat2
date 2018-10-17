@@ -1,12 +1,15 @@
 ---
 title: "Aligning reads with Rhisat2"
 author: "Charlotte Soneson"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+package: Rhisat2
+output: 
+    BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Rhisat2}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+    %\VignetteIndexEntry{Rhisat2}
+    %\VignetteEncoding{UTF-8}  
+    %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -16,4 +19,43 @@ knitr::opts_chunk$set(
 )
 ```
 
-Here will be some text...
+The `r Biocpkg("Rhisat2")` package provides an interface to the
+[hisat2](https://ccb.jhu.edu/software/hisat2/index.shtml) short-read aligner
+software.
+
+To build an index, use the `hisat2_build` function. 
+
+```{r}
+library(Rhisat2)
+```
+
+```{r}
+list.files(system.file("extdata/refs", package="Rhisat2"))
+refs <- list.files(system.file("extdata/refs", package="Rhisat2"), 
+                   full.names=TRUE)
+td <- tempdir()
+hisat2_build(references=refs, outdir=td, prefix="myindex", 
+             force=TRUE, strict=TRUE, execute=TRUE)
+```
+
+```{r}
+list.files(system.file("extdata/reads", package="Rhisat2"))
+reads <- list.files(system.file("extdata/reads", package="Rhisat2"),
+                    pattern="\\.fastq$", full.names=TRUE)
+hisat2(sequences=as.list(reads), index=file.path(td, "myindex"), 
+       type="paired", outfile=file.path(td, "out.sam"), 
+       force=TRUE, strict=TRUE, execute=TRUE)
+```
+
+```{r}
+hisat2_version()
+```
+
+```{r}
+hisat2_build_usage()
+```
+
+```{r}
+hisat2_usage()
+```
+
