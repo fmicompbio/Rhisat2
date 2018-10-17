@@ -75,7 +75,7 @@
                                         sprintf("--%s", x)), "")
     flags <- paste(flags, paste(fnames,
                                 vapply(flagList[!logFlags], paste,
-                                       collapse=" ", ""),
+                                       collapse=",", ""),
                                 collapse=" ", sep=" "), collapse=" ")
     return(gsub("^ *| *$", "", flags))
 }

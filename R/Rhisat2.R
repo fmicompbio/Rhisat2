@@ -144,7 +144,7 @@ hisat2 <- function(sequences, index, ...,
                 if (!is.character(sequences) ||
                     (!seqIn && !all(file.exists(sequences)))) {
                     stop("Argument 'sequences' has to be a character vector ",
-                         "of filenames to align against the bowtie index or ",
+                         "of filenames to align against the HISAT2 index or ",
                          "a character of read sequences if the additional ",
                          "argument c==TRUE.")
                 }
