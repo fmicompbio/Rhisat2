@@ -22,7 +22,7 @@
 #' memory requirements. Nature Methods 12:357-360 (2015).
 #'
 #' @return Nothing is returned, but the splice junction coordinates are written
-#'   to "outfile".
+#'   to \code{outfile}.
 #'
 extract_splice_sites <- function(features, outfile, min_length=5) {
     ## Create TxDb object from the input features
