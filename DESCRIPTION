@@ -15,4 +15,5 @@ Suggests: testthat,
     BiocStyle
 VignetteBuilder: knitr
 biocViews: Alignment, Sequencing
-
+Imports: GenomicFeatures,
+    SGSeq

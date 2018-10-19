@@ -1,0 +1,68 @@
+#' Extract splice sites from annotation
+#'
+#' This function extracts splice sites from an annotation object (a gtf/gff3
+#' file, a \code{GRanges} object or a \code{TxDb} object) and saves them in a
+#' text file formatted such that it can be directly used to improve genome
+#' alignments with hisat2, by providing it as the argument
+#' \code{known-splicesite-infile}.
+#'
+#' @param features Either the path to a gtf/gff3 file containing the genomic
+#'   features, a GRanges object or a TxDb object.
+#' @param outfile Character scalar. The path to a text file where the extracted
+#'   splice sites will be written.
+#' @param min_length Integer scalar. Junctions corresponding to introns below
+#'   this size will not be reported. The default setting in hisat2 is 5.
+#'
+#' @author Charlotte Soneson
+#'
+#' @export
+#'
+#' @references
+#' Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low
+#' memory requirements. Nature Methods 12:357-360 (2015).
+#'
+#' @return Nothing is returned, but the splice junction coordinates are written
+#'   to "outfile".
+#'
+extract_splice_sites <- function(features, outfile, min_length=5) {
+    ## Create TxDb object from the input features
+    if (is(features, "character")) {
+        if (!file.exists(features)) {
+            stop("'features' is a character string, but the corresponding ",
+                 "file does not exist.")
+        }
+        tryCatch({
+            txdb <- GenomicFeatures::makeTxDbFromGFF(features, format = "auto")
+        }, error = function(e) {
+            stop("'features' is a character string corresponding to an ",
+                 "existing file, but the file is not compatible with ",
+                 "'makeTxDbFromGFF'.")
+        })
+    } else if (is(features, "TxDb")) {
+        txdb <- features
+    } else if (is(features, "GRanges")) {
+        txdb <- GenomicFeatures::makeTxDbFromGRanges(features)
+    } else {
+        stop("The 'features' argument is not in one of the supported ",
+             "formats (path to gtf/gff3 file, TxDb, GRanges).")
+    }
+
+    ## Extract junctions
+    txf <- SGSeq::convertToTxFeatures(txdb)
+    txf <- txf[type(txf) == "J"]
+
+    ## hisat2 keeps only junctions where the intron is at least a certain length
+    ## (5bp by default, note that width() returns the intron length + the two
+    ## flanking bases)
+    txf <- txf[width(txf) >= (min_length + 2)]
+
+    ## Save junctions to a text file
+    df <- data.frame(chr = seqnames(txf), start = start(txf) - 1,
+                     end = end(txf) - 1, strand = strand(txf))
+    df <- df[order(df$start, df$end, df$strand), ]
+    write.table(
+        df, file = outfile,
+        row.names = FALSE, col.names = FALSE, quote = FALSE, sep = "\t"
+    )
+
+}

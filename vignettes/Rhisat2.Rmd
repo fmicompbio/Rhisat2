@@ -33,7 +33,11 @@ library(Rhisat2)
 To build an index for the alignment, use the `hisat2_build` function. You need
 to provide one or more fasta file with reference sequences, as well as an output
 directory where the index will be stored, and a "prefix" (that will determine
-the name of the index files in the output directory).
+the name of the index files in the output directory). Any additional arguments
+to the `hisat2-build` binary can also be supplied to the function (see
+`hisat2_build_usage()` or
+[https://ccb.jhu.edu/software/hisat2/manual.shtml#the-hisat2-build-indexer](https://ccb.jhu.edu/software/hisat2/manual.shtml#the-hisat2-build-indexer)
+for an overview of the available options).
 
 The package contains three example reference sequences, corresponding to short
 pieces of three different chromosomes. We show how to create an index (named
@@ -75,6 +79,11 @@ hisat2(sequences=as.list(reads), index=file.path(td, "myindex"),
        type="paired", outfile=file.path(td, "out.sam"), 
        force=TRUE, strict=TRUE, execute=TRUE)
 ```
+
+As for `hisat2_build()`, any additional arguments to the `hisat2` binary can be
+provided to the `hisat2()` function (see `hisat2_usage()` or
+[https://ccb.jhu.edu/software/hisat2/manual.shtml#running-hisat2](https://ccb.jhu.edu/software/hisat2/manual.shtml#running-hisat2)
+for an overview of the available options).
 
 # Miscellaneous helper functions
 
