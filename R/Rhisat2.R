@@ -199,9 +199,12 @@ hisat2 <- function(sequences, index, ...,
 
 #' Print usage of hisat2-build
 #'
+#' @author Charlotte Soneson
+#'
 #' @export
 #'
-#' @author Charlotte Soneson
+#' @return No value is returned, the usage of \code{hisat2_build} is printed to
+#'   the console.
 #'
 #' @examples
 #' hisat2_build_usage()
@@ -211,9 +214,12 @@ hisat2_build_usage <- function() {
 
 #' Print usage of hisat2
 #'
+#' @author Charlotte Soneson
+#'
 #' @export
 #'
-#' @author Charlotte Soneson
+#' @return No value is returned, the usage of \code{hisat2} is printed to the
+#'   console.
 #'
 #' @examples
 #' hisat2_usage()
@@ -223,9 +229,12 @@ hisat2_usage <- function() {
 
 #' Print HISAT2 version
 #'
+#' @author Charlotte Soneson
+#'
 #' @export
 #'
-#' @author Charlotte Soneson
+#' @return No value is returned, the version information for \code{hisat2} is
+#'   printed to the console.
 #'
 #' @examples
 #' hisat2_version()

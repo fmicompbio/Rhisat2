@@ -6,6 +6,10 @@
 \usage{
 hisat2_version()
 }
+\value{
+No value is returned, the version information for \code{hisat2} is
+  printed to the console.
+}
 \description{
 Print HISAT2 version
 }

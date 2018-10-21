@@ -18,4 +18,6 @@ VignetteBuilder: knitr
 biocViews: Alignment, Sequencing
 Imports: GenomicFeatures,
     SGSeq,
-    GenomicRanges
+    GenomicRanges,
+    methods,
+    utils

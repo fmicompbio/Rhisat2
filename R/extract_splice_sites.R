@@ -26,10 +26,12 @@
 #' @importFrom GenomicFeatures makeTxDbFromGFF
 #' @importFrom SGSeq convertToTxFeatures type
 #' @importFrom GenomicRanges start end width seqnames strand
+#' @importFrom methods is
+#' @importFrom utils write.table
 #'
 extract_splice_sites <- function(features, outfile, min_length=5) {
     ## Create TxDb object from the input features
-    if (is(features, "character")) {
+    if (methods::is(features, "character")) {
         if (!file.exists(features)) {
             stop("'features' is a character string, but the corresponding ",
                  "file does not exist.")
@@ -41,9 +43,9 @@ extract_splice_sites <- function(features, outfile, min_length=5) {
                  "existing file, but the file is not compatible with ",
                  "'makeTxDbFromGFF'.")
         })
-    } else if (is(features, "TxDb")) {
+    } else if (methods::is(features, "TxDb")) {
         txdb <- features
-    } else if (is(features, "GRanges")) {
+    } else if (methods::is(features, "GRanges")) {
         txdb <- GenomicFeatures::makeTxDbFromGRanges(features)
     } else {
         stop("The 'features' argument is not in one of the supported ",
@@ -66,7 +68,7 @@ extract_splice_sites <- function(features, outfile, min_length=5) {
                      strand = GenomicRanges::strand(txf),
                      stringsAsFactors = FALSE)
     df <- df[order(df$chr, df$start, df$end, df$strand), ]
-    write.table(
+    utils::write.table(
         df, file = outfile,
         row.names = FALSE, col.names = FALSE, quote = FALSE, sep = "\t"
     )

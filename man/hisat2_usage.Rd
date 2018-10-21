@@ -6,6 +6,10 @@
 \usage{
 hisat2_usage()
 }
+\value{
+No value is returned, the usage of \code{hisat2} is printed to the
+  console.
+}
 \description{
 Print usage of hisat2
 }

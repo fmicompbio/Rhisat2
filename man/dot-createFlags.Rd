@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{flagList}{A named list of argument values. Vectors will be collapsed
-and separated by a space}
+and separated by a comma.}
 }
 \value{
 A character string with the arguments and their values.
@@ -18,7 +18,7 @@ Given a named list of argument values, generate a single character string
 containing all arguments and values, separated by single spaces. Logical
 values imply that the argument is either included (without a value) or
 excluded in the character string. For vector-valued arguments, the values
-will be separated by single spaces in the final string.
+will be comma separated in the final string.
 }
 \details{
 Adapted from the Rbowtie package

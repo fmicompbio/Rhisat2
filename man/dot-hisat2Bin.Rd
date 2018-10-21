@@ -8,10 +8,10 @@
   execute = TRUE)
 }
 \arguments{
-\item{bin}{The name of the binary, either hisat2 or hisat2-build}
+\item{bin}{The name of the binary, either hisat2 or hisat2-build.}
 
 \item{args}{A character string containing the arguments that will be passed
-to the binary}
+to the binary.}
 
 \item{execute}{Logical scalar, whether to execute the command. If FALSE,
 return a string with the shell command.}

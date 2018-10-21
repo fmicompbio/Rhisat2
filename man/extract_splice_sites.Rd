@@ -14,7 +14,7 @@ features, a GRanges object or a TxDb object.}
 splice sites will be written.}
 
 \item{min_length}{Integer scalar. Junctions corresponding to introns below
-this size will not be reported. The default setting in hisat2 is 5.}
+this size will not be reported. The default setting in HISAT2 is 5.}
 }
 \value{
 Nothing is returned, but the splice junction coordinates are written
@@ -23,9 +23,8 @@ Nothing is returned, but the splice junction coordinates are written
 \description{
 This function extracts splice sites from an annotation object (a gtf/gff3
 file, a \code{GRanges} object or a \code{TxDb} object) and saves them in a
-text file formatted such that it can be directly used to improve genome
-alignments with hisat2, by providing it as the argument
-\code{known-splicesite-infile}.
+text file formatted such that it can be directly used with HISAT2, by
+providing it as the argument \code{known-splicesite-infile}.
 }
 \references{
 Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low
