@@ -40,11 +40,12 @@
 #'
 #' @examples
 #' tmp <- tempdir()
-#' refs <- dir(system.file(package="Rhisat2", "extdata/refs"), full=TRUE)
+#' refs <- list.files(system.file(package="Rhisat2", "extdata/refs"),
+#'                    full.names=TRUE, pattern="\\.fa$")
 #' x <- hisat2_build(references=refs, outdir=file.path(tmp, "index"),
 #'                   force=TRUE)
 #' head(x)
-#' dir(file.path(tmp, "index"))
+#' list.files(file.path(tmp, "index"))
 #'
 hisat2_build <- function(references, outdir, ..., prefix="index",
                          force=FALSE, strict=TRUE, execute=TRUE) {
@@ -118,11 +119,14 @@ hisat2_build <- function(references, outdir, ..., prefix="index",
 #'
 #' @examples
 #' tmp <- tempdir()
-#' refs <- dir(system.file(package="Rhisat2", "extdata/refs"), full=TRUE)
-#' x <- hisat2_build(references=refs, outdir=file.path(tmp, "index"),
-#'                   force=TRUE)
-#' head(x)
-#' dir(file.path(tmp, "index"))
+#' refs <- list.files(system.file("extdata/refs", package="Rhisat2"),
+#'                    full.names=TRUE, pattern="\\.fa$")
+#' hisat2_build(references=refs, outdir=file.path(tmp, "index"),
+#'              force=TRUE, prefix="index")
+#' reads <- list.files(system.file("extdata/reads", package="Rhisat2"),
+#'                     full.names=TRUE, pattern="\\.fastq$")
+#' hisat2(sequences=as.list(reads), index=file.path(tmp, "index/index"),
+#'        type="paired", outfile=file.path(tmp, "out.sam"), force=TRUE)
 #'
 hisat2 <- function(sequences, index, ...,
                    type=c("single", "paired"), outfile,
