@@ -4,11 +4,11 @@
 #'
 #' @keywords internal
 #'
-#' @param bin The name of the binary, either hisat2 or hisat2-build
+#' @param bin The name of the binary, either hisat2 or hisat2-build.
 #' @param execute Logical scalar, whether to execute the command. If FALSE,
 #'   return a string with the shell command.
 #' @param args A character string containing the arguments that will be passed
-#'   to the binary
+#'   to the binary.
 #'
 #' @return If \code{execute} is TRUE, returns the console output of running the
 #'   hisat2 command. If \code{execute} is FALSE, returns the shell command.
@@ -33,14 +33,14 @@
 #' containing all arguments and values, separated by single spaces. Logical
 #' values imply that the argument is either included (without a value) or
 #' excluded in the character string. For vector-valued arguments, the values
-#' will be separated by single spaces in the final string.
+#' will be comma separated in the final string.
 #'
 #' Adapted from the Rbowtie package
 #'
 #' @keywords internal
 #'
 #' @param flagList A named list of argument values. Vectors will be collapsed
-#'   and separated by a space
+#'   and separated by a comma.
 #'
 #' @return A character string with the arguments and their values.
 #'

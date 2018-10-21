@@ -2,16 +2,15 @@
 #'
 #' This function extracts splice sites from an annotation object (a gtf/gff3
 #' file, a \code{GRanges} object or a \code{TxDb} object) and saves them in a
-#' text file formatted such that it can be directly used to improve genome
-#' alignments with hisat2, by providing it as the argument
-#' \code{known-splicesite-infile}.
+#' text file formatted such that it can be directly used with HISAT2, by
+#' providing it as the argument \code{known-splicesite-infile}.
 #'
 #' @param features Either the path to a gtf/gff3 file containing the genomic
 #'   features, a GRanges object or a TxDb object.
 #' @param outfile Character scalar. The path to a text file where the extracted
 #'   splice sites will be written.
 #' @param min_length Integer scalar. Junctions corresponding to introns below
-#'   this size will not be reported. The default setting in hisat2 is 5.
+#'   this size will not be reported. The default setting in HISAT2 is 5.
 #'
 #' @author Charlotte Soneson
 #'
@@ -27,6 +26,7 @@
 #' @importFrom GenomicFeatures makeTxDbFromGFF
 #' @importFrom SGSeq convertToTxFeatures type
 #' @importFrom GenomicRanges start end width seqnames strand
+#'
 extract_splice_sites <- function(features, outfile, min_length=5) {
     ## Create TxDb object from the input features
     if (is(features, "character")) {
@@ -60,11 +60,12 @@ extract_splice_sites <- function(features, outfile, min_length=5) {
     txf <- txf[GenomicRanges::width(txf) >= (min_length + 2)]
 
     ## Save junctions to a text file
-    df <- data.frame(chr = GenomicRanges::seqnames(txf),
+    df <- data.frame(chr = as.character(GenomicRanges::seqnames(txf)),
                      start = GenomicRanges::start(txf) - 1,
                      end = GenomicRanges::end(txf) - 1,
-                     strand = GenomicRanges::strand(txf))
-    df <- df[order(df$start, df$end, df$strand), ]
+                     strand = GenomicRanges::strand(txf),
+                     stringsAsFactors = FALSE)
+    df <- df[order(df$chr, df$start, df$end, df$strand), ]
     write.table(
         df, file = outfile,
         row.names = FALSE, col.names = FALSE, quote = FALSE, sep = "\t"
