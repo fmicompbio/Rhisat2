@@ -23,6 +23,12 @@
 #' @return Nothing is returned, but the splice junction coordinates are written
 #'   to \code{outfile}.
 #'
+#' @examples
+#' tmp <- tempfile()
+#' extract_splice_sites(features=system.file("extdata/refs/genes.gtf",
+#'                                           package="Rhisat2"),
+#'                      outfile=tmp, min_length=5)
+#'
 #' @importFrom GenomicFeatures makeTxDbFromGFF
 #' @importFrom SGSeq convertToTxFeatures type
 #' @importFrom GenomicRanges start end width seqnames strand

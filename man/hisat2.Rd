@@ -56,11 +56,14 @@ available parameters.
 }
 \examples{
 tmp <- tempdir()
-refs <- dir(system.file(package="Rhisat2", "extdata/refs"), full=TRUE)
-x <- hisat2_build(references=refs, outdir=file.path(tmp, "index"),
-                  force=TRUE)
-head(x)
-dir(file.path(tmp, "index"))
+refs <- list.files(system.file("extdata/refs", package="Rhisat2"),
+                   full.names=TRUE, pattern="\\\\.fa$")
+hisat2_build(references=refs, outdir=file.path(tmp, "index"),
+             force=TRUE, prefix="index")
+reads <- list.files(system.file("extdata/reads", package="Rhisat2"),
+                    full.names=TRUE, pattern="\\\\.fastq$")
+hisat2(sequences=as.list(reads), index=file.path(tmp, "index/index"),
+       type="paired", outfile=file.path(tmp, "out.sam"), force=TRUE)
 
 }
 \references{

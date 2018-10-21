@@ -49,11 +49,12 @@ available parameters.
 }
 \examples{
 tmp <- tempdir()
-refs <- dir(system.file(package="Rhisat2", "extdata/refs"), full=TRUE)
+refs <- list.files(system.file(package="Rhisat2", "extdata/refs"),
+                   full.names=TRUE, pattern="\\\\.fa$")
 x <- hisat2_build(references=refs, outdir=file.path(tmp, "index"),
                   force=TRUE)
 head(x)
-dir(file.path(tmp, "index"))
+list.files(file.path(tmp, "index"))
 
 }
 \references{

@@ -26,6 +26,13 @@ file, a \code{GRanges} object or a \code{TxDb} object) and saves them in a
 text file formatted such that it can be directly used with HISAT2, by
 providing it as the argument \code{known-splicesite-infile}.
 }
+\examples{
+tmp <- tempfile()
+extract_splice_sites(features=system.file("extdata/refs/genes.gtf",
+                                          package="Rhisat2"),
+                     outfile=tmp, min_length=5)
+
+}
 \references{
 Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low
 memory requirements. Nature Methods 12:357-360 (2015).
