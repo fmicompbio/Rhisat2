@@ -46,7 +46,7 @@ pieces of three different chromosomes. We show how to create an index (named
 ```{r}
 list.files(system.file("extdata/refs", package="Rhisat2"))
 refs <- list.files(system.file("extdata/refs", package="Rhisat2"), 
-                   full.names=TRUE)
+                   full.names=TRUE, pattern="\\.fa$")
 td <- tempdir()
 hisat2_build(references=refs, outdir=td, prefix="myindex", 
              force=TRUE, strict=TRUE, execute=TRUE)
@@ -84,6 +84,23 @@ As for `hisat2_build()`, any additional arguments to the `hisat2` binary can be
 provided to the `hisat2()` function (see `hisat2_usage()` or
 [https://ccb.jhu.edu/software/hisat2/manual.shtml#running-hisat2](https://ccb.jhu.edu/software/hisat2/manual.shtml#running-hisat2)
 for an overview of the available options).
+
+With HISAT2, you can provide a file with known splice sites at the alignment
+step, which can help in finding the correct alignment across splice junctions. A
+text file in the requested format can be generated using the
+`extract_splice_sites()` function, starting from an annotation file in gtf or
+gff3 format, or from a `GRanges` or `TxDb` object.
+
+```{r}
+spsfile <- tempfile()
+gtf <- system.file("extdata/refs/genes.gtf", package="Rhisat2")
+extract_splice_sites(features=gtf, outfile=spsfile)
+hisat2(sequences=as.list(reads), index=file.path(td, "myindex"),
+       type="paired", outfile=file.path(td, "out_sps.sam"),
+       `known-splicesite-infile`=spsfile, 
+       force=TRUE, strict=TRUE, execute=TRUE)
+```
+
 
 # Miscellaneous helper functions
 

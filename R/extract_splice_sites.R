@@ -24,6 +24,9 @@
 #' @return Nothing is returned, but the splice junction coordinates are written
 #'   to \code{outfile}.
 #'
+#' @importFrom GenomicFeatures makeTxDbFromGFF
+#' @importFrom SGSeq convertToTxFeatures type
+#' @importFrom GenomicRanges start end width seqnames strand
 extract_splice_sites <- function(features, outfile, min_length=5) {
     ## Create TxDb object from the input features
     if (is(features, "character")) {
@@ -49,16 +52,18 @@ extract_splice_sites <- function(features, outfile, min_length=5) {
 
     ## Extract junctions
     txf <- SGSeq::convertToTxFeatures(txdb)
-    txf <- txf[type(txf) == "J"]
+    txf <- txf[SGSeq::type(txf) == "J"]
 
     ## hisat2 keeps only junctions where the intron is at least a certain length
     ## (5bp by default, note that width() returns the intron length + the two
     ## flanking bases)
-    txf <- txf[width(txf) >= (min_length + 2)]
+    txf <- txf[GenomicRanges::width(txf) >= (min_length + 2)]
 
     ## Save junctions to a text file
-    df <- data.frame(chr = seqnames(txf), start = start(txf) - 1,
-                     end = end(txf) - 1, strand = strand(txf))
+    df <- data.frame(chr = GenomicRanges::seqnames(txf),
+                     start = GenomicRanges::start(txf) - 1,
+                     end = GenomicRanges::end(txf) - 1,
+                     strand = GenomicRanges::strand(txf))
     df <- df[order(df$start, df$end, df$strand), ]
     write.table(
         df, file = outfile,
