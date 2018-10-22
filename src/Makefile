@@ -19,45 +19,38 @@
 #
 # Makefile for hisat2-align, hisat2-build, hisat2-inspect
 #
-# edited for cross-platform compilation as part of Rhisat2:
+# edited as part of Rhisat2:
 # - set BITS=64 (comment parts that are related to setting BITS)
-# - replace 'uname -p' by 'uname -m'
-# - set POPCNT_CAPABILITY = 0 on MACOS
-# - removed files
-#   from BIN_LIST:
-#     bowtie-build-l
-#     bowtie-align-l
-#     bowtie-inspect-l
-#     bowtie-inspect-s
-#   from BIN_LIST_AUX:
-#     bowtie-build-s-debug
-#     bowtie-build-l-debug
-#     bowtie-align-s-debug
-#     bowtie-align-l-debug
-#     bowtie-inspect-s-debug
-#     bowtie-inspect-l-debug
+# - removed files:
+#   from HISAT_BIN_LIST:
+#     hisat2-build-l
+#     hisat2-align-l
+#     hisat2-inspect-s
+#     hisat2-inspect-l
+#   from HISAT2_BIN_LIST_AUX:
+#     hisat2-build-s-debug
+#     hisat2-build-l-debug
+#     hisat2-align-s-debug
+#     hisat2-align-l-debug
+#     hisat2-inspect-s-debug
+#     hisat2-inspect-l-debug
 #   from GENERAL_LIST:
 #     $(wildcard scripts/*.sh)
 #     $(wildcard scripts/*.pl)
-#     $(wildcard scripts/*.py)
-#     $(wildcard indexes/e_coli*)
-#     $(wildcard genomes/NC_008253.fna)
-#     $(wildcard reads/e_coli_1000.*)
-#     $(wildcard reads/e_coli_1000_*)
-#     doc/manual.html
+#     $(wildcard *.py)
+#     $(wildcard hisatgenotype_modules/*.py)
+#     $(wildcard hisatgenotype_scripts/*.py)
+#     doc/manual.inc.html
 #     doc/README
 #     doc/style.css
-#     reads/e_coli_10000snp.fa
-#     reads/e_coli_10000snp.fq
-# - commented unnecessary buld targets
-# - added SpliceMap targets
-# - added installation instructions for bowtie and SpliceMap
-# - added installation targets to 'all'
-#     ../inst/bowtie
-#     ../inst/SpliceMap
-# - added Makefile.win
-#     use $(BINPREF) as path to gcc/g++ (needed to work with gcc-4.9.3-based toolchain)
-#     force 64-bit compilation even in i386 package (WIN = 64)
+#     $(wildcard example/index/*.ht2)
+#     $(wildcard example/reads/*.fa)
+#     example/reference/22_20-21M.fa
+#     example/reference/22_20-21M.snp
+# - commented unnecessary build targets
+# - added installation instructions for hisat2
+# - added installation targets to 'all':
+#     ../inst/hisat2
 
 INC =
 GCC_PREFIX = $(shell dirname `which gcc`)
