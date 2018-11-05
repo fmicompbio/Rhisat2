@@ -1,6 +1,7 @@
 # Based on https://github.com/Bioconductor/GenomicDataCommons/blob/master/appveyor.yml
 # DO NOT CHANGE the "init" and "install" sections below
 
+# Scripts that are called at the very beginning, before repo cloning
 # Download script file from GitHub
 init:
   ps: |
@@ -8,14 +9,19 @@ init:
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
 
+# Scripts that are run after cloning repository
+# To run script as a PowerShell command prepend it with ps:
 install:
   ps: Bootstrap
 
+# Build cache to preserve files/folders between builds
 cache:
   - C:\RLibrary
 
 # Adapt as necessary starting from here
+image: Ubuntu
 
+# To run your custom scripts instead of automatic MSBuild
 build_script:
   # The following configuration will use the development version of Bioconductor.  This
   # is because under the hood, r-appveyor relies on r-travis, and r-travis sets an
@@ -32,6 +38,7 @@ build_script:
   # - travis-tool.sh install_bioc grasp2db
   # - travis-tool.sh install_deps
 
+# To run your custom scripts instead of automatic tests
 test_script:
   - travis-tool.sh run_tests
 
@@ -39,6 +46,7 @@ on_failure:
   - 7z a failure.zip *.Rcheck\*
   - appveyor PushArtifact failure.zip
 
+# Environment variables
 environment:
   global:
     WARNINGS_ARE_ERRORS: 1
@@ -49,6 +57,7 @@ environment:
   matrix:
     - R_VERSION: release
 
+# Artifacts generation
 artifacts:
   - path: '*.Rcheck\**\*.log'
     name: Logs
