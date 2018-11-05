@@ -19,8 +19,6 @@ cache:
   - C:\RLibrary
 
 # Adapt as necessary starting from here
-image: Ubuntu
-
 # To run your custom scripts instead of automatic MSBuild
 build_script:
   # The following configuration will use the development version of Bioconductor.  This
