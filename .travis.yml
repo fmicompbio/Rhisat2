@@ -15,3 +15,4 @@ r_github_packages:
 before_script:
   - R -e 'BiocManager::install(version = "devel", ask = FALSE)'
   - R -e 'BiocManager::valid()'
+
