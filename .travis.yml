@@ -4,7 +4,11 @@ language: r
 
 r: bioc-devel
 warnings_are_errors: false
-cache: packages
+#cache: packages
 
 r_build_args: "--no-manual --no-resave-data"
 r_check_args: "--no-build-vignettes --no-manual --timings"
+
+before_script:
+  - R -e 'BiocManager::install(version = "devel", ask = FALSE)'
+  - R -e 'BiocManager::valid()'
