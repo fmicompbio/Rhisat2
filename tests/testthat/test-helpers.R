@@ -30,4 +30,5 @@ test_that(".hisat2Bin works", {
 test_that("print usage methods work", {
     expect_is(hisat2_build_usage(), "character")
     expect_is(hisat2_usage(), "character")
+    expect_is(hisat2_version(), "character")
 })
