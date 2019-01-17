@@ -56,11 +56,9 @@
 #     force 64-bit compilation even in i386 package (WIN = 64)
 
 INC =
-GCC_PREFIX = $(shell dirname `which gcc`)
-GCC_SUFFIX =
 WIN = 64
-CC = $(BINPREF)/gcc$(GCC_SUFFIX)
-CPP = $(BINPREF)/g++$(GCC_SUFFIX)
+CC = $(BINPREF)/gcc
+CPP = $(BINPREF)/g++
 CXX = $(CPP)
 HEADERS = $(wildcard *.h)
 BOWTIE_MM = 1
@@ -68,24 +66,29 @@ BOWTIE_SHARED_MEM = 0
 BITS=64
 
 # Detect Cygwin or MinGW
-WINDOWS = 0
-CYGWIN = 0
-MINGW = 0
-ifneq (,$(findstring CYGWIN,$(shell uname)))
-	WINDOWS = 1 
-	CYGWIN = 1
-	# POSIX memory-mapped files not currently supported on Windows
-	BOWTIE_MM = 0
-	BOWTIE_SHARED_MEM = 0
-else
-	ifneq (,$(findstring MINGW,$(shell uname)))
-		WINDOWS = 1
-		MINGW = 1
-		# POSIX memory-mapped files not currently supported on Windows
-		BOWTIE_MM = 0
-		BOWTIE_SHARED_MEM = 0
-	endif
-endif
+#WINDOWS = 0
+#CYGWIN = 0
+#MINGW = 0
+#ifneq (,$(findstring CYGWIN,$(shell uname)))
+#	WINDOWS = 1 
+#	CYGWIN = 1
+#	# POSIX memory-mapped files not currently supported on Windows
+#	BOWTIE_MM = 0
+#	BOWTIE_SHARED_MEM = 0
+#else
+#	ifneq (,$(findstring MINGW,$(shell uname)))
+#		WINDOWS = 1
+#		MINGW = 1
+#		# POSIX memory-mapped files not currently supported on Windows
+#		BOWTIE_MM = 0
+#		BOWTIE_SHARED_MEM = 0
+#	endif
+#endif
+WINDOWS = 1
+MINGW = 1
+# POSIX memory-mapped files not currently supported on Windows
+BOWTIE_MM = 0
+BOWTIE_SHARED_MEM = 0
 
 MACOS = 0
 ifneq (,$(findstring Darwin,$(shell uname)))
