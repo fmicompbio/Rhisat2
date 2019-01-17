@@ -55,8 +55,8 @@
 INC =
 GCC_PREFIX = $(shell dirname `which gcc`)
 GCC_SUFFIX =
-CC = $(GCC_PREFIX)/gcc$(GCC_SUFFIX)
-CPP = $(GCC_PREFIX)/g++$(GCC_SUFFIX)
+CC = $(BINPREF)/gcc$(GCC_SUFFIX)
+CPP = $(BINPREF)/g++$(GCC_SUFFIX)
 CXX = $(CPP)
 HEADERS = $(wildcard *.h)
 BOWTIE_MM = 1
