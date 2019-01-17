@@ -1,7 +1,7 @@
 ## Rhisat2
-[![Build Status](https://travis-ci.com/csoneson/Rhisat2.svg?branch=master)](https://travis-ci.com/csoneson/Rhisat2)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/csoneson/Rhisat2?branch=master&svg=true)](https://ci.appveyor.com/project/csoneson/Rhisat2)
-[![Code coverage](https://codecov.io/github/csoneson/Rhisat2/coverage.svg?branch=master)](https://codecov.io/github/csoneson/Rhisat2)
+[![Build Status](https://travis-ci.com/fmicompbio/Rhisat2.svg?branch=master)](https://travis-ci.com/fmicompbio/Rhisat2)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/fmicompbio/Rhisat2?branch=master&svg=true)](https://ci.appveyor.com/project/fmicompbio/Rhisat2)
+[![Code coverage](https://codecov.io/github/fmicompbio/Rhisat2/coverage.svg?branch=master)](https://codecov.io/github/fmicompbio/Rhisat2)
 
 The `Rhisat2` R package provides an R interface to the [`hisat2`](https://ccb.jhu.edu/software/hisat2/index.shtml) spliced short-read aligner by [Kim et al. (2015)](https://www.nature.com/articles/nmeth.3317). The package contains wrapper functions to create a genome index and to perform the read alignment to the generated index.
 

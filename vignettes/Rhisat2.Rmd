@@ -1,6 +1,7 @@
 ---
 title: "Aligning reads with Rhisat2"
 author: "Charlotte Soneson"
+date: "`r Sys.Date()`"
 package: Rhisat2
 output: 
     BiocStyle::html_document
@@ -10,6 +11,7 @@ vignette: >
     %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
+bibliography: rhisat2.bib
 ---
 
 ```{r setup, include = FALSE}
@@ -21,8 +23,8 @@ options(width=100)
 ```
 
 The `r Biocpkg("Rhisat2")` package provides an interface to the
-[hisat2](https://ccb.jhu.edu/software/hisat2/index.shtml) short-read aligner
-software.
+[HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml) short-read aligner
+software [@Kim2015-mu].
 
 ```{r}
 library(Rhisat2)
@@ -88,7 +90,7 @@ for an overview of the available options).
 
 With HISAT2, you can provide a file with known splice sites at the alignment
 step, which can help in finding the correct alignments across known splice
-junctions. A text file in the requested format can be generated using the
+junctions. A text file in the required format can be generated using the
 `extract_splice_sites()` function, starting from an annotation file in gtf or
 gff3 format, or from a `GRanges` or `TxDb` object.
 
@@ -105,7 +107,7 @@ hisat2(sequences=as.list(reads), index=file.path(td, "myindex"),
 
 # Miscellaneous helper functions
 
-To get the version of `hisat2`:
+To get the version of `HISAT2`:
 
 ```{r}
 hisat2_version()
@@ -129,3 +131,4 @@ hisat2_usage()
 sessionInfo()
 ```
 
+# References

@@ -8,7 +8,7 @@ SystemRequirements: GNU make
 Description: An R interface to the HISAT2 spliced short-read aligner by 
     Kim et al. (2015). The package contains wrapper functions to create a 
     genome index and to perform the read alignment to the generated index.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Suggests: testthat,
@@ -22,3 +22,4 @@ Imports: GenomicFeatures,
     GenomicRanges,
     methods,
     utils
+BugReports: https://github.com/fmicompbio/Rhisat2/issues
