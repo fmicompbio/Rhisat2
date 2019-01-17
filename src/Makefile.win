@@ -84,9 +84,9 @@ BITS=64
 #		BOWTIE_SHARED_MEM = 0
 #	endif
 #endif
+# set options manually (uname not available from Rtools)
 WINDOWS = 1
 MINGW = 1
-# POSIX memory-mapped files not currently supported on Windows
 BOWTIE_MM = 0
 BOWTIE_SHARED_MEM = 0
 
