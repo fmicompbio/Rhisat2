@@ -53,7 +53,7 @@ environment:
     USE_RTOOLS: true ## to be able to use Remotes (i.e. packages from non-CRAN sources)
 
   matrix:
-    - R_VERSION: release
+    - R_VERSION: devel
 
 # Artifacts generation
 artifacts:
