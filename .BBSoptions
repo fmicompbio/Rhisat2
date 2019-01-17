@@ -1,0 +1,11 @@
+# The reason this is marked as unsupported on win32 is that we don't want
+# to build the hisat2 binary twice. There is no library code in
+# src/, just the code to build the hisat2 executable. So we mark the package
+# as unsupported on win32 to avoid building it twice. I'm adding this
+# comment so if/when someone notices that the lack of support on win32
+# conflicts with what it says on the package landing page. Basically,
+# the landing page shows the architectures listed in the Archs field of
+# the repository index file (if there is no such field, it assumes the package
+# has no native code and can be run on both sub-archs). 
+UnsupportedPlatforms: win32
+
