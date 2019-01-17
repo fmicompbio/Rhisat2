@@ -48,13 +48,13 @@ on_failure:
 # Environment variables
 environment:
   global:
-    WARNINGS_ARE_ERRORS: 1
+    WARNINGS_ARE_ERRORS:
     _R_CHECK_FORCE_SUGGESTS_: 0
     R_ARCH: x64
     USE_RTOOLS: true ## to be able to use Remotes (i.e. packages from non-CRAN sources)
 
   matrix:
-    - R_VERSION: release
+    - R_VERSION: devel
 
 # Artifacts generation
 artifacts:
