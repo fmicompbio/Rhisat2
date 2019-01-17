@@ -55,6 +55,7 @@
 INC =
 GCC_PREFIX = $(shell dirname `which gcc`)
 GCC_SUFFIX =
+WIN = 64
 CC = $(BINPREF)/gcc$(GCC_SUFFIX)
 CPP = $(BINPREF)/g++$(GCC_SUFFIX)
 CXX = $(CPP)
