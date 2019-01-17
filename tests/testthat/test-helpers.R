@@ -26,3 +26,8 @@ test_that(".hisat2Bin works", {
               "-1 file1 -2 file2")
     )
 })
+
+test_that("print usage methods work", {
+    expect_is(hisat2_build_usage(), "character")
+    expect_is(hisat2_usage(), "character")
+})

@@ -7,12 +7,35 @@ test_that("malformed input gives error", {
         references=system.file("extdata/refs/chr1.fa", package="Rhisat2"),
         outdir=outdir, force=TRUE, execute=TRUE
     )
+
+    ## malformed sequences
     expect_error(hisat2(sequences=TRUE, outfile="file1",
                         index=file.path(outdir, "index")))
+
+    ## malformed outfile
     expect_error(hisat2(sequences=system.file("extdata/reads/reads1.fastq",
                                               package="Rhisat2"),
                         outfile=c("file1", "file2"),
                         index=file.path(outdir, "index")))
+
+    ## malformed sequences, c=TRUE
+    expect_error(hisat2(sequences=list(TRUE, TRUE), outfile="file1", c=TRUE,
+                        type="paired", index=file.path(outdir, "index")))
+
+    ## malformed index
+    expect_error(hisat2(sequences=system.file("extdata/reads/reads1.fastq",
+                                              package="Rhisat2"),
+                        outfile=file.path(tmp, "alignments.sam"),
+                        index=1, force=TRUE,
+                        execute=FALSE, type="single"))
+
+    ## outfile is not overwritten if it exists and force=FALSE
+    write.table(1, file=file.path(tmp, "alignments2.sam"))
+    expect_error(hisat2(sequences=system.file("extdata/reads/reads1.fastq",
+                                              package="Rhisat2"),
+                        outfile=file.path(tmp, "alignments2.sam"),
+                        index=file.path(outdir, "index"), force=FALSE,
+                        execute=FALSE, type="single", strict=TRUE))
 })
 
 test_that("correctly formatted input works", {
@@ -65,4 +88,11 @@ test_that("correctly formatted input works", {
                         outfile=file.path(tmp, "alignments.sam"),
                         index=file.path(outdir, "index"), force=TRUE,
                         execute=FALSE, type="single"))
+
+    ## missing outfile (return alignments as vector)
+    v <- hisat2(sequences=system.file("extdata/reads/reads1.fastq",
+                                      package="Rhisat2"),
+                index=file.path(outdir, "index"))
+    expect_is(v, "character")
+    expect_length(v, 7)
 })

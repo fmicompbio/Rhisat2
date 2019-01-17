@@ -10,7 +10,7 @@ Description: An R interface to the HISAT2 spliced short-read aligner by
     genome index and to perform the read alignment to the generated index.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Suggests: testthat,
     knitr,
     rmarkdown,

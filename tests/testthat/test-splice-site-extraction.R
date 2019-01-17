@@ -38,6 +38,8 @@ test_that("splice site extraction works and is consistent with HISAT2 output", {
   expect_equal(tmp, his)
 
   ## unsupported input format
+  expect_error(extract_splice_sites(features="nonExistingFile.txt",
+                                    outfile=tmp, min_length=5))
   expect_error(extract_splice_sites(features=1:3,
                                     outfile=tmp, min_length=5))
   expect_error(extract_splice_sites(features=system.file("extdata/refs/chr1.fa",
