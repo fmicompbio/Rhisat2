@@ -446,6 +446,7 @@ hisat2-bin: $(BIN_PKG_LIST) $(HISAT2_BIN_LIST) $(HISAT2_BIN_LIST_AUX)
 	mkdir -p ../inst
 	cp hisat2-align-s ../inst/hisat2
 	cp hisat2-build-s ../inst/hisat2-build
+	$(CXX) -shared -fPIC -o Rhisat2.so get_info.cpp
 
 #.PHONY: doc
 #doc: doc/manual.inc.html MANUAL
@@ -466,6 +467,7 @@ clean:
 	hisat2-src.zip hisat2-bin.zip
 	rm -f core.* .tmp.head
 	rm -rf *.dSYM
+	rm -f *.so
 
 .PHONY: push-doc
 push-doc: doc/manual.inc.html
