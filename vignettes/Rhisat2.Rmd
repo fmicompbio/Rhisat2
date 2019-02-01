@@ -26,6 +26,26 @@ The `r Biocpkg("Rhisat2")` package provides an interface to the
 [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml) short-read aligner
 software [@Kim2015-mu].
 
+# Installation
+
+Use the `BiocManager` package to download and install the package from
+Bioconductor as follows:
+
+```{r getPackage, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("Rhisat2")
+```
+
+If required, the latest development version of the package can also be installed
+from GitHub.
+
+```{r, eval = FALSE}
+BiocManager::install("fmicompbio/Rhisat2")
+```
+
+Once the package is installed, load it into your R session:
+
 ```{r}
 library(Rhisat2)
 ```
