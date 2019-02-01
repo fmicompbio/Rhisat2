@@ -1,7 +1,7 @@
 Package: Rhisat2
 Type: Package
 Title: R Wrapper for HISAT2 Aligner
-Version: 0.99.3
+Version: 0.99.4
 Author: Charlotte Soneson
 Maintainer: Charlotte Soneson <charlottesoneson@gmail.com>
 SystemRequirements: GNU make
