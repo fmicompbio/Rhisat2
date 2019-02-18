@@ -468,6 +468,7 @@ clean:
 	rm -f core.* .tmp.head
 	rm -rf *.dSYM
 	rm -f *.so
+	rm -f ../inst/hisat2 ../inst/hisat2-build
 
 .PHONY: push-doc
 push-doc: doc/manual.inc.html
