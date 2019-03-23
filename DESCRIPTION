@@ -1,9 +1,9 @@
 Package: Rhisat2
 Type: Package
 Title: R Wrapper for HISAT2 Aligner
-Version: 0.99.5
-Author: Charlotte Soneson
-Maintainer: Charlotte Soneson <charlottesoneson@gmail.com>
+Version: 0.99.6
+Authors@R: c(person("Charlotte", "Soneson", role = c("aut", "cre"), 
+    email = "charlottesoneson@gmail.com", comment = c(ORCID = "0000-0003-3833-2169")))
 SystemRequirements: GNU make
 Description: An R interface to the HISAT2 spliced short-read aligner by 
     Kim et al. (2015). The package contains wrapper functions to create a 
