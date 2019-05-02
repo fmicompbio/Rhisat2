@@ -1,7 +1,7 @@
 Package: Rhisat2
 Type: Package
 Title: R Wrapper for HISAT2 Aligner
-Version: 0.99.6
+Version: 1.0.0
 Authors@R: c(person("Charlotte", "Soneson", role = c("aut", "cre"), 
     email = "charlottesoneson@gmail.com", comment = c(ORCID = "0000-0003-3833-2169")))
 SystemRequirements: GNU make
