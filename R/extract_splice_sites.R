@@ -76,8 +76,8 @@ extract_splice_sites <- function(features, outfile, min_length=5) {
     df <- df[order(df$chr, df$start, df$end, df$strand), ]
 
     ## Make sure that scientific notation is not used in the text file
-    df$start <- format(df$start, scientific = FALSE)
-    df$end <- format(df$end, scientific = FALSE)
+    df$start <- as.integer(df$start)
+    df$end <- as.integer(df$end)
 
     utils::write.table(
         df, file = outfile,
