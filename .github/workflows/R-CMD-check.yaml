@@ -37,6 +37,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install -y libcurl4-openssl-dev
+          sudo apt-get install glpk-utils libglpk-dev glpk-doc python-glpk
 
       - name: Query dependencies
         run: |
