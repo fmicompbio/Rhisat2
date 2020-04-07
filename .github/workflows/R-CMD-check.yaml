@@ -33,6 +33,11 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
+      - name: Install libcurl
+        if: runner.os == 'Linux'
+        run: |
+          apt-get install -y libcurl4-openssl-dev
+
       - name: Query dependencies
         run: |
           install.packages(c('remotes', 'BiocManager'))
