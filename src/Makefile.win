@@ -54,9 +54,11 @@
 # - added Makefile.win
 #     use $(BINPREF) as path to gcc/g++ (needed to work with gcc-4.9.3-based toolchain)
 #     force 64-bit compilation even in i386 package (WIN = 64)
+#     manually set BINPREF (needed to work with Rtools 4.0)
 
 INC =
 WIN = 64
+BINPREF = c:/rtools40/mingw$(WIN)/bin/
 CC = $(BINPREF)gcc
 CPP = $(BINPREF)g++
 CXX = $(CPP)
