@@ -4,8 +4,15 @@
 \alias{hisat2_build}
 \title{Generate HISAT2 index}
 \usage{
-hisat2_build(references, outdir, ..., prefix = "index", force = FALSE,
-  strict = TRUE, execute = TRUE)
+hisat2_build(
+  references,
+  outdir,
+  ...,
+  prefix = "index",
+  force = FALSE,
+  strict = TRUE,
+  execute = TRUE
+)
 }
 \arguments{
 \item{references}{Character vector. The path to the files containing the

@@ -4,8 +4,16 @@
 \alias{hisat2}
 \title{Align reads with HISAT2}
 \usage{
-hisat2(sequences, index, ..., type = c("single", "paired"), outfile,
-  force = FALSE, strict = TRUE, execute = TRUE)
+hisat2(
+  sequences,
+  index,
+  ...,
+  type = c("single", "paired"),
+  outfile,
+  force = FALSE,
+  strict = TRUE,
+  execute = TRUE
+)
 }
 \arguments{
 \item{sequences}{If \code{type} is \code{single}, a character vector of file

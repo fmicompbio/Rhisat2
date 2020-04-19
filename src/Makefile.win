@@ -58,7 +58,12 @@
 
 INC =
 WIN = 64
-BINPREF = c:/rtools40/mingw$(WIN)/bin/
+# try with empty BINPREF if gcc not found in default Rtools 4.0 folder
+ifeq ($(wildcard c:/rtools40/mingw$(WIN)/bin/gcc.exe),)
+    BINPREF =
+else
+    BINPREF = c:/rtools40/mingw$(WIN)/bin/
+endif
 CC = $(BINPREF)gcc
 CPP = $(BINPREF)g++
 CXX = $(CPP)

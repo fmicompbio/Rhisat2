@@ -4,8 +4,7 @@
 \alias{.hisat2Bin}
 \title{Call the HISAT2 binary with additional arguments.}
 \usage{
-.hisat2Bin(bin = c("hisat2", "hisat2-build"), args = "",
-  execute = TRUE)
+.hisat2Bin(bin = c("hisat2", "hisat2-build"), args = "", execute = TRUE)
 }
 \arguments{
 \item{bin}{The name of the binary, either hisat2 or hisat2-build.}
