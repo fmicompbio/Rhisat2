@@ -73,7 +73,7 @@
       <h1 data-toc-skip>Aligning reads with Rhisat2</h1>
                         <h4 class="author">Charlotte Soneson</h4>
             
-            <h4 class="date">2020-05-03</h4>
+            <h4 class="date">2020-05-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/fmicompbio/Rhisat2/blob/master/vignettes/Rhisat2.Rmd"><code>vignettes/Rhisat2.Rmd</code></a></small>
       <div class="hidden name"><code>Rhisat2.Rmd</code></div>
@@ -110,7 +110,7 @@
 <p>By instead setting <code>execute=FALSE</code> in the command above, <code><a href="../reference/hisat2_build.html">hisat2_build()</a></code> will return the index building shell command for inspection, without executing it.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/hisat2_build.html">hisat2_build</a></span>(<span class="kw">references</span><span class="kw">=</span><span class="no">refs</span>, <span class="kw">outdir</span><span class="kw">=</span><span class="no">td</span>, <span class="kw">prefix</span><span class="kw">=</span><span class="st">"myindex"</span>,
                    <span class="kw">force</span><span class="kw">=</span><span class="fl">TRUE</span>, <span class="kw">strict</span><span class="kw">=</span><span class="fl">TRUE</span>, <span class="kw">execute</span><span class="kw">=</span><span class="fl">FALSE</span>))
-<span class="co">#&gt; [1] "'/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpc3vN2Z/myindex'"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "'/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpLkWfTg/myindex'"</span></pre></body></html></div>
 </div>
 <div id="aligning-reads-to-the-genome-index" class="section level1">
 <h1 class="hasAnchor">
@@ -144,8 +144,8 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/hisat2_version.html">hisat2_version</a></span>()
 <span class="co">#&gt; [1] "/Users/runner/runners/2.169.1/work/_temp/Library/Rhisat2/hisat2 version 2.1.0"                                        </span>
 <span class="co">#&gt; [2] "64-bit"                                                                                                               </span>
-<span class="co">#&gt; [3] "Built on Mac-1440.local"                                                                                              </span>
-<span class="co">#&gt; [4] "Sun May  3 09:20:36 UTC 2020"                                                                                         </span>
+<span class="co">#&gt; [3] "Built on Mac-1674.local"                                                                                              </span>
+<span class="co">#&gt; [4] "Wed May  6 19:03:49 UTC 2020"                                                                                         </span>
 <span class="co">#&gt; [5] "Compiler: InstalledDir: /Applications/Xcode_11.4.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"</span>
 <span class="co">#&gt; [6] "Options: -O3 -m64 -msse2 -funroll-loops -g3 -DPOPCNT_CAPABILITY"                                                      </span>
 <span class="co">#&gt; [7] "Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}"</span></pre></body></html></div>
@@ -312,19 +312,19 @@
 <span class="co">#&gt;  [7] rprojroot_1.3-2             digest_0.6.25               SGSeq_1.23.0               </span>
 <span class="co">#&gt; [10] BiocFileCache_1.13.0        R6_2.4.1                    GenomeInfoDb_1.25.0        </span>
 <span class="co">#&gt; [13] backports_1.1.6             stats4_4.0.0                RSQLite_2.2.0              </span>
-<span class="co">#&gt; [16] evaluate_0.14               httr_1.4.1                  pillar_1.4.3               </span>
+<span class="co">#&gt; [16] evaluate_0.14               httr_1.4.1                  pillar_1.4.4               </span>
 <span class="co">#&gt; [19] zlibbioc_1.35.0             rlang_0.4.6                 GenomicFeatures_1.41.0     </span>
 <span class="co">#&gt; [22] progress_1.2.2              curl_4.3                    blob_1.2.1                 </span>
-<span class="co">#&gt; [25] S4Vectors_0.27.2            RUnit_0.4.32                Matrix_1.2-18              </span>
+<span class="co">#&gt; [25] S4Vectors_0.27.4            RUnit_0.4.32                Matrix_1.2-18              </span>
 <span class="co">#&gt; [28] rmarkdown_2.1               pkgdown_1.5.1.9000          desc_1.2.0                 </span>
 <span class="co">#&gt; [31] BiocParallel_1.23.0         stringr_1.4.0               igraph_1.2.5               </span>
 <span class="co">#&gt; [34] RCurl_1.98-1.2              bit_1.1-15.2                biomaRt_2.45.0             </span>
-<span class="co">#&gt; [37] DelayedArray_0.15.1         compiler_4.0.0              rtracklayer_1.49.0         </span>
+<span class="co">#&gt; [37] DelayedArray_0.15.1         compiler_4.0.0              rtracklayer_1.49.1         </span>
 <span class="co">#&gt; [40] xfun_0.13                   pkgconfig_2.0.3             askpass_1.1                </span>
-<span class="co">#&gt; [43] BiocGenerics_0.35.0         htmltools_0.4.0             SummarizedExperiment_1.19.2</span>
+<span class="co">#&gt; [43] BiocGenerics_0.35.1         htmltools_0.4.0             SummarizedExperiment_1.19.2</span>
 <span class="co">#&gt; [46] openssl_1.4.1               tidyselect_1.0.0            tibble_3.0.1               </span>
 <span class="co">#&gt; [49] GenomeInfoDbData_1.2.3      bookdown_0.18               matrixStats_0.56.0         </span>
-<span class="co">#&gt; [52] IRanges_2.23.2              XML_3.99-0.3                crayon_1.3.4               </span>
+<span class="co">#&gt; [52] IRanges_2.23.4              XML_3.99-0.3                crayon_1.3.4               </span>
 <span class="co">#&gt; [55] dplyr_0.8.5                 dbplyr_1.4.3                GenomicAlignments_1.25.0   </span>
 <span class="co">#&gt; [58] MASS_7.3-51.5               bitops_1.0-6                rappdirs_0.3.1             </span>
 <span class="co">#&gt; [61] grid_4.0.0                  lifecycle_0.2.0             DBI_1.1.0                  </span>
@@ -333,7 +333,7 @@
 <span class="co">#&gt; [70] tools_4.0.0                 bit64_0.9-7                 Biobase_2.49.0             </span>
 <span class="co">#&gt; [73] glue_1.4.0                  purrr_0.3.4                 hms_0.5.3                  </span>
 <span class="co">#&gt; [76] parallel_4.0.0              yaml_2.2.1                  AnnotationDbi_1.51.0       </span>
-<span class="co">#&gt; [79] BiocManager_1.30.10         GenomicRanges_1.41.0        memoise_1.1.0              </span>
+<span class="co">#&gt; [79] BiocManager_1.30.10         GenomicRanges_1.41.1        memoise_1.1.0              </span>
 <span class="co">#&gt; [82] knitr_1.28</span></pre></body></html></div>
 </div>
 <div id="references" class="section level1 unnumbered">
