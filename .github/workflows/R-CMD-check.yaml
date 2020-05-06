@@ -70,6 +70,7 @@ jobs:
         run: |
           print(BiocManager::version())
           saveRDS(remotes::dev_package_deps(dependencies = TRUE, repos = c(getOption('repos'), BiocManager::repositories())), 'depends.Rds', version = 2)
+          print(BiocManager::version())
         shell: Rscript {0}
 
       - name: Cache R packages
