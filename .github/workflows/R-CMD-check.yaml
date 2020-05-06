@@ -116,7 +116,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@master
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-bioc${{ matrix.config.bioc }}-results
           path: check
 
       - name: Test coverage
