@@ -121,14 +121,14 @@
     </div>
 
     <pre class="usage"><span class='fu'>hisat2</span>(
-  <span class='no'>sequences</span>,
-  <span class='no'>index</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"single"</span>, <span class='st'>"paired"</span>),
-  <span class='no'>outfile</span>,
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>sequences</span>,
+  <span class='kw'>index</span>,
+  <span class='kw'>...</span>,
+  type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"single"</span>, <span class='st'>"paired"</span>),
+  <span class='kw'>outfile</span>,
+  force = <span class='fl'>FALSE</span>,
+  strict = <span class='fl'>TRUE</span>,
+  execute = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -193,23 +193,27 @@ character or numeric vectors, and the individual elements are collapsed into
 a single comma-separated string (e.g., <code>k=2</code> is translated into <code>-k
 2</code>, <code>bmax=100</code> into <code>--bmax 100</code>). Some arguments to the HISAT2
 binaries will be ignored if they are already handled as explicit function
-arguments. See the output of <code><a href='hisat2_usage.html'>hisat2_usage()</a></code> for details about
+arguments. See the output of <code>hisat2_usage()</code> for details about
 available parameters.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low
 memory requirements. Nature Methods 12:357-360 (2015).</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Charlotte Soneson, based on code from Florian Hahne.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>tmp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-<span class='no'>refs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/refs"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"Rhisat2"</span>),
-                   <span class='kw'>full.names</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"\\.fa$"</span>)
-<span class='fu'><a href='hisat2_build.html'>hisat2_build</a></span>(<span class='kw'>references</span><span class='kw'>=</span><span class='no'>refs</span>, <span class='kw'>outdir</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>tmp</span>, <span class='st'>"index"</span>),
-             <span class='kw'>force</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>prefix</span><span class='kw'>=</span><span class='st'>"index"</span>)
-<span class='no'>reads</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/reads"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"Rhisat2"</span>),
-                    <span class='kw'>full.names</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"\\.fastq$"</span>)
-<span class='fu'>hisat2</span>(<span class='kw'>sequences</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='no'>reads</span>), <span class='kw'>index</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>tmp</span>, <span class='st'>"index/index"</span>),
-       <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"paired"</span>, <span class='kw'>outfile</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>tmp</span>, <span class='st'>"out.sam"</span>), <span class='kw'>force</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
+<span class='kw'>refs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/refs"</span>, package=<span class='st'>"Rhisat2"</span>),
+                   full.names=<span class='fl'>TRUE</span>, pattern=<span class='st'>"\\.fa$"</span>)
+<span class='fu'>hisat2_build</span>(references=<span class='kw'>refs</span>, outdir=<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>),
+             force=<span class='fl'>TRUE</span>, prefix=<span class='st'>"index"</span>)
+<span class='kw'>reads</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/reads"</span>, package=<span class='st'>"Rhisat2"</span>),
+                    full.names=<span class='fl'>TRUE</span>, pattern=<span class='st'>"\\.fastq$"</span>)
+<span class='fu'>hisat2</span>(sequences=<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='kw'>reads</span>), index=<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index/index"</span>),
+       type=<span class='st'>"paired"</span>, outfile=<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"out.sam"</span>), force=<span class='fl'>TRUE</span>)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
