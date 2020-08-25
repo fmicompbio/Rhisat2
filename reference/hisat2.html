@@ -193,7 +193,7 @@ character or numeric vectors, and the individual elements are collapsed into
 a single comma-separated string (e.g., <code>k=2</code> is translated into <code>-k
 2</code>, <code>bmax=100</code> into <code>--bmax 100</code>). Some arguments to the HISAT2
 binaries will be ignored if they are already handled as explicit function
-arguments. See the output of <code>hisat2_usage()</code> for details about
+arguments. See the output of <code><a href='hisat2_usage.html'>hisat2_usage()</a></code> for details about
 available parameters.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -207,7 +207,7 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
     <pre class="examples"><div class='input'><span class='kw'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 <span class='kw'>refs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/refs"</span>, package=<span class='st'>"Rhisat2"</span>),
                    full.names=<span class='fl'>TRUE</span>, pattern=<span class='st'>"\\.fa$"</span>)
-<span class='fu'>hisat2_build</span>(references=<span class='kw'>refs</span>, outdir=<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>),
+<span class='fu'><a href='hisat2_build.html'>hisat2_build</a></span>(references=<span class='kw'>refs</span>, outdir=<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>),
              force=<span class='fl'>TRUE</span>, prefix=<span class='st'>"index"</span>)
 <span class='kw'>reads</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/reads"</span>, package=<span class='st'>"Rhisat2"</span>),
                     full.names=<span class='fl'>TRUE</span>, pattern=<span class='st'>"\\.fastq$"</span>)
