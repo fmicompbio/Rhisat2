@@ -106,11 +106,16 @@ jobs:
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
+          sessionInfo()
         shell: Rscript {0}
 
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", check_dir = "check")
         shell: Rscript {0}
+
+      - name: Print install.out file
+        run: |
+          cat /home/runner/work/Rhisat2/Rhisat2/check/Rhisat2.Rcheck/00install.out
 
       - name: BiocCheck
         run: |
