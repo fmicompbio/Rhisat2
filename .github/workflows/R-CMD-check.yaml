@@ -109,6 +109,14 @@ jobs:
           sessionInfo()
         shell: Rscript {0}
 
+      - name: Print compiler flags
+        run: |
+          R CMD config CXX
+          R CMD config CXXFLAGS
+          R CMD config CXXPICFLAGS
+          R CMD config CXXCPP
+          g++ --version
+
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", check_dir = "check")
         shell: Rscript {0}
