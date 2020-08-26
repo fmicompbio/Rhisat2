@@ -110,11 +110,11 @@ jobs:
         shell: Rscript {0}
 
       - name: Print compiler flags
+        if: runner.os != 'Windows'
         run: |
           R CMD config CXX
           R CMD config CXXFLAGS
           R CMD config CXXPICFLAGS
-          R CMD config CXXCPP
           g++ --version
 
       - name: Check
