@@ -199,10 +199,13 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
                    full.names=<span class='fl'>TRUE</span>, pattern=<span class='st'>"\\.fa$"</span>)
 <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>hisat2_build</span>(references=<span class='kw'>refs</span>, outdir=<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>),
                   force=<span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>x</span>)</div><div class='output co'>#&gt; [1] "Building DifferenceCoverSample"     "  Building sPrime"                 
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; [1] "Building DifferenceCoverSample"     "  Building sPrime"                 
 #&gt; [3] "  Building sPrimeOrder"             "  V-Sorting samples"               
-#&gt; [5] "  V-Sorting samples time: 00:00:00" "  Allocating rank array"           </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>))</div><div class='output co'>#&gt; [1] "index.1.ht2" "index.2.ht2" "index.3.ht2" "index.4.ht2" "index.5.ht2"
-#&gt; [6] "index.6.ht2" "index.7.ht2" "index.8.ht2"</div><div class='input'></div></pre>
+#&gt; [5] "  V-Sorting samples time: 00:00:00" "  Allocating rank array"           </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>))
+</div><div class='output co'>#&gt; [1] "index.1.ht2" "index.2.ht2" "index.3.ht2" "index.4.ht2" "index.5.ht2"
+#&gt; [6] "index.6.ht2" "index.7.ht2" "index.8.ht2"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
