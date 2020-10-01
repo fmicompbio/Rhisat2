@@ -72,19 +72,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/Rhisat2.html">Get started</a>
 </li>
 <li>
@@ -120,15 +114,15 @@
     <p>This function can be used to call the <code>hisat2-build</code> binary.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hisat2_build</span>(
-  <span class='kw'>references</span>,
-  <span class='kw'>outdir</span>,
-  <span class='kw'>...</span>,
-  prefix = <span class='st'>"index"</span>,
-  force = <span class='fl'>FALSE</span>,
-  strict = <span class='fl'>TRUE</span>,
-  execute = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>hisat2_build</span><span class='op'>(</span>
+  <span class='va'>references</span>,
+  <span class='va'>outdir</span>,
+  <span class='va'>...</span>,
+  prefix <span class='op'>=</span> <span class='st'>"index"</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  strict <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  execute <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,15 +188,15 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
     <p>Charlotte Soneson, based on code from Florian Hahne.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-<span class='kw'>refs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(package=<span class='st'>"Rhisat2"</span>, <span class='st'>"extdata/refs"</span>),
-                   full.names=<span class='fl'>TRUE</span>, pattern=<span class='st'>"\\.fa$"</span>)
-<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'>hisat2_build</span>(references=<span class='kw'>refs</span>, outdir=<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>),
-                  force=<span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>x</span>)
+    <pre class="examples"><div class='input'><span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>refs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>package<span class='op'>=</span><span class='st'>"Rhisat2"</span>, <span class='st'>"extdata/refs"</span><span class='op'>)</span>,
+                   full.names<span class='op'>=</span><span class='cn'>TRUE</span>, pattern<span class='op'>=</span><span class='st'>"\\.fa$"</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>hisat2_build</span><span class='op'>(</span>references<span class='op'>=</span><span class='va'>refs</span>, outdir<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"index"</span><span class='op'>)</span>,
+                  force<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "Building DifferenceCoverSample"     "  Building sPrime"                 
 #&gt; [3] "  Building sPrimeOrder"             "  V-Sorting samples"               
-#&gt; [5] "  V-Sorting samples time: 00:00:00" "  Allocating rank array"           </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>tmp</span>, <span class='st'>"index"</span>))
+#&gt; [5] "  V-Sorting samples time: 00:00:00" "  Allocating rank array"           </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"index"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "index.1.ht2" "index.2.ht2" "index.3.ht2" "index.4.ht2" "index.5.ht2"
 #&gt; [6] "index.6.ht2" "index.7.ht2" "index.8.ht2"</div><div class='input'>
 </div></pre>
@@ -221,7 +215,7 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
