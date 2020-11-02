@@ -1,5 +1,4 @@
 ## Rhisat2
-[![Build Status](https://travis-ci.com/fmicompbio/Rhisat2.svg?branch=master)](https://travis-ci.com/fmicompbio/Rhisat2)
 [![R build status](https://github.com/fmicompbio/Rhisat2/workflows/R-CMD-check/badge.svg)](https://github.com/fmicompbio/Rhisat2/actions)
 [![Code coverage](https://codecov.io/github/fmicompbio/Rhisat2/coverage.svg?branch=master)](https://codecov.io/github/fmicompbio/Rhisat2)
 
