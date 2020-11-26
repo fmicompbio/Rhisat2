@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
       <h1 data-toc-skip>Aligning reads with Rhisat2</h1>
                         <h4 class="author">Charlotte Soneson</h4>
             
-            <h4 class="date">2020-10-01</h4>
+            <h4 class="date">2020-11-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/fmicompbio/Rhisat2/blob/master/vignettes/Rhisat2.Rmd"><code>vignettes/Rhisat2.Rmd</code></a></small>
       <div class="hidden name"><code>Rhisat2.Rmd</code></div>
@@ -76,58 +76,58 @@
 
     
     
-<p>The <em><a href="https://bioconductor.org/packages/3.12/Rhisat2">Rhisat2</a></em> package provides an interface to the <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT2</a> short-read aligner software <span class="citation">(Kim, Langmead, and Salzberg 2015)</span>.</p>
+<p>The <em><a href="https://bioconductor.org/packages/3.13/Rhisat2">Rhisat2</a></em> package provides an interface to the <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT2</a> short-read aligner software <span class="citation">(Kim, Langmead, and Salzberg 2015)</span>.</p>
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
 <p>Use the <code>BiocManager</code> package to download and install the package from Bioconductor as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"Rhisat2"</span><span class="op">)</span></pre></div>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"Rhisat2"</span><span class="op">)</span></code></pre></div>
 <p>If required, the latest development version of the package can also be installed from GitHub.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"fmicompbio/Rhisat2"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"fmicompbio/Rhisat2"</span><span class="op">)</span></code></pre></div>
 <p>Once the package is installed, load it into your R session:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fmicompbio/Rhisat2">Rhisat2</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fmicompbio/Rhisat2">Rhisat2</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="building-a-genome-index" class="section level1">
 <h1 class="hasAnchor">
 <a href="#building-a-genome-index" class="anchor"></a>Building a genome index</h1>
 <p>To build an index for the alignment, use the <code>hisat2_build</code> function. You need to provide one or more fasta file with reference sequences, as well as an output directory where the index will be stored, and a “prefix” (that will determine the name of the index files in the output directory). Any additional arguments to the <code>hisat2-build</code> binary can also be supplied to the function (see <code><a href="../reference/hisat2_build_usage.html">hisat2_build_usage()</a></code> or <a href="https://ccb.jhu.edu/software/hisat2/manual.shtml#the-hisat2-build-indexer">https://ccb.jhu.edu/software/hisat2/manual.shtml#the-hisat2-build-indexer</a> for an overview of the available options).</p>
 <p>The package contains three example reference sequences, corresponding to short pieces of three different chromosomes. We show how to create an index (named <code>myindex</code>) based on these sequences.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/refs"</span>, package<span class="op">=</span><span class="st">"Rhisat2"</span><span class="op">)</span>, pattern<span class="op">=</span><span class="st">"\\.fa$"</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/refs"</span>, package<span class="op">=</span><span class="st">"Rhisat2"</span><span class="op">)</span>, pattern<span class="op">=</span><span class="st">"\\.fa$"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "chr1.fa" "chr2.fa" "chr3.fa"</span>
 <span class="va">refs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/refs"</span>, package<span class="op">=</span><span class="st">"Rhisat2"</span><span class="op">)</span>, 
                    full.names<span class="op">=</span><span class="cn">TRUE</span>, pattern<span class="op">=</span><span class="st">"\\.fa$"</span><span class="op">)</span>
 <span class="va">td</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/hisat2_build.html">hisat2_build</a></span><span class="op">(</span>references<span class="op">=</span><span class="va">refs</span>, outdir<span class="op">=</span><span class="va">td</span>, prefix<span class="op">=</span><span class="st">"myindex"</span>, 
-             force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
+             force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>By instead setting <code>execute=FALSE</code> in the command above, <code><a href="../reference/hisat2_build.html">hisat2_build()</a></code> will return the index building shell command for inspection, without executing it.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/hisat2_build.html">hisat2_build</a></span><span class="op">(</span>references<span class="op">=</span><span class="va">refs</span>, outdir<span class="op">=</span><span class="va">td</span>, prefix<span class="op">=</span><span class="st">"myindex"</span>,
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/hisat2_build.html">hisat2_build</a></span><span class="op">(</span>references<span class="op">=</span><span class="va">refs</span>, outdir<span class="op">=</span><span class="va">td</span>, prefix<span class="op">=</span><span class="st">"myindex"</span>,
                    force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpo2J3Up/myindex'"</span></pre></div>
+<span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpMnnjit/myindex'"</span></code></pre></div>
 </div>
 <div id="aligning-reads-to-the-genome-index" class="section level1">
 <h1 class="hasAnchor">
 <a href="#aligning-reads-to-the-genome-index" class="anchor"></a>Aligning reads to the genome index</h1>
 <p>After creating the index, reads can be aligned using the <code>hisat2</code> wrapper function. Most commonly, the reads will be provided in <code>fastq</code> files (one file for single-end reads, two files for paired-end reads). The names of these files can be provided directly to the <code>hisat2</code> function, either as a vector (for single-end reads) or as a list of length 2 (for paired-end reads, each list element corresponds to one mate). You also need to provide the path to the index generated by <code>hisat2_build</code> (the output directory combined with the prefix), and the output file name where the alignments should be written.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/reads"</span>, package<span class="op">=</span><span class="st">"Rhisat2"</span><span class="op">)</span>, 
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/reads"</span>, package<span class="op">=</span><span class="st">"Rhisat2"</span><span class="op">)</span>, 
            pattern<span class="op">=</span><span class="st">"\\.fastq$"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "reads1.fastq" "reads2.fastq"</span>
 <span class="va">reads</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/reads"</span>, package<span class="op">=</span><span class="st">"Rhisat2"</span><span class="op">)</span>,
                     pattern<span class="op">=</span><span class="st">"\\.fastq$"</span>, full.names<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="fu"><a href="../reference/hisat2.html">hisat2</a></span><span class="op">(</span>sequences<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">reads</span><span class="op">)</span>, index<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">td</span>, <span class="st">"myindex"</span><span class="op">)</span>, 
        type<span class="op">=</span><span class="st">"paired"</span>, outfile<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">td</span>, <span class="st">"out.sam"</span><span class="op">)</span>, 
-       force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
+       force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>As for <code><a href="../reference/hisat2_build.html">hisat2_build()</a></code>, any additional arguments to the <code>hisat2</code> binary can be provided to the <code><a href="../reference/hisat2.html">hisat2()</a></code> function (see <code><a href="../reference/hisat2_usage.html">hisat2_usage()</a></code> or <a href="https://ccb.jhu.edu/software/hisat2/manual.shtml#running-hisat2">https://ccb.jhu.edu/software/hisat2/manual.shtml#running-hisat2</a> for an overview of the available options).</p>
 <p>With HISAT2, you can provide a file with known splice sites at the alignment step, which can help in finding the correct alignments across known splice junctions. A text file in the required format can be generated using the <code><a href="../reference/extract_splice_sites.html">extract_splice_sites()</a></code> function, starting from an annotation file in gtf or gff3 format, or from a <code>GRanges</code> or <code>TxDb</code> object.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">spsfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">spsfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">gtf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/refs/genes.gtf"</span>, package<span class="op">=</span><span class="st">"Rhisat2"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/extract_splice_sites.html">extract_splice_sites</a></span><span class="op">(</span>features<span class="op">=</span><span class="va">gtf</span>, outfile<span class="op">=</span><span class="va">spsfile</span><span class="op">)</span>
 <span class="co">#&gt; Import genomic features from the file as a GRanges object ... OK</span>
@@ -136,24 +136,24 @@
 <span class="fu"><a href="../reference/hisat2.html">hisat2</a></span><span class="op">(</span>sequences<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">reads</span><span class="op">)</span>, index<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">td</span>, <span class="st">"myindex"</span><span class="op">)</span>,
        type<span class="op">=</span><span class="st">"paired"</span>, outfile<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">td</span>, <span class="st">"out_sps.sam"</span><span class="op">)</span>,
        `known-splicesite-infile`<span class="op">=</span><span class="va">spsfile</span>, 
-       force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></pre></div>
+       force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="miscellaneous-helper-functions" class="section level1">
 <h1 class="hasAnchor">
 <a href="#miscellaneous-helper-functions" class="anchor"></a>Miscellaneous helper functions</h1>
 <p>To get the version of <code>HISAT2</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../reference/hisat2_version.html">hisat2_version</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] "/Users/runner/work/_temp/Library/Rhisat2/hisat2 version 2.1.0"                                                      </span>
-<span class="co">#&gt; [2] "64-bit"                                                                                                             </span>
-<span class="co">#&gt; [3] "Built on Mac-1601565978568.local"                                                                                   </span>
-<span class="co">#&gt; [4] "Thu Oct  1 15:45:27 UTC 2020"                                                                                       </span>
-<span class="co">#&gt; [5] "Compiler: InstalledDir: /Applications/Xcode_11.7.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"</span>
-<span class="co">#&gt; [6] "Options: -O3 -m64 -msse2 -funroll-loops -g3 -DPOPCNT_CAPABILITY"                                                    </span>
-<span class="co">#&gt; [7] "Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}"</span></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hisat2_version.html">hisat2_version</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "/Users/runner/work/_temp/Library/Rhisat2/hisat2 version 2.1.0"                                                    </span>
+<span class="co">#&gt; [2] "64-bit"                                                                                                           </span>
+<span class="co">#&gt; [3] "Built on Mac-1606420966401.local"                                                                                 </span>
+<span class="co">#&gt; [4] "Thu Nov 26 20:30:51 UTC 2020"                                                                                     </span>
+<span class="co">#&gt; [5] "Compiler: InstalledDir: /Applications/Xcode_12.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"</span>
+<span class="co">#&gt; [6] "Options: -O3 -m64 -msse2 -funroll-loops -g3 -DPOPCNT_CAPABILITY"                                                  </span>
+<span class="co">#&gt; [7] "Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}"</span></code></pre></div>
 <p>To see the usage of <code><a href="../reference/hisat2_build.html">hisat2_build()</a></code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="../reference/hisat2_build_usage.html">hisat2_build_usage</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hisat2_build_usage.html">hisat2_build_usage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "HISAT2 version 2.1.0 by Daehwan Kim (infphilo@gmail.com, http://www.ccb.jhu.edu/people/infphilo)"</span>
 <span class="co">#&gt;  [2] "Usage: hisat2-build [options]* &lt;reference_in&gt; &lt;ht2_index_base&gt;"                                  </span>
 <span class="co">#&gt;  [3] "    reference_in            comma-separated list of files with ref sequences"                    </span>
@@ -181,10 +181,10 @@
 <span class="co">#&gt; [25] "    -q/--quiet              verbose output (for debugging)"                                      </span>
 <span class="co">#&gt; [26] "    -h/--help               print detailed description of tool and its options"                  </span>
 <span class="co">#&gt; [27] "    --usage                 print this usage message"                                            </span>
-<span class="co">#&gt; [28] "    --version               print version information and quit"</span></pre></div>
+<span class="co">#&gt; [28] "    --version               print version information and quit"</span></code></pre></div>
 <p>And similarly to see the usage of <code><a href="../reference/hisat2.html">hisat2()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="../reference/hisat2_usage.html">hisat2_usage</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hisat2_usage.html">hisat2_usage</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;   [1] "HISAT2 version 2.1.0 by Daehwan Kim (infphilo@gmail.com, www.ccb.jhu.edu/people/infphilo)"                  </span>
 <span class="co">#&gt;   [2] "Usage: "                                                                                                    </span>
 <span class="co">#&gt;   [3] "  hisat2-align [options]* -x &lt;ht2-idx&gt; {-1 &lt;m1&gt; -2 &lt;m2&gt; | -U &lt;r&gt;} [-S &lt;sam&gt;]"                               </span>
@@ -287,20 +287,20 @@
 <span class="co">#&gt; [100] "  --remove-chrname   remove 'chr' from reference names in alignment"                                        </span>
 <span class="co">#&gt; [101] "  --add-chrname      add 'chr' to reference names in alignment "                                            </span>
 <span class="co">#&gt; [102] "  --version          print version information and quit"                                                    </span>
-<span class="co">#&gt; [103] "  -h/--help          print this usage message"</span></pre></div>
+<span class="co">#&gt; [103] "  -h/--help          print this usage message"</span></code></pre></div>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; R version 4.0.2 (2020-06-22)</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; R Under development (unstable) (2020-11-25 r79505)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Catalina 10.15.6</span>
+<span class="co">#&gt; Running under: macOS Catalina 10.15.7</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib</span>
+<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; locale:</span>
 <span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
@@ -309,37 +309,38 @@
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] Rhisat2_1.5.2    BiocStyle_2.17.1</span>
+<span class="co">#&gt; [1] Rhisat2_1.7.0    BiocStyle_2.19.1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] Biobase_2.49.1              httr_1.4.2                  bit64_4.0.5                </span>
-<span class="co">#&gt;  [4] assertthat_0.2.1            askpass_1.1                 BiocManager_1.30.10        </span>
-<span class="co">#&gt;  [7] stats4_4.0.2                BiocFileCache_1.13.1        blob_1.2.1                 </span>
-<span class="co">#&gt; [10] GenomeInfoDbData_1.2.3      Rsamtools_2.5.3             yaml_2.2.1                 </span>
-<span class="co">#&gt; [13] progress_1.2.2              SGSeq_1.23.1                pillar_1.4.6               </span>
-<span class="co">#&gt; [16] RSQLite_2.2.1               backports_1.1.10            lattice_0.20-41            </span>
-<span class="co">#&gt; [19] glue_1.4.2                  RUnit_0.4.32                digest_0.6.25              </span>
-<span class="co">#&gt; [22] GenomicRanges_1.41.6        XVector_0.29.3              htmltools_0.5.0            </span>
+<span class="co">#&gt;  [1] MatrixGenerics_1.3.0        Biobase_2.51.0              httr_1.4.2                 </span>
+<span class="co">#&gt;  [4] bit64_4.0.5                 assertthat_0.2.1            askpass_1.1                </span>
+<span class="co">#&gt;  [7] BiocManager_1.30.10         stats4_4.1.0                BiocFileCache_1.15.1       </span>
+<span class="co">#&gt; [10] blob_1.2.1                  GenomeInfoDbData_1.2.4      Rsamtools_2.7.0            </span>
+<span class="co">#&gt; [13] yaml_2.2.1                  progress_1.2.2              SGSeq_1.25.0               </span>
+<span class="co">#&gt; [16] lattice_0.20-41             pillar_1.4.7                RSQLite_2.2.1              </span>
+<span class="co">#&gt; [19] RUnit_0.4.32                glue_1.4.2                  digest_0.6.27              </span>
+<span class="co">#&gt; [22] GenomicRanges_1.43.0        XVector_0.31.0              htmltools_0.5.0            </span>
 <span class="co">#&gt; [25] Matrix_1.2-18               XML_3.99-0.5                pkgconfig_2.0.3            </span>
-<span class="co">#&gt; [28] biomaRt_2.45.3              bookdown_0.20               zlibbioc_1.35.0            </span>
-<span class="co">#&gt; [31] purrr_0.3.4                 BiocParallel_1.23.2         tibble_3.0.3               </span>
-<span class="co">#&gt; [34] openssl_1.4.3               generics_0.0.2              IRanges_2.23.10            </span>
-<span class="co">#&gt; [37] ellipsis_0.3.1              SummarizedExperiment_1.19.7 GenomicFeatures_1.41.3     </span>
-<span class="co">#&gt; [40] BiocGenerics_0.35.4         magrittr_1.5                crayon_1.3.4               </span>
+<span class="co">#&gt; [28] biomaRt_2.47.1              bookdown_0.21               zlibbioc_1.37.0            </span>
+<span class="co">#&gt; [31] purrr_0.3.4                 BiocParallel_1.25.1         tibble_3.0.4               </span>
+<span class="co">#&gt; [34] openssl_1.4.3               generics_0.1.0              IRanges_2.25.2             </span>
+<span class="co">#&gt; [37] ellipsis_0.3.1              SummarizedExperiment_1.21.0 GenomicFeatures_1.43.2     </span>
+<span class="co">#&gt; [40] BiocGenerics_0.37.0         magrittr_2.0.1              crayon_1.3.4               </span>
 <span class="co">#&gt; [43] memoise_1.1.0               evaluate_0.14               fs_1.5.0                   </span>
-<span class="co">#&gt; [46] tools_4.0.2                 prettyunits_1.1.1           hms_0.5.3                  </span>
-<span class="co">#&gt; [49] lifecycle_0.2.0             matrixStats_0.57.0          stringr_1.4.0              </span>
-<span class="co">#&gt; [52] S4Vectors_0.27.13           DelayedArray_0.15.11        AnnotationDbi_1.51.3       </span>
-<span class="co">#&gt; [55] Biostrings_2.57.2           compiler_4.0.2              pkgdown_1.6.1.9000         </span>
-<span class="co">#&gt; [58] GenomeInfoDb_1.25.11        systemfonts_0.3.2           rlang_0.4.7                </span>
-<span class="co">#&gt; [61] grid_4.0.2                  RCurl_1.98-1.2              rappdirs_0.3.1             </span>
-<span class="co">#&gt; [64] igraph_1.2.5                bitops_1.0-6                rmarkdown_2.4              </span>
-<span class="co">#&gt; [67] DBI_1.1.0                   curl_4.3                    R6_2.4.1                   </span>
-<span class="co">#&gt; [70] GenomicAlignments_1.25.3    knitr_1.30                  dplyr_1.0.2                </span>
-<span class="co">#&gt; [73] rtracklayer_1.49.5          bit_4.0.4                   rprojroot_1.3-2            </span>
-<span class="co">#&gt; [76] ragg_0.3.1                  desc_1.2.0                  stringi_1.5.3              </span>
-<span class="co">#&gt; [79] parallel_4.0.2              Rcpp_1.0.5                  vctrs_0.3.4                </span>
-<span class="co">#&gt; [82] dbplyr_1.4.4                tidyselect_1.1.0            xfun_0.18</span></pre></div>
+<span class="co">#&gt; [46] xml2_1.3.2                  textshaping_0.2.1           tools_4.1.0                </span>
+<span class="co">#&gt; [49] prettyunits_1.1.1           hms_0.5.3                   lifecycle_0.2.0            </span>
+<span class="co">#&gt; [52] matrixStats_0.57.0          stringr_1.4.0               S4Vectors_0.29.3           </span>
+<span class="co">#&gt; [55] DelayedArray_0.17.4         AnnotationDbi_1.53.0        Biostrings_2.59.0          </span>
+<span class="co">#&gt; [58] compiler_4.1.0              pkgdown_1.6.1.9000          GenomeInfoDb_1.27.1        </span>
+<span class="co">#&gt; [61] systemfonts_0.3.2           rlang_0.4.9                 grid_4.1.0                 </span>
+<span class="co">#&gt; [64] RCurl_1.98-1.2              rappdirs_0.3.1              igraph_1.2.6               </span>
+<span class="co">#&gt; [67] bitops_1.0-6                rmarkdown_2.5               DBI_1.1.0                  </span>
+<span class="co">#&gt; [70] curl_4.3                    R6_2.5.0                    GenomicAlignments_1.27.1   </span>
+<span class="co">#&gt; [73] knitr_1.30                  dplyr_1.0.2                 rtracklayer_1.51.0         </span>
+<span class="co">#&gt; [76] bit_4.0.4                   filelock_1.0.2              rprojroot_2.0.2            </span>
+<span class="co">#&gt; [79] ragg_0.4.0                  desc_1.2.0                  stringi_1.5.3              </span>
+<span class="co">#&gt; [82] parallel_4.1.0              Rcpp_1.0.5                  vctrs_0.3.5                </span>
+<span class="co">#&gt; [85] dbplyr_2.0.0                tidyselect_1.1.0            xfun_0.19</span></code></pre></div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
