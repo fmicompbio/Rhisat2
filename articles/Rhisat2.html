@@ -67,7 +67,7 @@
       <h1 data-toc-skip>Aligning reads with Rhisat2</h1>
                         <h4 class="author">Charlotte Soneson</h4>
             
-            <h4 class="date">2020-11-26</h4>
+            <h4 class="date">2020-12-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/fmicompbio/Rhisat2/blob/master/vignettes/Rhisat2.Rmd"><code>vignettes/Rhisat2.Rmd</code></a></small>
       <div class="hidden name"><code>Rhisat2.Rmd</code></div>
@@ -109,7 +109,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/hisat2_build.html">hisat2_build</a></span><span class="op">(</span>references<span class="op">=</span><span class="va">refs</span>, outdir<span class="op">=</span><span class="va">td</span>, prefix<span class="op">=</span><span class="st">"myindex"</span>,
                    force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpMnnjit/myindex'"</span></code></pre></div>
+<span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp2qGHsr/myindex'"</span></code></pre></div>
 </div>
 <div id="aligning-reads-to-the-genome-index" class="section level1">
 <h1 class="hasAnchor">
@@ -144,12 +144,12 @@
 <p>To get the version of <code>HISAT2</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hisat2_version.html">hisat2_version</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] "/Users/runner/work/_temp/Library/Rhisat2/hisat2 version 2.1.0"                                                    </span>
-<span class="co">#&gt; [2] "64-bit"                                                                                                           </span>
-<span class="co">#&gt; [3] "Built on Mac-1606420966401.local"                                                                                 </span>
-<span class="co">#&gt; [4] "Thu Nov 26 20:30:51 UTC 2020"                                                                                     </span>
-<span class="co">#&gt; [5] "Compiler: InstalledDir: /Applications/Xcode_12.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"</span>
-<span class="co">#&gt; [6] "Options: -O3 -m64 -msse2 -funroll-loops -g3 -DPOPCNT_CAPABILITY"                                                  </span>
+<span class="co">#&gt; [1] "/Users/runner/work/_temp/Library/Rhisat2/hisat2 version 2.1.0"                                                      </span>
+<span class="co">#&gt; [2] "64-bit"                                                                                                             </span>
+<span class="co">#&gt; [3] "Built on Mac-1607071280675.local"                                                                                   </span>
+<span class="co">#&gt; [4] "Fri Dec  4 09:10:48 UTC 2020"                                                                                       </span>
+<span class="co">#&gt; [5] "Compiler: InstalledDir: /Applications/Xcode_12.2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"</span>
+<span class="co">#&gt; [6] "Options: -O3 -m64 -msse2 -funroll-loops -g3 -DPOPCNT_CAPABILITY"                                                    </span>
 <span class="co">#&gt; [7] "Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}"</span></code></pre></div>
 <p>To see the usage of <code><a href="../reference/hisat2_build.html">hisat2_build()</a></code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -294,7 +294,7 @@
 <a href="#session-info" class="anchor"></a>Session info</h1>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; R Under development (unstable) (2020-11-25 r79505)</span>
+<span class="co">#&gt; R Under development (unstable) (2020-12-04 r79554)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
 <span class="co">#&gt; Running under: macOS Catalina 10.15.7</span>
 <span class="co">#&gt; </span>
@@ -323,13 +323,13 @@
 <span class="co">#&gt; [25] Matrix_1.2-18               XML_3.99-0.5                pkgconfig_2.0.3            </span>
 <span class="co">#&gt; [28] biomaRt_2.47.1              bookdown_0.21               zlibbioc_1.37.0            </span>
 <span class="co">#&gt; [31] purrr_0.3.4                 BiocParallel_1.25.1         tibble_3.0.4               </span>
-<span class="co">#&gt; [34] openssl_1.4.3               generics_0.1.0              IRanges_2.25.2             </span>
+<span class="co">#&gt; [34] openssl_1.4.3               generics_0.1.0              IRanges_2.25.4             </span>
 <span class="co">#&gt; [37] ellipsis_0.3.1              SummarizedExperiment_1.21.0 GenomicFeatures_1.43.2     </span>
 <span class="co">#&gt; [40] BiocGenerics_0.37.0         magrittr_2.0.1              crayon_1.3.4               </span>
 <span class="co">#&gt; [43] memoise_1.1.0               evaluate_0.14               fs_1.5.0                   </span>
 <span class="co">#&gt; [46] xml2_1.3.2                  textshaping_0.2.1           tools_4.1.0                </span>
 <span class="co">#&gt; [49] prettyunits_1.1.1           hms_0.5.3                   lifecycle_0.2.0            </span>
-<span class="co">#&gt; [52] matrixStats_0.57.0          stringr_1.4.0               S4Vectors_0.29.3           </span>
+<span class="co">#&gt; [52] matrixStats_0.57.0          stringr_1.4.0               S4Vectors_0.29.5           </span>
 <span class="co">#&gt; [55] DelayedArray_0.17.4         AnnotationDbi_1.53.0        Biostrings_2.59.0          </span>
 <span class="co">#&gt; [58] compiler_4.1.0              pkgdown_1.6.1.9000          GenomeInfoDb_1.27.1        </span>
 <span class="co">#&gt; [61] systemfonts_0.3.2           rlang_0.4.9                 grid_4.1.0                 </span>
