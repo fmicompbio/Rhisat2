@@ -68,7 +68,7 @@ WINDOWS = 0
 CYGWIN = 0
 MINGW = 0
 ifneq (,$(findstring CYGWIN,$(shell uname)))
-	WINDOWS = 1 
+	WINDOWS = 1
 	CYGWIN = 1
 	# POSIX memory-mapped files not currently supported on Windows
 	BOWTIE_MM = 0
@@ -90,41 +90,42 @@ endif
 
 EXTRA_FLAGS += -DPOPCNT_CAPABILITY
 INC += -I third_party
+PKG_CPPFLAGS = -DBOOST_NO_AUTO_PTR
 
-MM_DEF = 
+MM_DEF =
 
 ifeq (1,$(BOWTIE_MM))
 	MM_DEF = -DBOWTIE_MM
 endif
 
-SHMEM_DEF = 
+SHMEM_DEF =
 
 ifeq (1,$(BOWTIE_SHARED_MEM))
 	SHMEM_DEF = -DBOWTIE_SHARED_MEM
 endif
 
 PTHREAD_PKG =
-PTHREAD_LIB = 
+PTHREAD_LIB =
 
 ifeq (1,$(MINGW))
-	PTHREAD_LIB = 
+	PTHREAD_LIB =
 else
 	PTHREAD_LIB = -lpthread
 endif
 
-SEARCH_LIBS = 
-BUILD_LIBS = 
+SEARCH_LIBS =
+BUILD_LIBS =
 INSPECT_LIBS =
 
 ifeq (1,$(MINGW))
-	BUILD_LIBS = 
-	INSPECT_LIBS = 
+	BUILD_LIBS =
+	INSPECT_LIBS =
 endif
 
 USE_SRA = 0
 SRA_DEF =
 SRA_LIB =
-SERACH_INC = 
+SERACH_INC =
 ifeq (1,$(USE_SRA))
 	SRA_DEF = -DUSE_SRA
 	SRA_LIB = -lncbi-ngs-c++-static -lngs-c++-static -lncbi-vdb-static -ldl
@@ -156,7 +157,7 @@ SEARCH_CPPS = qual.cpp pat.cpp \
 	aligner_swsse_loc_u8.cpp \
 	aligner_swsse_ee_u8.cpp \
 	aligner_driver.cpp \
-	splice_site.cpp 
+	splice_site.cpp
 
 BUILD_CPPS = diff_sample.cpp
 
@@ -205,7 +206,7 @@ endif
 
 HISAT2_BIN_LIST = hisat2-build-s \
 	hisat2-align-s
-HISAT2_BIN_LIST_AUX = 
+HISAT2_BIN_LIST_AUX =
 
 GENERAL_LIST = $(PTHREAD_PKG) \
 	hisat2 \
@@ -220,7 +221,7 @@ GENERAL_LIST = $(PTHREAD_PKG) \
 	VERSION
 
 ifeq (1,$(WINDOWS))
-	HISAT2_BIN_LIST := $(HISAT2_BIN_LIST) hisat2.bat hisat2-build.bat hisat2-inspect.bat 
+	HISAT2_BIN_LIST := $(HISAT2_BIN_LIST) hisat2.bat hisat2-build.bat hisat2-inspect.bat
 endif
 
 # This is helpful on Windows under MinGW/MSYS, where Make might go for
@@ -376,7 +377,7 @@ hisat2-align-s: hisat2.cpp $(SEARCH_CPPS) $(SHARED_CPPS) $(HEADERS) $(SEARCH_FRA
 #	$(SHARED_CPPS) \
 #	$(LIBS) $(INSPECT_LIBS)
 
-#hisat2-inspect-s-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS) 
+#hisat2-inspect-s-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS)
 #	$(CXX) $(DEBUG_FLAGS) \
 #	$(DEBUG_DEFS) $(EXTRA_FLAGS) \
 #	$(DEFS) -DBOWTIE2 -DHISAT2_INSPECT_MAIN -Wall \
@@ -385,7 +386,7 @@ hisat2-align-s: hisat2.cpp $(SEARCH_CPPS) $(SHARED_CPPS) $(HEADERS) $(SEARCH_FRA
 #	$(SHARED_CPPS) \
 #	$(LIBS) $(INSPECT_LIBS)
 
-#hisat2-inspect-l-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS) 
+#hisat2-inspect-l-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS)
 #	$(CXX) $(DEBUG_FLAGS) \
 #	$(DEBUG_DEFS) $(EXTRA_FLAGS) \
 #	$(DEFS) -DBOWTIE2 -DBOWTIE_64BIT_INDEX -DHISAT2_INSPECT_MAIN -Wall \
@@ -442,7 +443,7 @@ hisat2-bin: $(BIN_PKG_LIST) $(HISAT2_BIN_LIST) $(HISAT2_BIN_LIST_AUX)
 
 #
 # installation instructions
-# 
+#
 ../inst/hisat2: $(BIN_LIST)
 	mkdir -p ../inst
 	cp hisat2-align-s ../inst/hisat2
