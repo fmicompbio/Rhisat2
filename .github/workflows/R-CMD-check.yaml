@@ -60,7 +60,7 @@ jobs:
 
       - name: Set gfortran alias (mac)
         if: runner.os == 'macOS'
-        run: alias gfortran=${{ matrix.config.gfortran }}
+        run: alias gfortran='${{ matrix.config.gfortran }}'
 
       - name: Install remotes
         run: |
