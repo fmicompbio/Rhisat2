@@ -58,9 +58,9 @@ jobs:
         run: |
           sudo apt-get install -y python-glpk
 
-      - name: Set gfortran symlink (mac)
+      - name: Set gfortran alias (mac)
         if: runner.os == 'macOS'
-        run: ln -s ${{ matrix.config.gfortran }} gfortran
+        run: alias gfortran=${{ matrix.config.gfortran }}
 
       - name: Install remotes
         run: |
