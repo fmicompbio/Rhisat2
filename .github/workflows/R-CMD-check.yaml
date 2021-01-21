@@ -20,7 +20,7 @@ jobs:
       matrix:
         config:
         - { os: windows-latest, r: 'devel', bioc: 'devel'}
-        - { os: macOS-latest, r: 'devel', gfortran: gfortran-8, bioc: 'devel', curlConfigPath: '/usr/bin/'}
+        - { os: macOS-latest, r: 'devel', bioc: 'devel', curlConfigPath: '/usr/bin/'}
         #- { os: macOS-11.0, r: 'devel', bioc: 'devel', curlConfigPath: '/usr/bin/'}
         - { os: ubuntu-20.04, r: 'devel', bioc: 'devel', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
         - { os: ubuntu-latest, r: 'devel', image: 'bioconductor/bioconductor_docker:devel'}
@@ -57,10 +57,6 @@ jobs:
         if: matrix.config.os == 'ubuntu-16.04' && matrix.config.image == null
         run: |
           sudo apt-get install -y python-glpk
-
-      - name: Set gfortran alias (mac)
-        if: runner.os == 'macOS'
-        run: alias gfortran='${{ matrix.config.gfortran }}'
 
       - name: Install remotes
         run: |
@@ -102,6 +98,7 @@ jobs:
         run: |
           brew install harfbuzz
           brew install fribidi
+          brew install --cask gfortran
 
       - name: Install dependencies
         run: |
