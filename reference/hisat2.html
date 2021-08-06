@@ -58,9 +58,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0</span>
       </span>
     </div>
 
@@ -116,7 +122,7 @@
     <p>The function can be used to call the <code>hisat2</code> binary.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hisat2</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>hisat2</span><span class='op'>(</span>
   <span class='va'>sequences</span>,
   <span class='va'>index</span>,
   <span class='va'>...</span>,
@@ -125,7 +131,7 @@
   force <span class='op'>=</span> <span class='cn'>FALSE</span>,
   strict <span class='op'>=</span> <span class='cn'>TRUE</span>,
   execute <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,17 +206,17 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
     <p>Charlotte Soneson, based on code from Florian Hahne.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>refs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/refs"</span>, package<span class='op'>=</span><span class='st'>"Rhisat2"</span><span class='op'>)</span>,
-                   full.names<span class='op'>=</span><span class='cn'>TRUE</span>, pattern<span class='op'>=</span><span class='st'>"\\.fa$"</span><span class='op'>)</span>
-<span class='fu'><a href='hisat2_build.html'>hisat2_build</a></span><span class='op'>(</span>references<span class='op'>=</span><span class='va'>refs</span>, outdir<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"index"</span><span class='op'>)</span>,
-             force<span class='op'>=</span><span class='cn'>TRUE</span>, prefix<span class='op'>=</span><span class='st'>"index"</span><span class='op'>)</span>
-<span class='va'>reads</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/reads"</span>, package<span class='op'>=</span><span class='st'>"Rhisat2"</span><span class='op'>)</span>,
-                    full.names<span class='op'>=</span><span class='cn'>TRUE</span>, pattern<span class='op'>=</span><span class='st'>"\\.fastq$"</span><span class='op'>)</span>
-<span class='fu'>hisat2</span><span class='op'>(</span>sequences<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='va'>reads</span><span class='op'>)</span>, index<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"index/index"</span><span class='op'>)</span>,
-       type<span class='op'>=</span><span class='st'>"paired"</span>, outfile<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"out.sam"</span><span class='op'>)</span>, force<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>refs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/refs"</span>, package<span class='op'>=</span><span class='st'>"Rhisat2"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                   full.names<span class='op'>=</span><span class='cn'>TRUE</span>, pattern<span class='op'>=</span><span class='st'>"\\.fa$"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='hisat2_build.html'>hisat2_build</a></span><span class='op'>(</span>references<span class='op'>=</span><span class='va'>refs</span>, outdir<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"index"</span><span class='op'>)</span>,</span>
+<span class='r-in'>             force<span class='op'>=</span><span class='cn'>TRUE</span>, prefix<span class='op'>=</span><span class='st'>"index"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>reads</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/reads"</span>, package<span class='op'>=</span><span class='st'>"Rhisat2"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                    full.names<span class='op'>=</span><span class='cn'>TRUE</span>, pattern<span class='op'>=</span><span class='st'>"\\.fastq$"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>hisat2</span><span class='op'>(</span>sequences<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='va'>reads</span><span class='op'>)</span>, index<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"index/index"</span><span class='op'>)</span>,</span>
+<span class='r-in'>       type<span class='op'>=</span><span class='st'>"paired"</span>, outfile<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>tmp</span>, <span class='st'>"out.sam"</span><span class='op'>)</span>, force<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -222,11 +228,11 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Charlotte Soneson.</p>
+  <p><p>Developed by Charlotte Soneson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -234,6 +240,8 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
 
   
 
+
+  
 
   </body>
 </html>

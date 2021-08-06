@@ -58,9 +58,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0</span>
       </span>
     </div>
 
@@ -116,7 +122,7 @@
     <p>Print usage of hisat2-build</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hisat2_build_usage</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>hisat2_build_usage</span><span class='op'>(</span><span class='op'>)</span></code></pre></div>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -128,35 +134,36 @@
     <p>Charlotte Soneson</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>hisat2_build_usage</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "HISAT2 version 2.1.0 by Daehwan Kim (infphilo@gmail.com, http://www.ccb.jhu.edu/people/infphilo)"
-#&gt;  [2] "Usage: hisat2-build [options]* &lt;reference_in&gt; &lt;ht2_index_base&gt;"                                  
-#&gt;  [3] "    reference_in            comma-separated list of files with ref sequences"                    
-#&gt;  [4] "    hisat2_index_base       write ht2 data to files with this dir/basename"                      
-#&gt;  [5] "Options:"                                                                                        
-#&gt;  [6] "    -c                      reference sequences given on cmd line (as"                           
-#&gt;  [7] "                            &lt;reference_in&gt;)"                                                     
-#&gt;  [8] "    -a/--noauto             disable automatic -p/--bmax/--dcv memory-fitting"                    
-#&gt;  [9] "    -p                      number of threads"                                                   
-#&gt; [10] "    --bmax &lt;int&gt;            max bucket sz for blockwise suffix-array builder"                    
-#&gt; [11] "    --bmaxdivn &lt;int&gt;        max bucket sz as divisor of ref len (default: 4)"                    
-#&gt; [12] "    --dcv &lt;int&gt;             diff-cover period for blockwise (default: 1024)"                     
-#&gt; [13] "    --nodc                  disable diff-cover (algorithm becomes quadratic)"                    
-#&gt; [14] "    -r/--noref              don't build .3/.4.ht2 (packed reference) portion"                    
-#&gt; [15] "    -3/--justref            just build .3/.4.ht2 (packed reference) portion"                     
-#&gt; [16] "    -o/--offrate &lt;int&gt;      SA is sampled every 2^offRate BWT chars (default: 5)"                
-#&gt; [17] "    -t/--ftabchars &lt;int&gt;    # of chars consumed in initial lookup (default: 10)"                 
-#&gt; [18] "    --localoffrate &lt;int&gt;    SA (local) is sampled every 2^offRate BWT chars (default: 3)"        
-#&gt; [19] "    --localftabchars &lt;int&gt;  # of chars consumed in initial lookup in a local index (default: 6)" 
-#&gt; [20] "    --snp &lt;path&gt;            SNP file name"                                                       
-#&gt; [21] "    --haplotype &lt;path&gt;      haplotype file name"                                                 
-#&gt; [22] "    --ss &lt;path&gt;             Splice site file name"                                               
-#&gt; [23] "    --exon &lt;path&gt;           Exon file name"                                                      
-#&gt; [24] "    --seed &lt;int&gt;            seed for random number generator"                                    
-#&gt; [25] "    -q/--quiet              verbose output (for debugging)"                                      
-#&gt; [26] "    -h/--help               print detailed description of tool and its options"                  
-#&gt; [27] "    --usage                 print this usage message"                                            
-#&gt; [28] "    --version               print version information and quit"                                  </div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>hisat2_build_usage</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "HISAT2 version 2.1.0 by Daehwan Kim (infphilo@gmail.com, http://www.ccb.jhu.edu/people/infphilo)"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2] "Usage: hisat2-build [options]* &lt;reference_in&gt; &lt;ht2_index_base&gt;"                                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3] "    reference_in            comma-separated list of files with ref sequences"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4] "    hisat2_index_base       write ht2 data to files with this dir/basename"                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5] "Options:"                                                                                        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6] "    -c                      reference sequences given on cmd line (as"                           </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7] "                            &lt;reference_in&gt;)"                                                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8] "    -a/--noauto             disable automatic -p/--bmax/--dcv memory-fitting"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9] "    -p                      number of threads"                                                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10] "    --bmax &lt;int&gt;            max bucket sz for blockwise suffix-array builder"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11] "    --bmaxdivn &lt;int&gt;        max bucket sz as divisor of ref len (default: 4)"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12] "    --dcv &lt;int&gt;             diff-cover period for blockwise (default: 1024)"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13] "    --nodc                  disable diff-cover (algorithm becomes quadratic)"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14] "    -r/--noref              don't build .3/.4.ht2 (packed reference) portion"                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15] "    -3/--justref            just build .3/.4.ht2 (packed reference) portion"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16] "    -o/--offrate &lt;int&gt;      SA is sampled every 2^offRate BWT chars (default: 5)"                </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17] "    -t/--ftabchars &lt;int&gt;    # of chars consumed in initial lookup (default: 10)"                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18] "    --localoffrate &lt;int&gt;    SA (local) is sampled every 2^offRate BWT chars (default: 3)"        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19] "    --localftabchars &lt;int&gt;  # of chars consumed in initial lookup in a local index (default: 6)" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [20] "    --snp &lt;path&gt;            SNP file name"                                                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21] "    --haplotype &lt;path&gt;      haplotype file name"                                                 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [22] "    --ss &lt;path&gt;             Splice site file name"                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23] "    --exon &lt;path&gt;           Exon file name"                                                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [24] "    --seed &lt;int&gt;            seed for random number generator"                                    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [25] "    -q/--quiet              verbose output (for debugging)"                                      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [26] "    -h/--help               print detailed description of tool and its options"                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [27] "    --usage                 print this usage message"                                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [28] "    --version               print version information and quit"                                  </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -168,11 +175,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Charlotte Soneson.</p>
+  <p><p>Developed by Charlotte Soneson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -180,6 +187,8 @@
 
   
 
+
+  
 
   </body>
 </html>
