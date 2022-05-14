@@ -135,7 +135,7 @@ jobs:
       - name: Print install.out file
         if: runner.os == 'Linux' && matrix.config.image == null
         run: |
-          cat /home/runner/work/Rhisat2/Rhisat2/check/Rhisat2.Rcheck/00install.out
+          cat /home/runner/work/Rhisat2/Rhisat2.Rcheck/00install.out
 
       - name: Show testthat output
         if: always()
