@@ -68,7 +68,7 @@ WINDOWS = 0
 CYGWIN = 0
 MINGW = 0
 ifneq (,$(findstring CYGWIN,$(shell uname)))
-	WINDOWS = 1 
+	WINDOWS = 1
 	CYGWIN = 1
 	# POSIX memory-mapped files not currently supported on Windows
 	BOWTIE_MM = 0
@@ -88,43 +88,43 @@ ifneq (,$(findstring Darwin,$(shell uname)))
 	MACOS = 1
 endif
 
-EXTRA_FLAGS += -DPOPCNT_CAPABILITY
-INC += -I third_party
+EXTRA_FLAGS += -DPOPCNT_CAPABILITY -std=c++11
+INC += -I. -I third_party
 
-MM_DEF = 
+MM_DEF =
 
 ifeq (1,$(BOWTIE_MM))
 	MM_DEF = -DBOWTIE_MM
 endif
 
-SHMEM_DEF = 
+SHMEM_DEF =
 
 ifeq (1,$(BOWTIE_SHARED_MEM))
 	SHMEM_DEF = -DBOWTIE_SHARED_MEM
 endif
 
 PTHREAD_PKG =
-PTHREAD_LIB = 
+PTHREAD_LIB =
 
 ifeq (1,$(MINGW))
-	PTHREAD_LIB = 
+	PTHREAD_LIB =
 else
 	PTHREAD_LIB = -lpthread
 endif
 
-SEARCH_LIBS = 
-BUILD_LIBS = 
+SEARCH_LIBS =
+BUILD_LIBS =
 INSPECT_LIBS =
 
 ifeq (1,$(MINGW))
-	BUILD_LIBS = 
-	INSPECT_LIBS = 
+	BUILD_LIBS =
+	INSPECT_LIBS =
 endif
 
 USE_SRA = 0
 SRA_DEF =
 SRA_LIB =
-SERACH_INC = 
+SERACH_INC =
 ifeq (1,$(USE_SRA))
 	SRA_DEF = -DUSE_SRA
 	SRA_LIB = -lncbi-ngs-c++-static -lngs-c++-static -lncbi-vdb-static -ldl
@@ -156,12 +156,31 @@ SEARCH_CPPS = qual.cpp pat.cpp \
 	aligner_swsse_loc_u8.cpp \
 	aligner_swsse_ee_u8.cpp \
 	aligner_driver.cpp \
-	splice_site.cpp 
+	splice_site.cpp
 
 BUILD_CPPS = diff_sample.cpp
 
+REPEAT_CPPS = \
+	mask.cpp \
+	qual.cpp \
+	aligner_bt.cpp \
+	scoring.cpp \
+	simple_func.cpp \
+	dp_framer.cpp \
+	aligner_result.cpp \
+	aligner_sw_driver.cpp \
+	aligner_sw.cpp \
+	aligner_swsse_ee_i16.cpp \
+	aligner_swsse_ee_u8.cpp \
+	aligner_swsse_loc_i16.cpp \
+	aligner_swsse_loc_u8.cpp \
+	aligner_swsse.cpp \
+	bit_packed_array.cpp \
+	repeat_builder.cpp
+
 HISAT2_CPPS_MAIN = $(SEARCH_CPPS) hisat2_main.cpp
 HISAT2_BUILD_CPPS_MAIN = $(BUILD_CPPS) hisat2_build_main.cpp
+HISAT2_REPEAT_CPPS_MAIN = $(REPEAT_CPPS) $(BUILD_CPPS) hisat2_repeat_main.cpp
 
 SEARCH_FRAGMENTS = $(wildcard search_*_phase*.c)
 VERSION = $(shell cat VERSION)
@@ -188,7 +207,7 @@ ifeq (64,$(BITS))
 endif
 SSE_FLAG=-msse2
 
-DEBUG_FLAGS    = -O0 -g3 $(BIToS_FLAG) $(SSE_FLAG)
+DEBUG_FLAGS    = -O0 -g3 $(BITS_FLAG) $(SSE_FLAG)
 DEBUG_DEFS     = -DCOMPILER_OPTIONS="\"$(DEBUG_FLAGS) $(EXTRA_FLAGS)\""
 RELEASE_FLAGS  = -O3 $(BITS_FLAG) $(SSE_FLAG) -funroll-loops -g3
 RELEASE_DEFS   = -DCOMPILER_OPTIONS="\"$(RELEASE_FLAGS) $(EXTRA_FLAGS)\""
@@ -197,15 +216,45 @@ FILE_FLAGS     = -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE
 
 ifeq (1,$(USE_SRA))
 	ifeq (1, $(MACOS))
-		DEBUG_FLAGS += -mmacosx-version-min=10.6
-		RELEASE_FLAGS += -mmacosx-version-min=10.6
+		SRA_LIB += -stdlib=libc++
+		DEBUG_FLAGS += -mmacosx-version-min=10.10
+		RELEASE_FLAGS += -mmacosx-version-min=10.10
 	endif
 endif
 
 
 HISAT2_BIN_LIST = hisat2-build-s \
 	hisat2-align-s
-HISAT2_BIN_LIST_AUX = 
+HISAT2_BIN_LIST_AUX =
+
+HT2LIB_DIR = hisat2lib
+HT2LIB_SRCS = $(SHARED_CPPS) \
+			  $(HT2LIB_DIR)/ht2_init.cpp \
+			  $(HT2LIB_DIR)/ht2_repeat.cpp \
+			  $(HT2LIB_DIR)/ht2_index.cpp
+
+HT2LIB_OBJS = $(HT2LIB_SRCS:.cpp=.o)
+
+HT2LIB_DEBUG_OBJS = $(addprefix .ht2lib-obj-debug/,$(HT2LIB_OBJS))
+HT2LIB_RELEASE_OBJS = $(addprefix .ht2lib-obj-release/,$(HT2LIB_OBJS))
+HT2LIB_SHARED_DEBUG_OBJS = $(addprefix .ht2lib-obj-debug-shared/,$(HT2LIB_OBJS))
+HT2LIB_SHARED_RELEASE_OBJS = $(addprefix .ht2lib-obj-release-shared/,$(HT2LIB_OBJS))
+
+HT2LIB_PKG_SRC = \
+	$(HT2LIB_DIR)/ht2_init.cpp \
+	$(HT2LIB_DIR)/ht2_repeat.cpp \
+	$(HT2LIB_DIR)/ht2_index.cpp \
+	$(HT2LIB_DIR)/ht2.h \
+	$(HT2LIB_DIR)/ht2_handle.h \
+	$(HT2LIB_DIR)/java_jni/Makefile \
+	$(HT2LIB_DIR)/java_jni/ht2module.c \
+	$(HT2LIB_DIR)/java_jni/HT2Module.java \
+	$(HT2LIB_DIR)/java_jni/HT2ModuleExample.java \
+	$(HT2LIB_DIR)/pymodule/Makefile \
+	$(HT2LIB_DIR)/pymodule/ht2module.c \
+	$(HT2LIB_DIR)/pymodule/setup.py \
+	$(HT2LIB_DIR)/pymodule/ht2example.py
+
 
 GENERAL_LIST = $(PTHREAD_PKG) \
 	hisat2 \
@@ -220,7 +269,7 @@ GENERAL_LIST = $(PTHREAD_PKG) \
 	VERSION
 
 ifeq (1,$(WINDOWS))
-	HISAT2_BIN_LIST := $(HISAT2_BIN_LIST) hisat2.bat hisat2-build.bat hisat2-inspect.bat 
+	HISAT2_BIN_LIST := $(HISAT2_BIN_LIST) hisat2.bat hisat2-build.bat hisat2-inspect.bat
 endif
 
 # This is helpful on Windows under MinGW/MSYS, where Make might go for
@@ -231,8 +280,9 @@ SRC_PKG_LIST = $(wildcard *.h) \
 	$(wildcard *.hh) \
 	$(wildcard *.c) \
 	$(wildcard *.cpp) \
-	doc/strip_markdown.pl \
+	$(HT2LIB_PKG_SRC) \
 	Makefile \
+	CMakeLists.txt \
 	$(GENERAL_LIST)
 
 BIN_PKG_LIST = $(GENERAL_LIST)
@@ -247,6 +297,10 @@ allall: $(HISAT2_BIN_LIST) $(HISAT2_BIN_LIST_AUX)
 both: hisat2-align-s hisat2-align-l hisat2-build-s hisat2-build-l
 
 both-debug: hisat2-align-s-debug hisat2-align-l-debug hisat2-build-s-debug hisat2-build-l-debug
+
+repeat: hisat2-repeat
+
+repeat-debug: hisat2-repeat-debug
 
 DEFS=-fno-strict-aliasing \
      -DHISAT2_VERSION="\"`cat VERSION`\"" \
@@ -278,6 +332,26 @@ hisat-bp-bin-debug: hisat_bp.cpp $(SEARCH_CPPS) $(SHARED_CPPS) $(HEADERS) $(SEAR
 	-o $@ $< \
 	$(SHARED_CPPS) $(HISAT_CPPS_MAIN) \
 	$(LIBS) $(SEARCH_LIBS)
+
+#
+# hisat2-repeat targets
+#
+
+hisat2-repeat: hisat2_repeat.cpp $(REPEAT_CPPS) $(SHARED_CPPS) $(HEADERS)
+	$(CXX) $(RELEASE_FLAGS) $(RELEASE_DEFS) $(EXTRA_FLAGS) \
+	$(DEFS) -DBOWTIE2 -DBOWTIE_64BIT_INDEX $(NOASSERT_FLAGS) -Wall \
+	$(INC) \
+	-o $@ $< \
+	$(SHARED_CPPS) $(HISAT2_REPEAT_CPPS_MAIN) \
+	$(LIBS) $(BUILD_LIBS)
+
+hisat2-repeat-debug: hisat2_repeat.cpp $(REPEAT_CPPS) $(SHARED_CPPS) $(HEADERS)
+	$(CXX) $(DEBUG_FLAGS) $(DEBUG_DEFS) $(EXTRA_FLAGS) \
+	$(DEFS) -DBOWTIE2 -DBOWTIE_64BIT_INDEX -Wall \
+	$(INC) \
+	-o $@ $< \
+	$(SHARED_CPPS) $(HISAT2_REPEAT_CPPS_MAIN) \
+	$(LIBS) $(BUILD_LIBS)
 
 
 #
@@ -376,7 +450,7 @@ hisat2-align-s: hisat2.cpp $(SEARCH_CPPS) $(SHARED_CPPS) $(HEADERS) $(SEARCH_FRA
 #	$(SHARED_CPPS) \
 #	$(LIBS) $(INSPECT_LIBS)
 
-#hisat2-inspect-s-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS) 
+#hisat2-inspect-s-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS)
 #	$(CXX) $(DEBUG_FLAGS) \
 #	$(DEBUG_DEFS) $(EXTRA_FLAGS) \
 #	$(DEFS) -DBOWTIE2 -DHISAT2_INSPECT_MAIN -Wall \
@@ -385,7 +459,7 @@ hisat2-align-s: hisat2.cpp $(SEARCH_CPPS) $(SHARED_CPPS) $(HEADERS) $(SEARCH_FRA
 #	$(SHARED_CPPS) \
 #	$(LIBS) $(INSPECT_LIBS)
 
-#hisat2-inspect-l-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS) 
+#hisat2-inspect-l-debug: hisat2_inspect.cpp $(HEADERS) $(SHARED_CPPS)
 #	$(CXX) $(DEBUG_FLAGS) \
 #	$(DEBUG_DEFS) $(EXTRA_FLAGS) \
 #	$(DEFS) -DBOWTIE2 -DBOWTIE_64BIT_INDEX -DHISAT2_INSPECT_MAIN -Wall \
@@ -394,7 +468,51 @@ hisat2-align-s: hisat2.cpp $(SEARCH_CPPS) $(SHARED_CPPS) $(HEADERS) $(SEARCH_FRA
 #	$(SHARED_CPPS) \
 #	$(LIBS) $(INSPECT_LIBS)
 
+#
+# HT2LIB targets
+#
 
+ht2lib: libhisat2lib-debug.a libhisat2lib.a libhisat2lib-debug.so libhisat2lib.so
+
+libhisat2lib-debug.a: $(HT2LIB_DEBUG_OBJS)
+	ar rc $@ $(HT2LIB_DEBUG_OBJS)
+
+libhisat2lib.a: $(HT2LIB_RELEASE_OBJS)
+	ar rc $@ $(HT2LIB_RELEASE_OBJS)
+
+libhisat2lib-debug.so: $(HT2LIB_SHARED_DEBUG_OBJS)
+	$(CXX) $(DEBUG_FLAGS) $(DEBUG_DEFS) $(EXTRA_FLAGS) $(DEFS) $(SRA_DEF) -DBOWTIE2 -Wall $(INC) $(SEARCH_INC) \
+	-shared -o $@  $(HT2LIB_SHARED_DEBUG_OBJS) $(LIBS) $(SRA_LIB) $(SEARCH_LIBS)
+
+libhisat2lib.so: $(HT2LIB_SHARED_RELEASE_OBJS)
+	$(CXX) $(RELEASE_FLAGS) $(RELEASE_DEFS) $(EXTRA_FLAGS) $(DEFS) $(SRA_DEF) -DBOWTIE2 $(NOASSERT_FLAGS) -Wall  $(INC) $(SEARCH_INC)\
+	-shared -o $@ $(HT2LIB_SHARED_RELEASE_OBJS) $(LIBS) $(SRA_LIB) $(SEARCH_LIBS)
+
+.ht2lib-obj-debug/%.o: %.cpp
+	@mkdir -p $(dir $@)/$(dir $<)
+	$(CXX) -fPIC $(DEBUG_FLAGS) $(DEBUG_DEFS) $(EXTRA_FLAGS) $(DEFS) $(SRA_DEF) -DBOWTIE2 -Wall $(INC) $(SEARCH_INC) \
+	-c -o $@ $<
+
+.ht2lib-obj-release/%.o: %.cpp
+	@mkdir -p $(dir $@)/$(dir $<)
+	$(CXX) -fPIC $(RELEASE_FLAGS) $(RELEASE_DEFS) $(EXTRA_FLAGS) $(DEFS) $(SRA_DEF) -DBOWTIE2 $(NOASSERT_FLAGS) -Wall $(INC) $(SEARCH_INC) \
+	-c -o $@ $<
+
+.ht2lib-obj-debug-shared/%.o: %.cpp
+	@mkdir -p $(dir $@)/$(dir $<)
+	$(CXX) -fPIC $(DEBUG_FLAGS) $(DEBUG_DEFS) $(EXTRA_FLAGS) $(DEFS) $(SRA_DEF) -DBOWTIE2 -Wall $(INC) $(SEARCH_INC) \
+	-c -o $@ $<
+
+.ht2lib-obj-release-shared/%.o: %.cpp
+	@mkdir -p $(dir $@)/$(dir $<)
+	$(CXX) -fPIC $(RELEASE_FLAGS) $(RELEASE_DEFS) $(EXTRA_FLAGS) $(DEFS) $(SRA_DEF) -DBOWTIE2 $(NOASSERT_FLAGS) -Wall $(INC) $(SEARCH_INC) \
+	-c -o $@ $<
+
+#
+# repeatexp
+#
+repeatexp:
+	g++ -o repeatexp repeatexp.cpp -I hisat2lib libhisat2lib.a
 
 hisat2: ;
 
@@ -442,7 +560,7 @@ hisat2-bin: $(BIN_PKG_LIST) $(HISAT2_BIN_LIST) $(HISAT2_BIN_LIST_AUX)
 
 #
 # installation instructions
-# 
+#
 ../inst/hisat2: $(BIN_LIST)
 	mkdir -p ../inst
 	cp hisat2-align-s ../inst/hisat2
@@ -467,9 +585,12 @@ clean:
 	hisat2-src.zip hisat2-bin.zip
 	rm -f core.* .tmp.head
 	rm -rf *.dSYM
+	rm -rf .ht2lib-obj*
+	rm -f libhisat2lib*.a libhisat2lib*.so
 	rm -f *.so
 	rm -f ../inst/hisat2 ../inst/hisat2-build
 
+
 .PHONY: push-doc
 push-doc: doc/manual.inc.html
-	scp doc/*.*html igm1:/data1/igm3/www/ccb.jhu.edu/html/software/hisat2/
+	scp doc/*.*html doc/indexes.txt salz-dmz:/ccb/salz7-data/www/ccb.jhu.edu/html/software/hisat2/
