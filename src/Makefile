@@ -22,11 +22,12 @@
 # edited as part of Rhisat2:
 # - set BITS=64 (comment parts that are related to setting BITS)
 # - removed files:
-#   from HISAT_BIN_LIST:
+#   from HISAT2_BIN_LIST:
 #     hisat2-build-l
 #     hisat2-align-l
 #     hisat2-inspect-s
 #     hisat2-inspect-l
+#     hisat2-repeat
 #   from HISAT2_BIN_LIST_AUX:
 #     hisat2-build-s-debug
 #     hisat2-build-l-debug
@@ -34,15 +35,11 @@
 #     hisat2-align-l-debug
 #     hisat2-inspect-s-debug
 #     hisat2-inspect-l-debug
+#     hisat2-repeat-debug
 #   from GENERAL_LIST:
 #     $(wildcard scripts/*.sh)
 #     $(wildcard scripts/*.pl)
 #     $(wildcard *.py)
-#     $(wildcard hisatgenotype_modules/*.py)
-#     $(wildcard hisatgenotype_scripts/*.py)
-#     doc/manual.inc.html
-#     doc/README
-#     doc/style.css
 #     $(wildcard example/index/*.ht2)
 #     $(wildcard example/reads/*.fa)
 #     example/reference/22_20-21M.fa
