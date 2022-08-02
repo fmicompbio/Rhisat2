@@ -11,7 +11,7 @@ Description: An R interface to the HISAT2 spliced short-read aligner by
 License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.2.1
-Depends: R (>= 3.6)
+Depends: R (>= 4.2)
 Suggests: testthat,
     knitr,
     rmarkdown,
