@@ -1,7 +1,7 @@
 
 ' ask the scripting runtime environemt for access to files
 set FS = CreateObject("Scripting.FileSystemObject")
-set FileHandler = FS.GetFile("../VERSION")
+set FileHandler = FS.GetFile("../VERSION_HS2")
 set inputTextStream = FileHandler.OpenAsTextStream(1)
 version = inputTextStream.ReadLine
 

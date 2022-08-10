@@ -180,7 +180,7 @@ HISAT2_BUILD_CPPS_MAIN = $(BUILD_CPPS) hisat2_build_main.cpp
 HISAT2_REPEAT_CPPS_MAIN = $(REPEAT_CPPS) $(BUILD_CPPS) hisat2_repeat_main.cpp
 
 SEARCH_FRAGMENTS = $(wildcard search_*_phase*.c)
-VERSION = $(shell cat VERSION)
+VERSION = $(shell cat VERSION_HS2)
 
 # Convert BITS=?? to a -m flag
 #BITS=32
@@ -263,7 +263,7 @@ GENERAL_LIST = $(PTHREAD_PKG) \
 	MANUAL \
 	MANUAL.markdown \
 	TUTORIAL \
-	VERSION
+	VERSION_HS2
 
 ifeq (1,$(WINDOWS))
 	HISAT2_BIN_LIST := $(HISAT2_BIN_LIST) hisat2.bat hisat2-build.bat hisat2-inspect.bat
@@ -299,10 +299,13 @@ repeat: hisat2-repeat
 
 repeat-debug: hisat2-repeat-debug
 
+BUILD_HOST ?= $(shell hostname)
+BUILD_TIME ?= $(shell date)
+
 DEFS=-fno-strict-aliasing \
-     -DHISAT2_VERSION="\"`cat VERSION`\"" \
-     -DBUILD_HOST="\"`hostname`\"" \
-     -DBUILD_TIME="\"`date`\"" \
+     -DHISAT2_VERSION="\"$(VERSION)\"" \
+     -DBUILD_HOST="\"${BUILD_HOST}\"" \
+     -DBUILD_TIME="\"${BUILD_TIME}\"" \
      -DCOMPILER_VERSION="\"`$(CXX) -v 2>&1 | tail -1`\"" \
      $(FILE_FLAGS) \
      $(PREF_DEF) \

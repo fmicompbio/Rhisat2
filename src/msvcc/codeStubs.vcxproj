@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -72,7 +72,7 @@
     <CustomBuildStep>
       <Command>cscript.exe SetVersion.vbs</Command>
       <Outputs>../version.h;</Outputs>
-      <Inputs>../VERSION;</Inputs>
+      <Inputs>../VERSION_HS2;</Inputs>
       <Message>Setting version info</Message>
     </CustomBuildStep>
   </ItemDefinitionGroup>
@@ -94,7 +94,7 @@
     <CustomBuildStep>
       <Command>cscript.exe SetVersion.vbs</Command>
       <Outputs>../version.h;</Outputs>
-      <Inputs>../VERSION;</Inputs>
+      <Inputs>../VERSION_HS2;</Inputs>
       <Message>Setting version info</Message>
     </CustomBuildStep>
   </ItemDefinitionGroup>
