@@ -66,11 +66,12 @@
 
 #define INLINE_CUPS
 
+#define SIMDE_ENABLE_NATIVE_ALIASES
+#include "simde/x86/sse2.h"
 #include <stdint.h>
 #include <iostream>
 #include <limits>
 #include "threading.h"
-#include <emmintrin.h>
 #include "aligner_sw_common.h"
 #include "aligner_sw_nuc.h"
 #include "ds.h"
@@ -101,7 +102,7 @@
  * The class is stateful.  First the user must call init() to initialize the
  * object with details regarding the dynamic programming problem to be solved.
  * Next, the user calls align() to fill the dynamic programming matrix and
- * calculate summaries describing the solutions.  Finally the user calls 
+ * calculate summaries describing the solutions.  Finally the user calls
  * nextAlignment(...), perhaps repeatedly, to populate the SwResult object with
  * the next result.  Results are dispensend in best-to-worst, left-to-right
  * order.
@@ -127,7 +128,7 @@
  * allows negative scores (i.e. doesn't necessarily clamp them up to 0), (b)
  * checks in rows other than the last row for acceptable solutions, and (c)
  * optionally adds a bonus to the score for matches.
- * 
+ *
  * For global alignment, we:
  *
  * (a) Allow negative scores
@@ -199,7 +200,7 @@ class SwAligner {
 		STATE_INITED,  // init() has been called, but not align()
 		STATE_ALIGNED, // align() has been called
 	};
-	
+
 	const static size_t ALPHA_SIZE = 5;
 
 public:
@@ -244,7 +245,7 @@ public:
 		size_t rdi,              // offset of first read char to align
 		size_t rdf,              // offset of last read char to align
 		const Scoring& sc);      // scoring scheme
-	
+
 	/**
 	 * Initialize with a new alignment problem.
 	 */
@@ -320,7 +321,7 @@ public:
 	 * last time init() was called.  Uses dynamic programming.
 	 */
 	bool align(RandomSource& rnd, TAlScore& best);
-	
+
 	/**
 	 * Populate the given SwResult with information about the "next best"
 	 * alignment if there is one.  If there isn't one, false is returned.  Note
@@ -331,7 +332,7 @@ public:
 		SwResult& res,
 		TAlScore minsc,
 		RandomSource& rnd);
-	
+
 	/**
 	 * Print out an alignment result as an ASCII DP table.
 	 */
@@ -341,7 +342,7 @@ public:
 	{
 		res.alres.printStacked(*rd_, os);
 	}
-	
+
 	/**
 	 * Return true iff there are no more solution cells to backtace from.
 	 * Note that this may return false in situations where there are actually
@@ -362,7 +363,7 @@ public:
 	 * align against.
 	 */
 	inline bool initedRead() const { return initedRead_; }
-	
+
 	/**
 	 * Reset, signaling that we're done with this dynamic programming problem
 	 * and won't be asking for any more alignments.
@@ -383,7 +384,7 @@ public:
 		return true;
 	}
 #endif
-	
+
 	/**
 	 * Return the number of alignments given out so far by nextAlignment().
 	 */
@@ -409,7 +410,7 @@ public:
 		nbtfiltsc += nbtfiltsc_;
 		nbtfiltdo += nbtfiltdo_;
 	}
-	
+
 	/**
 	 * Reset all the counters related to filling in the DP table to 0.
 	 */
@@ -420,7 +421,7 @@ public:
 		sseI16MateMet_.reset();
 		nbtfiltst_ = nbtfiltsc_ = nbtfiltdo_ = 0;
 	}
-	
+
 	/**
 	 * Return the size of the DP problem.
 	 */
@@ -429,7 +430,7 @@ public:
 	}
 
 protected:
-	
+
 	/**
 	 * Return the number of rows that will be in the dynamic programming table.
 	 */
@@ -453,7 +454,7 @@ protected:
 		int& flag, bool debug);
 	TAlScore alignNucleotidesLocalSseI16(   // signed 16-bit elements
 		int& flag, bool debug);
-	
+
 	/**
 	 * Aligns by filling a dynamic programming matrix with the SSE-accelerated,
 	 * banded DP approach of Farrar.  As it goes, it determines which cells we
@@ -480,7 +481,7 @@ protected:
 		int& flag, bool debug);
 	TAlScore alignGatherLoc16(              // signed 16-bit elements
 		int& flag, bool debug);
-	
+
 	/**
 	 * Build query profile look up tables for the read.  The query profile look
 	 * up table is organized as a 1D array indexed by [i][j] where i is the
@@ -498,7 +499,7 @@ protected:
 	 */
 	void buildQueryProfileEnd2EndSseI16(bool fw);
 	void buildQueryProfileLocalSseI16(bool fw);
-	
+
 	bool gatherCellsNucleotidesLocalSseU8(TAlScore best);
 	bool gatherCellsNucleotidesEnd2EndSseU8(TAlScore best);
 
@@ -614,7 +615,7 @@ protected:
 	bool                readSse16_;    // true -> sse16 from now on for read
 	bool                initedRef_;    // true iff initialized with initRef
 	EList<uint32_t>     rfwbuf_;       // buffer for wordized ref stretches
-	
+
 	EList<DpNucFrame>    btnstack_;    // backtrace stack for nucleotides
 	EList<SizeTPair>     btcells_;     // cells involved in current backtrace
 
@@ -623,23 +624,23 @@ protected:
 	EList<DpBtCandidate> btncanddone_; // candidates that we investigated
 	size_t              btncanddoneSucc_; // # investigated and succeeded
 	size_t              btncanddoneFail_; // # investigated and failed
-	
+
 	BtBranchTracer       bter_;        // backtracer
-	
+
 	Checkpointer         cper_;        // structure for saving checkpoint cells
 	size_t               cperMinlen_;  // minimum length for using checkpointer
 	size_t               cperPerPow2_; // checkpoint every 1 << perpow2 diags (& next)
 	bool                 cperEf_;      // store E and F in addition to H?
 	bool                 cperTri_;     // checkpoint for triangular mini-fills?
-	
+
 	size_t              colstop_;      // bailed on DP loop after this many cols
 	size_t              lastsolcol_;   // last DP col with valid cell
 	size_t              cural_;        // index of next alignment to be given
-	
+
 	uint64_t nbtfiltst_; // # candidates filtered b/c starting cell was seen
 	uint64_t nbtfiltsc_; // # candidates filtered b/c score uninteresting
 	uint64_t nbtfiltdo_; // # candidates filtered b/c dominated by other cell
-	
+
 	ASSERT_ONLY(SStringExpandable<uint32_t> tmp_destU32_);
 	ASSERT_ONLY(BTDnaString tmp_editstr_, tmp_refstr_);
 	ASSERT_ONLY(EList<DpBtCandidate> cand_tmp_);

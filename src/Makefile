@@ -85,7 +85,7 @@ ifneq (,$(findstring Darwin,$(shell uname)))
 	MACOS = 1
 endif
 
-EXTRA_FLAGS += -DPOPCNT_CAPABILITY -std=c++11
+EXTRA_FLAGS += -std=c++11
 INC += -I. -I third_party
 
 MM_DEF =
