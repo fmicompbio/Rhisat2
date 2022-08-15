@@ -138,12 +138,17 @@ jobs:
         run: |
           cat /home/runner/work/Rhisat2/Rhisat2.Rcheck/00install.out
 
-      - name: Print install.out file (any location)
+     - name: Print install.out file (windows, hard-coded name)
+        if: runner.os == 'Windows' && failure()
+        run: find . -name 'Rhisat2.install-out.txt' -exec cat '{}' \; || true
+        shell: bash
+
+     - name: Print 00install.out file (any location)
         if: failure()
         run: find . -name '00install.out' -exec cat '{}' \; || true
         shell: bash
 
-      - name: Print check.out file (any location)
+      - name: Print 00check.out file (any location)
         if: failure()
         run: find . -name '00check.log' -exec cat '{}' \; || true
         shell: bash
