@@ -10,6 +10,8 @@ The `Rhisat2` R package provides an R interface to the [`hisat2`](https://ccb.jh
 
 In Rhisat2 v1.13.1 and onwards, hisat2 was updated to v2.2.1, which was obtained from [https://github.com/DaehwanKimLab/hisat2/releases](https://github.com/DaehwanKimLab/hisat2/releases) on July 27, 2022. 
 
+Furthermore, Rhisat2 now includes parts of the SIMD Everywhere header library (https://github.com/simd-everywhere/simde) to support compilation on arm64, based on the implemented by Michael R. Crusoe <crusoe@debian.org> for the hisat2 (2.2.1-3) debian package (simde patch in http://deb.debian.org/debian/pool/main/h/hisat2/hisat2_2.2.1-3.debian.tar.xz, also forwarded in https://github.com/DaehwanKimLab/hisat2/pull/251).
+
 #### Rhisat2 versions up to v1.13.0
 
 The source code for hisat2 v2.1.0 was obtained from [https://ccb.jhu.edu/software/hisat2/index.shtml](https://ccb.jhu.edu/software/hisat2/index.shtml) on October 17, 2018.

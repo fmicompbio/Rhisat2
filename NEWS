@@ -2,6 +2,7 @@ CHANGES IN VERSION 1.13.1
 -------------------------
 
     o Update hisat2 to v2.2.1
+    o Include SIMD Everywhere library (https://github.com/simd-everywhere/simde) to support arm64
 
 CHANGES IN VERSION 0.99.0
 -------------------------
