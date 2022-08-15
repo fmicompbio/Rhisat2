@@ -124,6 +124,7 @@ jobs:
           g++ --version
 
       - name: Build, Install, Check
+        id: build-install-check
         uses: grimbough/bioc-actions/build-install-check@v1
 
       - name: Run BiocCheck
@@ -147,7 +148,9 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: ${{ runner.os }}-bioc${{ matrix.config.bioc }}-results
-          path: check
+          path: |
+            check
+            ${{ steps.build-install-check.outputs.check-dir }}
 
       - name: Test coverage
         if: matrix.config.os == 'macOS-latest'
