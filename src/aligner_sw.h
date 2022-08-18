@@ -67,11 +67,16 @@
 #define INLINE_CUPS
 
 #define SIMDE_ENABLE_NATIVE_ALIASES
-#include "simde/x86/sse2.h"
+#ifdef USESIMDE
+    #include "simde/x86/sse2.h"
+#endif
 #include <stdint.h>
 #include <iostream>
 #include <limits>
 #include "threading.h"
+#ifndef USESIMDE
+    #include <emmintrin.h>
+#endif
 #include "aligner_sw_common.h"
 #include "aligner_sw_nuc.h"
 #include "ds.h"

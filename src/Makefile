@@ -310,7 +310,8 @@ DEFS=-fno-strict-aliasing \
      $(FILE_FLAGS) \
      $(PREF_DEF) \
      $(MM_DEF) \
-     $(SHMEM_DEF)
+     $(SHMEM_DEF) \
+     -USESIMDE
 
 #
 # hisat-bp targets
