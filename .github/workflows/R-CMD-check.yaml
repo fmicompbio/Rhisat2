@@ -123,10 +123,6 @@ jobs:
           R CMD config CXXPICFLAGS
           g++ --version
 
-      - name: Check
-        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", check_dir = "check")
-        shell: Rscript {0}
-
       - name: Build, Install, Check
         id: build-install-check
         uses: grimbough/bioc-actions/build-install-check@v1
@@ -142,21 +138,6 @@ jobs:
         run: |
           cat /home/runner/work/Rhisat2/Rhisat2.Rcheck/00install.out
 
-#      - name: Print install.out file (windows hard-coded name)
-#        if: runner.os == 'Windows' && failure()
-#        run: find . -name 'Rhisat2.install-out.txt' -exec cat '{}' \; || true
-#        shell: bash
-#
-#      - name: Print install.out file (any location)
-#        if: failure()
-#        run: find . -name '00install.out' -exec cat '{}' \; || true
-#        shell: bash
-#
-#      - name: Print check.out file (any location)
-#        if: failure()
-#        run: find . -name '00check.log' -exec cat '{}' \; || true
-#        shell: bash
-
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
@@ -167,9 +148,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: ${{ runner.os }}-bioc${{ matrix.config.bioc }}-results
-          path: |
-            check
-            ${{ steps.build-install-check.outputs.check-dir }}
+          path: ${{ steps.build-install-check.outputs.check-dir }}
 
       - name: Test coverage
         if: matrix.config.os == 'macOS-latest'
