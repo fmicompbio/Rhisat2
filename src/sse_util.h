@@ -20,8 +20,8 @@
 #ifndef SSE_UTIL_H_
 #define SSE_UTIL_H_
 
-#define SIMDE_ENABLE_NATIVE_ALIASES
 #ifdef USESIMDE
+    #define SIMDE_ENABLE_NATIVE_ALIASES
     #include "simde/x86/sse2.h"
 #endif
 

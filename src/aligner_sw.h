@@ -66,8 +66,8 @@
 
 #define INLINE_CUPS
 
-#define SIMDE_ENABLE_NATIVE_ALIASES
 #ifdef USESIMDE
+    #define SIMDE_ENABLE_NATIVE_ALIASES
     #include "simde/x86/sse2.h"
 #endif
 #include <stdint.h>
