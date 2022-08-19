@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #
 # Copyright 2015, Daehwan Kim <infphilo@gmail.com>
@@ -18,8 +18,6 @@
 # You should have received a copy of the GNU General Public License
 # along with HISAT 2.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-from __future__ import print_function
 
 from sys import stderr, exit
 from collections import defaultdict as dd, Counter
@@ -49,9 +47,10 @@ def extract_splice_sites(gtf_file, verbose=False):
             continue
 
         values_dict = {}
-        for attr in values.split(';')[:-1]:
-            attr, _, val = attr.strip().partition(' ')
-            values_dict[attr] = val.strip('"')
+        for attr in values.split(';'):
+            if attr:
+                attr, _, val = attr.strip().partition(' ')
+                values_dict[attr] = val.strip('"')
 
         if 'gene_id' not in values_dict or \
                 'transcript_id' not in values_dict:
@@ -103,19 +102,19 @@ def extract_splice_sites(gtf_file, verbose=False):
         print('genes: {}, genes with multiple isoforms: {}'.format(
                 len(genes), sum(len(v) > 1 for v in genes.values())),
               file=stderr)
-        print('transcripts: {}, transcript avg. length: {:d}'.format(
-                len(trans), sum(trans_lengths.elements())/len(trans)),
+        print('transcripts: {}, transcript avg. length: {:.0f}'.format(
+                len(trans), sum(trans_lengths.elements())//len(trans)),
               file=stderr)
-        print('exons: {}, exon avg. length: {:d}'.format(
+        print('exons: {}, exon avg. length: {:.0f}'.format(
                 sum(exon_lengths.values()),
-                sum(exon_lengths.elements())/sum(exon_lengths.values())),
+                sum(exon_lengths.elements())//sum(exon_lengths.values())),
               file=stderr)
-        print('introns: {}, intron avg. length: {:d}'.format(
+        print('introns: {}, intron avg. length: {:.0f}'.format(
                 sum(intron_lengths.values()),
-                sum(intron_lengths.elements())/sum(intron_lengths.values())),
+                sum(intron_lengths.elements())//sum(intron_lengths.values())),
               file=stderr)
-        print('average number of exons per transcript: {:d}'.format(
-                sum(exon_lengths.values())/len(trans)),
+        print('average number of exons per transcript: {:.0f}'.format(
+                sum(exon_lengths.values())//len(trans)),
               file=stderr)
 
 

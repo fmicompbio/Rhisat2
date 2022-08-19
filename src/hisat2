@@ -52,9 +52,12 @@ my $align_bin_l = $os_is_nix ? 'hisat2-align-l' : 'hisat2-align-l.exe';
 my $align_prog_s= File::Spec->catpath($vol,$script_path,$align_bin_s);
 my $align_prog_l= File::Spec->catpath($vol,$script_path,$align_bin_l);
 my $align_prog  = $align_prog_s;
-my $idx_ext_l     = 'ht2l'; 
+my $read_stat_prog = File::Spec->catpath($vol,$script_path,"hisat2_read_statistics.py");
+my $idx_ext_l     = 'ht2l';
 my $idx_ext_s     = 'ht2'; 
 my $idx_ext       = $idx_ext_s; 
+my $seq_in_args = 0;
+my $skip_read_stat = 0;
 my %signo       = ();
 my @signame     = ();
 
@@ -70,7 +73,9 @@ my @signame     = ();
 }
 
 (-x "$align_prog") ||
-	Fail("Expected hisat2 to be in same directory with hisat-align:\n$script_path\n");
+	Fail("Expected hisat2 to be in same directory with hisat2-align-s and hisat2-align-l:\n$script_path\n");
+
+(-x "$read_stat_prog") || ($skip_read_stat = 1);
 
 # Get description of arguments from HISAT so that we can distinguish HISAT
 # args from wrapper args
@@ -181,6 +186,13 @@ for(my $i = 0; $i < scalar(@ht2_args); $i++) {
 		$large_idx = 1;
 		$ht2_args[$i] = undef;
 	}
+	if($arg eq "--skip-read-lengths") {
+		$skip_read_stat = 1;
+		$ht2_args[$i] = undef
+	}
+	if($arg eq "-c") {
+		$seq_in_args = 1;
+	}
 	for my $rarg ("un-conc", "al-conc", "al-conc-disc", "un", "al") {
 		if($arg =~ /^--${rarg}$/ || $arg =~ /^--${rarg}-gz$/ || $arg =~ /^--${rarg}-bz2$/) {
 			$ht2_args[$i] = undef;
@@ -225,6 +237,7 @@ my @unps = ();
 my @mate1s = ();
 my @mate2s = ();
 my @to_delete = ();
+my @to_kills = ();
 my $temp_dir = "/tmp";
 my $bam_out = 0;
 my $ref_str = undef;
@@ -267,6 +280,46 @@ if ($log_fName) {
 Info("Before arg handling:\n");
 Info("  Wrapper args:\n[ @ht2w_args ]\n");
 Info("  Binary args:\n[ @ht2_args ]\n");
+
+# check read lengths
+# if read_files have more than 1 files, use first one,
+my @read_files = (scalar(@unps) > 0) ? @unps : @mate1s;
+if ((scalar(@read_files) > 0)
+		&& ($seq_in_args == 0)
+		&& ($skip_read_stat == 0)) {
+	Info("Check read length: $read_files[0]\n");
+	my $cmd = "'$read_stat_prog' $read_files[0]";
+	my $read_len_str = "";
+
+	open(my $fh, "$cmd |") || Fail("Failed to run command '$cmd'\n");
+	while(readline $fh) {
+		chomp;
+		next if /^\s*$/;
+		my @ts = split(/ /);
+		if (scalar(@ts) > 4) {
+			$read_len_str = $ts[4];
+		} else {
+			$read_len_str = "";
+		}
+	}
+	close($fh);
+
+	if (($read_len_str ne "") && ($read_len_str ne "0")) {
+		Info("Read Length String: $read_len_str\n");
+		push @ht2_args, ("--read-lengths", $read_len_str);
+	}
+}
+
+sub check_file_exist($$$) {
+	my ($unps, $mate1s, $mate2s) = @_;
+	for my $fn (@$unps, @$mate1s, @$mate2s) {
+		if (not -f $fn) {
+			Fail("Read file '%s' doesn't exist\n", $fn);
+			return 1;
+		}
+	}
+	return 0;
+}
 
 sub cat_file($$) {
 	my ($ifn, $ofh) = @_;
@@ -315,10 +368,27 @@ sub Extract_IndexName_From {
     my $index_opt = $ref_str ? '--index' : '-x';
     for (my $i=0; $i<@_; $i++) {
         if ($_[$i] eq $index_opt){
-            return $_[$i+1];
+			my $idx_basename = $_[$i+1];
+			my @idx_filenames = glob($idx_basename . "*.ht2{,l}");
+			unless(@idx_filenames) {
+				if(exists $ENV{"HISAT2_INDEXES"}) {
+					@idx_filenames = glob("$ENV{'HISAT2_INDEXES'}/$idx_basename" . "ht2{,l}");
+				}
+
+				if(!@idx_filenames) {
+					Fail("\"" . $idx_basename . "\" does not exist\n");
+				}
+				$idx_basename = "$ENV{'HISAT2_INDEXES'}/$idx_basename"
+			}
+
+            return $idx_basename;
         }
     }
     Info("Cannot find any index option (--reference-string, --ref-string or -x) in the given command line.\n");    
+}
+
+if($seq_in_args == 0) {
+	check_file_exist(\@unps, \@mate1s, \@mate2s);
 }
 
 if(wrapInput(\@unps, \@mate1s, \@mate2s)) {
@@ -339,6 +409,7 @@ if(wrapInput(\@unps, \@mate1s, \@mate2s)) {
 		}
 		my $pid = 0;
 		$pid = fork() unless $no_pipes;
+		push @to_kills, $pid unless $no_pipes;
 		if($pid == 0) {
 			# Open named pipe 1 for writing
 			open(my $ofh, ">$m1fn") || Fail("Can't open '$m1fn' for writing\n");
@@ -356,6 +427,7 @@ if(wrapInput(\@unps, \@mate1s, \@mate2s)) {
 		}
 		$pid = 0;
 		$pid = fork() unless $no_pipes;
+		push @to_kills, $pid unless $no_pipes;
 		if($pid == 0) {
 			# Open named pipe 2 for writing
 			open(my $ofh, ">$m2fn") || Fail("Can't open '$m2fn' for writing.\n");
@@ -410,8 +482,7 @@ if(defined($ref_str)) {
 	push @to_delete, ("$ofn.1.".$idx_ext, "$ofn.2.".$idx_ext, 
 	                  "$ofn.3.".$idx_ext, "$ofn.4.".$idx_ext,
 			  "$ofn.5.".$idx_ext, "$ofn.6.".$idx_ext,
-	                  "$ofn.rev.1.".$idx_ext, "$ofn.rev.2.".$idx_ext,
-			  "$ofn.rev.5.".$idx_ext, "$ofn.rev.6.".$idx_ext);
+			  "$ofn.7.".$idx_ext, "$ofn.8.".$idx_ext);
 }
 
 Info("After arg handling:\n");
@@ -535,7 +606,7 @@ if(defined($cap_out)) {
 					my $l = <HT>;
 					chomp($l);
 					$l =~ s/%(..)/chr(hex($1))/eg;
-					if((defined($read_fhs{un}) || defined($read_fhs{al})) && $unp) {
+					if((defined($read_fhs{un}) || defined($read_fhs{al})) && $unp && !$secondary) {
 						if($unal) {
 							# Failed to align
 							print {$read_fhs{un}} $l if defined($read_fhs{un});
@@ -574,6 +645,8 @@ if(defined($cap_out)) {
 } else {
 	$ret = system($cmd);
 }
+kill 'TERM', @to_kills;
+
 if(!$keep) { for(@to_delete) { unlink($_); } }
 
 if ($ret == -1) {

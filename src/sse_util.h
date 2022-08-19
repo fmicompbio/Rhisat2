@@ -20,11 +20,18 @@
 #ifndef SSE_UTIL_H_
 #define SSE_UTIL_H_
 
+#ifdef USESIMDE
+    #define SIMDE_ENABLE_NATIVE_ALIASES
+    #include "simde/x86/sse2.h"
+#endif
+
 #include "assert_helpers.h"
 #include "ds.h"
 #include "limit.h"
 #include <iostream>
-#include <emmintrin.h>
+#ifndef USESIMDE
+    #include <emmintrin.h>
+#endif
 
 class EList_m128i {
 public:
@@ -52,7 +59,7 @@ public:
 	 * Return number of elements allocated.
 	 */
 	inline size_t capacity() const { return sz_; }
-	
+
 	/**
 	 * Ensure that there is sufficient capacity to expand to include
 	 * 'thresh' more elements without having to expand.
@@ -76,7 +83,7 @@ public:
 	 * Return true iff there are no elements.
 	 */
 	inline bool empty() const { return cur_ == 0; }
-	
+
 	/**
 	 * Return true iff list hasn't been initialized yet.
 	 */
@@ -97,7 +104,7 @@ public:
 		}
 		cur_ = sz;
 	}
-	
+
 	/**
 	 * Zero out contents of vector.
 	 */
@@ -167,7 +174,7 @@ public:
 	inline __m128i& get(size_t i) {
 		return operator[](i);
 	}
-	
+
 	/**
 	 * Return a reference to the ith element.
 	 */
@@ -319,9 +326,9 @@ private:
 
 struct  CpQuad {
 	CpQuad() { reset(); }
-	
+
 	void reset() { sc[0] = sc[1] = sc[2] = sc[3] = 0; }
-	
+
 	bool operator==(const CpQuad& o) const {
 		return sc[0] == o.sc[0] &&
 		       sc[1] == o.sc[1] &&
@@ -341,7 +348,7 @@ class Checkpointer {
 public:
 
 	Checkpointer() { reset(); }
-	
+
 	/**
 	 * Set the checkpointer up for a new rectangle.
 	 */
@@ -388,12 +395,12 @@ public:
 			qcolsD_.resize(ncol_ * (niter_ << 2));
 		}
 	}
-	
+
 	/**
 	 * Return true iff we've been collecting debug cells.
 	 */
 	bool debug() const { return debug_; }
-	
+
 	/**
 	 * Check whether the given score matches the saved score at row, col, hef.
 	 */
@@ -426,7 +433,7 @@ public:
 		}
 		return asc;
 	}
-	
+
 	/**
 	 * Return true iff the given row/col is checkpointed.
 	 */
@@ -508,7 +515,7 @@ public:
 	 * Given a column of filled-in cells, save the checkpointed cells in cs_.
 	 */
 	void commitCol(__m128i *pvH, __m128i *pvE, __m128i *pvF, size_t coli);
-	
+
 	/**
 	 * Reset the state of the Checkpointer.
 	 */
@@ -520,14 +527,14 @@ public:
 		firstCommit_ = true;
 		is8_ = debug_ = false;
 	}
-	
+
 	/**
 	 * Return true iff the Checkpointer has been initialized.
 	 */
 	bool inited() const {
 		return nrow_ > 0;
 	}
-	
+
 	size_t per()     const { return per_;     }
 	size_t perpow2() const { return perpow2_; }
 	size_t lomask()  const { return lomask_;  }
@@ -535,7 +542,7 @@ public:
 	size_t hicol()   const { return hicol_;   }
 	size_t nrow()    const { return nrow_;    }
 	size_t ncol()    const { return ncol_;    }
-	
+
 	const CpQuad* qdiag1sPtr() const { return qdiag1s_.ptr(); }
 	const CpQuad* qdiag2sPtr() const { return qdiag2s_.ptr(); }
 
@@ -547,26 +554,26 @@ public:
 	size_t   ncol_;      // # cols in current rectangle
 	int64_t  perf_;      // perfect score
 	bool     local_;     // local alignment?
-	
+
 	size_t   ndiag_;     // # of double-diags
-	
+
 	size_t   locol_;     // leftmost column committed
 	size_t   hicol_;     // rightmost column committed
 
 	// Map for committing scores from vector columns to checkpointed diagonals
 	EList<size_t> commitMap_;
 	bool          firstCommit_;
-	
+
 	EList<CpQuad> qdiag1s_; // checkpoint H/E/F values for diagonal 1
 	EList<CpQuad> qdiag2s_; // checkpoint H/E/F values for diagonal 2
 
 	EList<CpQuad> qrows_;   // checkpoint H/E/F values for rows
-	
+
 	// We store columns in this way to reduce overhead of populating them
 	bool          is8_;     // true -> fill used 8-bit cells
 	size_t        niter_;   // # __m128i words per column
 	EList_m128i   qcols_;   // checkpoint E/F/H values for select columns
-	
+
 	bool          debug_;   // get debug checkpoints? (i.e. fill qcolsD_?)
 	EList_m128i   qcolsD_;  // checkpoint E/F/H values for all columns (debug)
 };

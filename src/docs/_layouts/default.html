@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+<head>
+    {% capture title %}{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}{% endcapture %}
+
+    {% include page-url-resolver.html page=page %}
+
+    {% if page.excerpt %}
+    {% assign description = page.excerpt | strip_html | strip_newlines | truncate: 160 %}
+    {% else %}
+    {% assign description = site.description %}
+    {% endif %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ title }}</title>
+
+    <meta name="description" content="{{ description }}">
+
+    <link rel="shortcut icon" href="{{ site.favicon | prepend: site.baseurl }}" type="image/x-icon">
+    <link rel="canonical" href="{{ url }}">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}" />
+
+    {% if page.eye_catch %}
+    {% assign ogp_image_url = page.eye_catch %}
+    {% else %}
+    {% assign ogp_image_url = site.ogp.image_url %}
+    {% endif %}
+
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{ ogp_image_url }}" />
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:site_name" content="{{ site.title }}" />
+    <meta property="fb:admins" content="{{ site.ogp.fb.admin }}" />
+    <meta property="fb:app_id" content="{{ site.ogp.fb.app_id }}" />
+    <meta property="og:description" content="{{ description }}" />
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://use.fontawesome.com/1f5f360d80.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet">
+
+    <link href="{{ '/assets/css/style.css' | prepend: site.baseurl }}" rel="stylesheet">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="inner clearfix">
+        {% if site.avatar %}
+        <a href="{{ '/' | prepend: site.baseurl }}">
+            <img class="avatar" src="{{ site.avatar | prepend: site.baseurl }}" alt=""/>
+        </a>
+        {% endif %}
+        <h1 class="clearfix">
+            <a class="title {% if site.avatar == null %}slim{% endif %}" href="{{ '/' | prepend: site.baseurl }}">{{ site.title }}</a>
+            <br><span class="description">{{ site.description }}</span>
+        </h1>
+    </div>
+</header>
+
+<div class="site-container">
+    <div class="site-content">
+        {{ content }}
+    </div>
+
+    <aside class="site-aside">
+        <div class="inner">
+			<div class="block">
+                        <form action="{{ site.baseurl }}/search">
+                            <input type="search" id="search" name="q" placeholder="{{ site.str_search }}" />
+                        </form>
+           </div>
+
+		   <div class="block">
+            <ul>
+                {% assign pages = site.pages | where: "category", "main" | sort: 'order' %}
+                {% for page in pages %}
+                {% if page.title and page.hide != true %}
+                <li><a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+			</div>
+            <!--
+            <ul class="icons">
+                {% include icons.html icons=site.icons %}
+            </ul>
+            <hr class="with-no-margin margin-bottom"/>
+            -->
+
+			<div class="block">
+			<h2>Funding</h2>
+			<br>
+			<div style="font-size: 0.8em">
+            This work was supported in part by the National Human Genome Research Institute under grants R01-HG006102 and R01-HG006677, 
+			and NIH grants R01-LM06845 and R01-GM083873 and NSF grant CCF-0347992 to Steven L. Salzberg 
+			and by the Cancer Prevention Research Institute of Texas under grant RR170068 and NIH grant R01-GM135341 to Daehwan Kim
+			</div>
+			</div>
+
+			<div class="block">
+			<h2>Getting Help</h2>
+			<br>
+			Please use <a href="mailto:hisat2.genomics@gmail.com">hisat2.genomics@gmail.com</a> for private communications only. Please do not email technical questions to HISAT2 contributors directly.
+			</div>
+
+			<div class="block">
+			<h2>Publications</h2>
+			<div style="font-size: 0.8em">
+			<ul>
+			<li>Kim, D., Paggi, J.M., Park, C. <i>et al.</i> <a class="publication" href="https://doi.org/10.1038/s41587-019-0201-4">Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype.</a> <a class="publication" href="https://www.nature.com/nbt/"><i>Nat Biotechnol</i></a> <b>37</b>, 907–915 (2019).</li>
+			<li>Kim D, Langmead B and Salzberg SL. <a class="publication" href="https://doi.org/10.1038/nmeth.3317">HISAT: a fast spliced aligner with low memory requirements.</a> <a class="publication" href="https://www.nature.com/nmeth/"><i>Nature Methods</i></a> 2015</li>
+			<li>Pertea M, Kim D, Pertea G, Leek JT and Salzberg SL. <a class="publication" href="https://doi.org/10.1038/nprot.2016.095">Transcript-level expression analysis of RNA-seq experiments with HISAT, StringTie and Ballgown.</a> <a class="publication" href="https://www.nature.com/nprot/"><i>Nature Protocols</i></a> 2016</li>
+			</ul>
+			</div>
+			</div>
+
+			<div class="block">
+			<h2>Contributors</h2>
+            <ul>
+            {% for item in site.data.contributor %}
+			    <li>
+				{% if item.url contains "http://" or item.url contains "https://" %}
+				<a class="page-link" href="{{ item.url }}">{{ item.name }}</a>
+				{% else %}
+				<a class="page-link" href="{{ item.url | prepend: site.baseurl }}">{{ item.name }}</a>
+				{% endif %}
+				</li>
+            {% endfor %}
+            </ul>
+			</div>
+
+            {% if site.data.collaborate %}
+            <div class="block">
+            {% for item in site.data.collaborate %}
+                    <ul style="text-align: center">
+                        <a href="{{ item.url }}">
+                            <img class="avatar" src="{{ item.logo | prepend: site.baseurl }}" alt="{{ item.name }}" />
+                        </a>
+                    </ul>
+            {% endfor %}
+            </div>
+            {% endif %}
+
+			<!--
+            <div class="block sticky">
+                <h2>{{ site.str_recent_posts }}</h2>
+                <ul>
+                    {% assign posts = '' | split: '' %}
+                    {% for post in site.posts %}
+                    {% if post.hide != true %}
+                    {% assign posts = posts | push: post %}
+                    {% endif %}
+                    {% endfor %}
+                    {% assign posts = posts | sort: 'date' | reverse %}
+                    {% for post in posts limit:site.recent_posts_num %}
+                    <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+			-->
+
+        </div>
+    </aside>
+</div>
+
+<footer class="site-footer">
+    <div class="inner">
+        <span>Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://github.com/ttskch/jekyll-ttskch-theme">TtskchTheme</a></span>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{{ '/assets/lib/garand-sticky/jquery.sticky.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/assets/js/script.js' | prepend: site.baseurl }}"></script>
+
+{% if page.id %}
+<script src="{{ '/assets/js/header-link.js' | prepend: site.baseurl }}"></script>
+{% endif %}
+
+{% if page.permalink == '/search/' %}
+<script src="{{ '/assets/js/search.js' | prepend: site.baseurl }}"></script>
+{% endif %}
+
+{% include fb-root.html %}
+{% include google-analytics.html %}
+
+</body>
+</html>
