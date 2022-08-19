@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.1</span>
       </span>
     </div>
 
@@ -75,12 +75,22 @@
 <div class="section level3">
 <h3 id="source-code">Source code<a class="anchor" aria-label="anchor" href="#source-code"></a>
 </h3>
+<div class="section level4">
+<h4 id="rhisat2-v1131-and-newer">Rhisat2 v1.13.1 and newer<a class="anchor" aria-label="anchor" href="#rhisat2-v1131-and-newer"></a>
+</h4>
+<p>In Rhisat2 v1.13.1 and onwards, hisat2 was updated to v2.2.1, which was obtained from <a href="https://github.com/DaehwanKimLab/hisat2/releases" class="external-link">https://github.com/DaehwanKimLab/hisat2/releases</a> on July 27, 2022.</p>
+<p>Furthermore, Rhisat2 now includes parts of the SIMD Everywhere header library (<a href="https://github.com/simd-everywhere/simde" class="external-link uri">https://github.com/simd-everywhere/simde</a>) to support compilation on arm64, based on the implementation by Michael R. Crusoe <a href="mailto:crusoe@debian.org" class="email">crusoe@debian.org</a> for the hisat2 (2.2.1-3) debian package (simde patch in <a href="http://deb.debian.org/debian/pool/main/h/hisat2/hisat2_2.2.1-3.debian.tar.xz" class="external-link uri">http://deb.debian.org/debian/pool/main/h/hisat2/hisat2_2.2.1-3.debian.tar.xz</a>, also forwarded in <a href="https://github.com/DaehwanKimLab/hisat2/pull/251" class="external-link uri">https://github.com/DaehwanKimLab/hisat2/pull/251</a>).</p>
+</div>
+<div class="section level4">
+<h4 id="rhisat2-versions-up-to-v1130">Rhisat2 versions up to v1.13.0<a class="anchor" aria-label="anchor" href="#rhisat2-versions-up-to-v1130"></a>
+</h4>
 <p>The source code for hisat2 v2.1.0 was obtained from <a href="https://ccb.jhu.edu/software/hisat2/index.shtml" class="external-link">https://ccb.jhu.edu/software/hisat2/index.shtml</a> on October 17, 2018.</p>
 <p>Based on the discussion at <a href="https://github.com/BenLangmead/bowtie2/issues/81" class="external-link">https://github.com/BenLangmead/bowtie2/issues/81</a>, the following small modification was made to allow compilation:</p>
 <p>In the file <code>src/aligner_result.cpp</code>, line 1267</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>flag <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span></code></pre></div>
 <p>was replaced by</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>flag[<span class="dv">0</span>] <span class="op">!=</span><span class="st"> '\0'</span></span></code></pre></div>
+</div>
 </div>
 </div>
   </div>
@@ -136,7 +146,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

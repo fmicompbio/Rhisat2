@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.1</span>
       </span>
     </div>
 
@@ -53,12 +53,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hisat2_build_usage</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hisat2_build_usage</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="value">
     <h2>Value</h2>
-    <p>No value is returned, the usage of <code>hisat2_build</code> is printed to
+    
+
+<p>No value is returned, the usage of <code>hisat2_build</code> is printed to
   the console.</p>
     </div>
     <div id="author">
@@ -68,8 +70,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">hisat2_build_usage</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "HISAT2 version 2.1.0 by Daehwan Kim (infphilo@gmail.com, http://www.ccb.jhu.edu/people/infphilo)"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hisat2_build_usage</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "HISAT2 version 2.2.1 by Daehwan Kim (infphilo@gmail.com, http://www.ccb.jhu.edu/people/infphilo)"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "Usage: hisat2-build [options]* &lt;reference_in&gt; &lt;ht2_index_base&gt;"                                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "    reference_in            comma-separated list of files with ref sequences"                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "    hisat2_index_base       write ht2 data to files with this dir/basename"                      </span>
@@ -77,7 +79,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "    -c                      reference sequences given on cmd line (as"                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "                            &lt;reference_in&gt;)"                                                     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "    -a/--noauto             disable automatic -p/--bmax/--dcv memory-fitting"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "    -p                      number of threads"                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "    -p &lt;int&gt;                number of threads"                                                   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [10] "    --bmax &lt;int&gt;            max bucket sz for blockwise suffix-array builder"                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] "    --bmaxdivn &lt;int&gt;        max bucket sz as divisor of ref len (default: 4)"                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [12] "    --dcv &lt;int&gt;             diff-cover period for blockwise (default: 1024)"                     </span>
@@ -92,11 +94,15 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] "    --haplotype &lt;path&gt;      haplotype file name"                                                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [22] "    --ss &lt;path&gt;             Splice site file name"                                               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [23] "    --exon &lt;path&gt;           Exon file name"                                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [24] "    --seed &lt;int&gt;            seed for random number generator"                                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "    -q/--quiet              verbose output (for debugging)"                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [26] "    -h/--help               print detailed description of tool and its options"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [27] "    --usage                 print this usage message"                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "    --version               print version information and quit"                                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [24] "    --repeat-ref &lt;path&gt;     Repeat reference file name"                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "    --repeat-info &lt;path&gt;    Repeat information file name"                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [26] "    --repeat-snp &lt;path&gt;     Repeat snp file name"                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [27] "    --repeat-haplotype &lt;path&gt;   Repeat haplotype file name"                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "    --seed &lt;int&gt;            seed for random number generator"                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [29] "    -q/--quiet              disable verbose output (for debugging)"                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [30] "    -h/--help               print detailed description of tool and its options"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "    --usage                 print this usage message"                                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [32] "    --version               print version information and quit"                                  </span>
 </code></pre></div>
     </div>
   </div>
@@ -111,7 +117,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>
