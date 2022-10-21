@@ -87,9 +87,9 @@
 <p>The source code for hisat2 v2.1.0 was obtained from <a href="https://ccb.jhu.edu/software/hisat2/index.shtml" class="external-link">https://ccb.jhu.edu/software/hisat2/index.shtml</a> on October 17, 2018.</p>
 <p>Based on the discussion at <a href="https://github.com/BenLangmead/bowtie2/issues/81" class="external-link">https://github.com/BenLangmead/bowtie2/issues/81</a>, the following small modification was made to allow compilation:</p>
 <p>In the file <code>src/aligner_result.cpp</code>, line 1267</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>flag <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flag <span class="sc">&gt;</span> <span class="dv">0</span></span></code></pre></div>
 <p>was replaced by</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>flag[<span class="dv">0</span>] <span class="op">!=</span><span class="st"> '\0'</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flag[<span class="dv">0</span>] <span class="sc">!=</span> <span class="st">'</span><span class="sc">\0</span><span class="st">'</span></span></code></pre></div>
 </div>
 </div>
 </div>
