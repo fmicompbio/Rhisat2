@@ -36,6 +36,11 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2
 
+      - name: Install specific version of xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '13.4'
+
       - name: Set up R and install BiocManager
         uses: grimbough/bioc-actions/setup-bioc@v1
         if: matrix.config.image == null
