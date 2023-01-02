@@ -58,10 +58,12 @@ jobs:
         run: |
           sudo apt-get install -y python-glpk
 
-      - name: Check Xcode CLTools version
+      - name: Check and set Xcode CLTools version
         if: runner.os == 'macOS'
         run: |
           pkgutil --pkg-info=com.apple.pkg.CLTools_Executables
+          ## See https://github.com/orgs/Homebrew/discussions/3659
+          sudo xcode-select --switch /Library/Developer/CommandLineTools
 
       - name: Install remotes
         run: |
