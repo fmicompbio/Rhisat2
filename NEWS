@@ -1,3 +1,9 @@
+CHANGES IN VERSION 1.19.1
+-------------------------
+
+    o Exclude unsupported flags in Makefile for Linux aarch64 platform
+    o Make mask2iupac a signed char array
+
 CHANGES IN VERSION 1.13.1
 -------------------------
 
