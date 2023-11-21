@@ -85,6 +85,12 @@ ifneq (,$(findstring Darwin,$(shell uname)))
 	MACOS = 1
 endif
 
+AARCH64 = 0
+ifneq (,$(findstring aarch64,$(shell uname -m)))
+  AARCH64 = 1
+endif
+
+
 EXTRA_FLAGS += -std=c++11
 INC += -I. -I third_party
 
@@ -200,9 +206,14 @@ BITS_FLAG =
 #endif
 
 ifeq (64,$(BITS))
-	BITS_FLAG = -m64
+  ifeq (0, $(AARCH64))
+  	BITS_FLAG = -m64
+  endif
 endif
-SSE_FLAG=-msse2
+SSE_FLAG =
+ifeq (0, $(AARCH64))
+  SSE_FLAG=-msse2
+endif
 
 DEBUG_FLAGS    = -O0 -g3 $(BITS_FLAG) $(SSE_FLAG)
 DEBUG_DEFS     = -DCOMPILER_OPTIONS="\"$(DEBUG_FLAGS) $(EXTRA_FLAGS)\""
