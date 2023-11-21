@@ -8,7 +8,7 @@ The `Rhisat2` R package provides an R interface to the [`hisat2`](https://ccb.jh
 
 #### Rhisat2 v1.19.1 and newer
 
-To allow compilation on Linux aarch64, the Makefile obtained from hisat2 was adapted to exclude unsupported flags (`-m64` and `-msse2`) on this platform. In addition, the `mask2iupac` array was converted from a `char` to a `signed char`. See [here](https://github.com/fmicompbio/Rhisat2/pull/5/files) for the precise changes. 
+To allow compilation also on Linux aarch64, the Makefile obtained from hisat2 was adapted to exclude unsupported flags (`-m64` and `-msse2`) on this platform. In addition, the `mask2iupac` array was converted from a `char` to a `signed char`. See [here](https://github.com/fmicompbio/Rhisat2/pull/5/files) for the precise changes. 
 
 #### Rhisat2 v1.13.1 and newer
 
