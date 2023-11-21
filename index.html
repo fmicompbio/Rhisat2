@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.17.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.19.1</span>
       </span>
     </div>
 
@@ -73,6 +73,11 @@
 <div class="section level3">
 <h3 id="source-code">Source code<a class="anchor" aria-label="anchor" href="#source-code"></a>
 </h3>
+<div class="section level4">
+<h4 id="rhisat2-v1191-and-newer">Rhisat2 v1.19.1 and newer<a class="anchor" aria-label="anchor" href="#rhisat2-v1191-and-newer"></a>
+</h4>
+<p>To allow compilation also on Linux aarch64, the Makefile obtained from hisat2 was adapted to exclude unsupported flags (<code>-m64</code> and <code>-msse2</code>) on this platform. In addition, the <code>mask2iupac</code> array was converted from a <code>char</code> to a <code>signed char</code>. See <a href="https://github.com/fmicompbio/Rhisat2/pull/5/files" class="external-link">here</a> for the precise changes.</p>
+</div>
 <div class="section level4">
 <h4 id="rhisat2-v1131-and-newer">Rhisat2 v1.13.1 and newer<a class="anchor" aria-label="anchor" href="#rhisat2-v1131-and-newer"></a>
 </h4>
