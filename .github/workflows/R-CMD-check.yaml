@@ -24,6 +24,7 @@ jobs:
         - { os: ubuntu-latest, bioc: 'devel'}
 #        - { os: ubuntu-latest, r: 'devel', bioc: 'devel', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
         - { os: ubuntu-latest, image: 'bioconductor/bioconductor_docker:devel'}
+        - { os: ubuntu-latest, image: 'bioconductor/bioconductor_docker:devel-arm64'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
