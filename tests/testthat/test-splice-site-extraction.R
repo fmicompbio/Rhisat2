@@ -26,7 +26,7 @@ test_that("splice site extraction works and is consistent with HISAT2 output", {
 
   ## input in TxDb format
   tmp <- tempfile()
-  txdb <- GenomicFeatures::makeTxDbFromGFF(
+  txdb <- txdbmaker::makeTxDbFromGFF(
       system.file("extdata/refs/genes.gtf",
                   package="Rhisat2"))
   extract_splice_sites(features=txdb,

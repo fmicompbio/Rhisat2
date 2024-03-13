@@ -29,7 +29,7 @@
 #'                                           package="Rhisat2"),
 #'                      outfile=tmp, min_length=5)
 #'
-#' @importFrom GenomicFeatures makeTxDbFromGFF
+#' @importFrom txdbmaker makeTxDbFromGFF
 #' @importFrom SGSeq convertToTxFeatures type
 #' @importFrom GenomicRanges start end width seqnames strand
 #' @importFrom methods is
@@ -43,7 +43,7 @@ extract_splice_sites <- function(features, outfile, min_length=5) {
                  "file does not exist.")
         }
         tryCatch({
-            txdb <- GenomicFeatures::makeTxDbFromGFF(features, format = "auto")
+            txdb <- txdbmaker::makeTxDbFromGFF(features, format = "auto")
         }, error = function(e) {
             stop("'features' is a character string corresponding to an ",
                  "existing file, but the file is not compatible with ",
