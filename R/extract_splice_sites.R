@@ -52,7 +52,7 @@ extract_splice_sites <- function(features, outfile, min_length=5) {
     } else if (methods::is(features, "TxDb")) {
         txdb <- features
     } else if (methods::is(features, "GRanges")) {
-        txdb <- GenomicFeatures::makeTxDbFromGRanges(features)
+        txdb <- txdbmaker::makeTxDbFromGRanges(features)
     } else {
         stop("The 'features' argument is not in one of the supported ",
              "formats (path to gtf/gff3 file, TxDb, GRanges).")
