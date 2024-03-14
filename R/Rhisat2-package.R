@@ -7,13 +7,10 @@
 #'
 #' @author Charlotte Soneson, based partly on code from Florian Hahne
 #'
-#' @name Rhisat2-package
-#'
 #' @seealso hisat2, hisat2_build, hisat2_build_usage, hisat2_usage
-#'
+#' @keywords internal
 #' @references
 #' Kim D, Langmead B and Salzberg SL. HISAT: a fast spliced aligner with low
 #' memory requirements. Nature Methods 12:357-360 (2015).
 #'
-#' @docType package
-NULL
+"_PACKAGE"

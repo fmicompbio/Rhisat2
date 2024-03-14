@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.19.2
+-------------------------
+
+    o Swap GenomicFeatures dependency for txdbmaker
+
 CHANGES IN VERSION 1.19.1
 -------------------------
 

@@ -2,6 +2,7 @@
 % Please edit documentation in R/Rhisat2-package.R
 \docType{package}
 \name{Rhisat2-package}
+\alias{Rhisat2}
 \alias{Rhisat2-package}
 \title{R hisat2 wrapper}
 \description{
@@ -20,3 +21,4 @@ hisat2, hisat2_build, hisat2_build_usage, hisat2_usage
 \author{
 Charlotte Soneson, based partly on code from Florian Hahne
 }
+\keyword{internal}
