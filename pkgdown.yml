@@ -1,7 +1,7 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7.9000
-pkgdown_sha: 3c4d8f13e35dce8c93c8979022db17c5700f10d4
+pkgdown: 2.0.9.9000
+pkgdown_sha: 5f9606b54aedbb36ade5a1f9db4c2780ceaf4e56
 articles:
   Rhisat2: Rhisat2.html
-last_built: 2024-03-14T13:29Z
+last_built: 2024-04-30T18:21Z
 
