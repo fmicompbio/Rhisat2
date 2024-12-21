@@ -6,6 +6,8 @@ providing it as the argument known-splicesite-infile."><!-- mathjax --><script s
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
+
+
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -18,9 +20,10 @@ providing it as the argument known-splicesite-infile."><!-- mathjax --><script s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.21.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.23.0</span>
       </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
   <a href="../articles/Rhisat2.html">Get started</a>
@@ -31,42 +34,56 @@ providing it as the argument known-splicesite-infile."><!-- mathjax --><script s
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/fmicompbio/Rhisat2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+
+
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract splice sites from annotation</h1>
-    <small class="dont-index">Source: <a href="https://github.com/fmicompbio/Rhisat2/blob/HEAD/R/extract_splice_sites.R" class="external-link"><code>R/extract_splice_sites.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/fmicompbio/Rhisat2/blob/devel/R/extract_splice_sites.R" class="external-link"><code>R/extract_splice_sites.R</code></a></small>
     <div class="hidden name"><code>extract_splice_sites.Rd</code></div>
     </div>
+
     <div class="ref-description">
     <p>This function extracts splice sites from an annotation object (a gtf/gff3
 file, a <code>GRanges</code> object or a <code>TxDb</code> object) and saves them in a
 text file formatted such that it can be directly used with HISAT2, by
 providing it as the argument <code>known-splicesite-infile</code>.</p>
     </div>
+
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_splice_sites</span><span class="op">(</span><span class="va">features</span>, <span class="va">outfile</span>, min_length <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
     </div>
+
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt id="arg-features">features<a class="anchor" aria-label="anchor" href="#arg-features"></a></dt>
+
+
+<dl><dt id="arg-features">features<a class="anchor" aria-label="anchor" href="#arg-features"></a></dt>
 <dd><p>Either the path to a gtf/gff3 file containing the genomic
 features, a GRanges object or a TxDb object.</p></dd>
+
+
 <dt id="arg-outfile">outfile<a class="anchor" aria-label="anchor" href="#arg-outfile"></a></dt>
 <dd><p>Character scalar. The path to a text file where the extracted
 splice sites will be written.</p></dd>
+
+
 <dt id="arg-min-length">min_length<a class="anchor" aria-label="anchor" href="#arg-min-length"></a></dt>
 <dd><p>Integer scalar. Junctions corresponding to introns below
 this size will not be reported. The default setting in HISAT2 is 5.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-<p>Nothing is returned, but the splice junction coordinates are written
+    <p>Nothing is returned, but the splice junction coordinates are written
   to <code>outfile</code>.</p>
     </div>
     <div id="references">
@@ -78,6 +95,7 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
     <h2>Author</h2>
     <p>Charlotte Soneson</p>
     </div>
+
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -89,6 +107,7 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>genome version information is not available for this TxDb object</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -98,12 +117,22 @@ memory requirements. Nature Methods 12:357-360 (2015).</p>
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
     </nav></div>
 </div>
+
+
       <footer><div class="copyright">
   <p></p><p>Developed by Charlotte Soneson.</p>
 </div>
+
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
 </div>
+
       </footer></div>
+
+
+
+
+
+
   </body></html>
 
