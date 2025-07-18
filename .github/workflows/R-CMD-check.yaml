@@ -115,7 +115,7 @@ jobs:
 
       - name: Force install some packages
         run: |
-          BiocManager::install(c("txdbmaker", "GenomicRanges", "GenomeInfoDb", "Seqinfo"), type = "source", force = TRUE)
+          BiocManager::install(c("txdbmaker", "GenomicRanges", "GenomeInfoDb", "Seqinfo", "GenomicFeatures"), type = "source", force = TRUE)
           txdb <- txdbmaker::makeTxDbFromGFF("inst/extdata/refs/genes.gtf", format = "auto")
           txdb
         shell: Rscript {0}
