@@ -69,7 +69,7 @@
                         <h4 data-toc-skip class="author">Charlotte
 Soneson</h4>
             
-            <h4 data-toc-skip class="date">2025-04-16</h4>
+            <h4 data-toc-skip class="date">2025-07-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/fmicompbio/Rhisat2/blob/devel/vignettes/Rhisat2.Rmd" class="external-link"><code>vignettes/Rhisat2.Rmd</code></a></small>
       <div class="hidden name"><code>Rhisat2.Rmd</code></div>
@@ -78,7 +78,7 @@ Soneson</h4>
 
     
     
-<p>The <em><a href="https://bioconductor.org/packages/3.21/Rhisat2" class="external-link">Rhisat2</a></em>
+<p>The <em><a href="https://bioconductor.org/packages/3.22/Rhisat2" class="external-link">Rhisat2</a></em>
 package provides an interface to the <a href="https://ccb.jhu.edu/software/hisat2/index.shtml" class="external-link">HISAT2</a>
 short-read aligner software <span class="citation">(Kim, Langmead, and
 Salzberg 2015)</span>.</p>
@@ -127,7 +127,7 @@ for inspection, without executing it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/hisat2_build.html">hisat2_build</a></span><span class="op">(</span>references<span class="op">=</span><span class="va">refs</span>, outdir<span class="op">=</span><span class="va">td</span>, prefix<span class="op">=</span><span class="st">"myindex"</span>,</span>
 <span>                   force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/qn/7t0vq3ts721cmgt0tgrtgzl80000gn/T//RtmpEYpwiK/myindex'"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/y6/nj790rtn62lfktb1sh__79hc0000gn/T//Rtmpqe3tOg/myindex'"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="aligning-reads-to-the-genome-index">Aligning reads to the genome index<a class="anchor" aria-label="anchor" href="#aligning-reads-to-the-genome-index"></a>
@@ -184,8 +184,8 @@ starting from an annotation file in gtf or gff3 format, or from a
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hisat2_version.html">hisat2_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "/Users/runner/work/_temp/Library/Rhisat2/hisat2 version 2.2.1"          </span></span>
 <span><span class="co">#&gt; [2] "64-bit"                                                                 </span></span>
-<span><span class="co">#&gt; [3] "Built on Mac-1744787360332.local"                                       </span></span>
-<span><span class="co">#&gt; [4] "Wed Apr 16 07:17:08 UTC 2025"                                           </span></span>
+<span><span class="co">#&gt; [3] "Built on Mac-1752837425270.local"                                       </span></span>
+<span><span class="co">#&gt; [4] "Fri Jul 18 11:20:57 UTC 2025"                                           </span></span>
 <span><span class="co">#&gt; [5] "Compiler: InstalledDir: /Library/Developer/CommandLineTools/usr/bin"    </span></span>
 <span><span class="co">#&gt; [6] "Options: -O3 -m64 -msse2 -funroll-loops -g3 -std=c++11"                 </span></span>
 <span><span class="co">#&gt; [7] "Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}"</span></span></code></pre></div>
@@ -364,9 +364,9 @@ starting from an annotation file in gtf or gff3 format, or from a
 </h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.5.0 Patched (2025-04-15 r88147)</span></span>
+<span><span class="co">#&gt; R version 4.5.1 (2025-06-13)</span></span>
 <span><span class="co">#&gt; Platform: aarch64-apple-darwin20</span></span>
-<span><span class="co">#&gt; Running under: macOS Sonoma 14.7.4</span></span>
+<span><span class="co">#&gt; Running under: macOS Sonoma 14.7.6</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib </span></span>
@@ -382,42 +382,42 @@ starting from an annotation file in gtf or gff3 format, or from a
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] Rhisat2_1.25.0   BiocStyle_2.35.0</span></span>
+<span><span class="co">#&gt; [1] Rhisat2_1.25.0   BiocStyle_2.37.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] tidyselect_1.2.1            dplyr_1.1.4                 blob_1.2.4                 </span></span>
-<span><span class="co">#&gt;  [4] filelock_1.0.3              Biostrings_2.75.4           bitops_1.0-9               </span></span>
-<span><span class="co">#&gt;  [7] fastmap_1.2.0               RCurl_1.98-1.17             BiocFileCache_2.15.1       </span></span>
-<span><span class="co">#&gt; [10] GenomicAlignments_1.43.0    XML_3.99-0.18               digest_0.6.37              </span></span>
-<span><span class="co">#&gt; [13] lifecycle_1.0.4             KEGGREST_1.47.1             RSQLite_2.3.9              </span></span>
-<span><span class="co">#&gt; [16] magrittr_2.0.3              compiler_4.5.0              rlang_1.1.6                </span></span>
-<span><span class="co">#&gt; [19] sass_0.4.10                 progress_1.2.3              tools_4.5.0                </span></span>
-<span><span class="co">#&gt; [22] igraph_2.1.4                yaml_2.3.10                 rtracklayer_1.67.1         </span></span>
-<span><span class="co">#&gt; [25] knitr_1.50                  prettyunits_1.2.0           S4Arrays_1.7.3             </span></span>
-<span><span class="co">#&gt; [28] bit_4.6.0                   curl_6.2.2                  DelayedArray_0.33.6        </span></span>
-<span><span class="co">#&gt; [31] xml2_1.3.8                  abind_1.4-8                 BiocParallel_1.41.5        </span></span>
-<span><span class="co">#&gt; [34] txdbmaker_1.3.1             BiocGenerics_0.53.6         desc_1.4.3                 </span></span>
-<span><span class="co">#&gt; [37] grid_4.5.0                  stats4_4.5.0                biomaRt_2.63.3             </span></span>
-<span><span class="co">#&gt; [40] SummarizedExperiment_1.37.0 cli_3.6.4                   rmarkdown_2.29             </span></span>
-<span><span class="co">#&gt; [43] crayon_1.5.3                ragg_1.4.0                  generics_0.1.3             </span></span>
-<span><span class="co">#&gt; [46] httr_1.4.7                  rjson_0.2.23                RUnit_0.4.33               </span></span>
+<span><span class="co">#&gt;  [4] filelock_1.0.3              Biostrings_2.77.2           bitops_1.0-9               </span></span>
+<span><span class="co">#&gt;  [7] fastmap_1.2.0               RCurl_1.98-1.17             BiocFileCache_2.99.5       </span></span>
+<span><span class="co">#&gt; [10] GenomicAlignments_1.45.1    XML_3.99-0.18               digest_0.6.37              </span></span>
+<span><span class="co">#&gt; [13] lifecycle_1.0.4             KEGGREST_1.49.1             RSQLite_2.4.1              </span></span>
+<span><span class="co">#&gt; [16] magrittr_2.0.3              compiler_4.5.1              rlang_1.1.6                </span></span>
+<span><span class="co">#&gt; [19] sass_0.4.10                 progress_1.2.3              tools_4.5.1                </span></span>
+<span><span class="co">#&gt; [22] igraph_2.1.4                yaml_2.3.10                 rtracklayer_1.69.1         </span></span>
+<span><span class="co">#&gt; [25] knitr_1.50                  prettyunits_1.2.0           S4Arrays_1.9.1             </span></span>
+<span><span class="co">#&gt; [28] bit_4.6.0                   curl_6.4.0                  DelayedArray_0.35.2        </span></span>
+<span><span class="co">#&gt; [31] xml2_1.3.8                  abind_1.4-8                 BiocParallel_1.43.4        </span></span>
+<span><span class="co">#&gt; [34] txdbmaker_1.5.6             BiocGenerics_0.55.0         desc_1.4.3                 </span></span>
+<span><span class="co">#&gt; [37] grid_4.5.1                  stats4_4.5.1                biomaRt_2.65.0             </span></span>
+<span><span class="co">#&gt; [40] SummarizedExperiment_1.39.1 cli_3.6.5                   rmarkdown_2.29             </span></span>
+<span><span class="co">#&gt; [43] crayon_1.5.3                ragg_1.4.0                  generics_0.1.4             </span></span>
+<span><span class="co">#&gt; [46] httr_1.4.7                  rjson_0.2.23                RUnit_0.4.33.1             </span></span>
 <span><span class="co">#&gt; [49] DBI_1.2.3                   cachem_1.1.0                stringr_1.5.1              </span></span>
-<span><span class="co">#&gt; [52] parallel_4.5.0              AnnotationDbi_1.69.1        BiocManager_1.30.25        </span></span>
-<span><span class="co">#&gt; [55] XVector_0.47.2              restfulr_0.0.15             matrixStats_1.5.0          </span></span>
+<span><span class="co">#&gt; [52] parallel_4.5.1              AnnotationDbi_1.71.0        BiocManager_1.30.26        </span></span>
+<span><span class="co">#&gt; [55] XVector_0.49.0              restfulr_0.0.16             matrixStats_1.5.0          </span></span>
 <span><span class="co">#&gt; [58] vctrs_0.6.5                 Matrix_1.7-3                jsonlite_2.0.0             </span></span>
-<span><span class="co">#&gt; [61] bookdown_0.43               IRanges_2.41.3              hms_1.1.3                  </span></span>
-<span><span class="co">#&gt; [64] S4Vectors_0.45.4            bit64_4.6.0-1               systemfonts_1.2.2          </span></span>
-<span><span class="co">#&gt; [67] GenomicFeatures_1.59.1      SGSeq_1.41.0                jquerylib_0.1.4            </span></span>
-<span><span class="co">#&gt; [70] glue_1.8.0                  pkgdown_2.1.1.9000          codetools_0.2-20           </span></span>
-<span><span class="co">#&gt; [73] stringi_1.8.7               GenomeInfoDb_1.43.4         GenomicRanges_1.59.1       </span></span>
-<span><span class="co">#&gt; [76] BiocIO_1.17.2               UCSC.utils_1.3.1            tibble_3.2.1               </span></span>
-<span><span class="co">#&gt; [79] pillar_1.10.2               rappdirs_0.3.3              htmltools_0.5.8.1          </span></span>
-<span><span class="co">#&gt; [82] GenomeInfoDbData_1.2.14     dbplyr_2.5.0                R6_2.6.1                   </span></span>
-<span><span class="co">#&gt; [85] httr2_1.1.2                 textshaping_1.0.0           evaluate_1.0.3             </span></span>
-<span><span class="co">#&gt; [88] lattice_0.22-7              Biobase_2.67.0              png_0.1-8                  </span></span>
-<span><span class="co">#&gt; [91] Rsamtools_2.23.1            memoise_2.0.1               bslib_0.9.0                </span></span>
-<span><span class="co">#&gt; [94] SparseArray_1.7.7           xfun_0.52                   fs_1.6.6                   </span></span>
-<span><span class="co">#&gt; [97] MatrixGenerics_1.19.1       pkgconfig_2.0.3</span></span></code></pre></div>
+<span><span class="co">#&gt; [61] bookdown_0.43               IRanges_2.43.0              hms_1.1.3                  </span></span>
+<span><span class="co">#&gt; [64] S4Vectors_0.47.0            bit64_4.6.0-1               systemfonts_1.2.3          </span></span>
+<span><span class="co">#&gt; [67] GenomicFeatures_1.61.4      SGSeq_1.43.0                jquerylib_0.1.4            </span></span>
+<span><span class="co">#&gt; [70] glue_1.8.0                  pkgdown_2.1.3.9000          codetools_0.2-20           </span></span>
+<span><span class="co">#&gt; [73] stringi_1.8.7               GenomeInfoDb_1.45.7         GenomicRanges_1.61.1       </span></span>
+<span><span class="co">#&gt; [76] BiocIO_1.19.0               UCSC.utils_1.5.0            tibble_3.3.0               </span></span>
+<span><span class="co">#&gt; [79] pillar_1.11.0               rappdirs_0.3.3              htmltools_0.5.8.1          </span></span>
+<span><span class="co">#&gt; [82] Seqinfo_0.99.1              dbplyr_2.5.0                R6_2.6.1                   </span></span>
+<span><span class="co">#&gt; [85] httr2_1.2.0                 textshaping_1.0.1           evaluate_1.0.4             </span></span>
+<span><span class="co">#&gt; [88] lattice_0.22-7              Biobase_2.69.0              png_0.1-8                  </span></span>
+<span><span class="co">#&gt; [91] Rsamtools_2.25.1            memoise_2.0.1               bslib_0.9.0                </span></span>
+<span><span class="co">#&gt; [94] SparseArray_1.9.0           xfun_0.52                   fs_1.6.6                   </span></span>
+<span><span class="co">#&gt; [97] MatrixGenerics_1.21.0       pkgconfig_2.0.3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -447,7 +447,7 @@ Requirements.”</span> <em>Nat. Methods</em> 12: 357.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.9000.</p>
 </div>
 
       </footer>
