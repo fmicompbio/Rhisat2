@@ -116,6 +116,8 @@ jobs:
       - name: Force install some packages
         run: |
           BiocManager::install("txdbmaker", type = "source", force = TRUE)
+          txdb <- txdbmaker::makeTxDbFromGFF("inst/extdata/refs/genes.gtf" format = "auto")
+          txdb
         shell: Rscript {0}
 
       - name: Session info
