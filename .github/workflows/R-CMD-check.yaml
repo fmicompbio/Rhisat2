@@ -173,7 +173,7 @@ jobs:
         run: |
           cat /home/runner/work/Rhisat2/Rhisat2.Rcheck/00install.out
 
-       - name: Run BiocCheck
+      - name: Run BiocCheck
         uses: grimbough/bioc-actions/run-BiocCheck@v1
         with:
           arguments: '--no-check-bioc-views --no-check-bioc-help'
