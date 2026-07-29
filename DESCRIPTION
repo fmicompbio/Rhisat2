@@ -10,7 +10,6 @@ Description: An R interface to the HISAT2 spliced short-read aligner by
     genome index and to perform the read alignment to the generated index.
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.3.1
 Depends: R (>= 4.4.0)
 Suggests: testthat,
     knitr,
@@ -25,4 +24,4 @@ Imports: txdbmaker,
     utils
 URL: https://github.com/fmicompbio/Rhisat2
 BugReports: https://github.com/fmicompbio/Rhisat2/issues
-Archs: x64
+Config/roxygen2/version: 8.0.0
