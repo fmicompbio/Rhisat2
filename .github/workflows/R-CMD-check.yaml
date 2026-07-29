@@ -42,6 +42,12 @@ jobs:
         with:
           bioc-version: ${{ matrix.config.bioc }}
 
+      - name: Run BiocCheck
+        uses: grimbough/bioc-actions/run-BiocCheck@v1
+        with:
+          arguments: '--no-check-bioc-views --no-check-bioc-help'
+          error-on: 'error'
+
       - name: Set up pandoc
         uses: r-lib/actions/setup-pandoc@v2
         if: matrix.config.image == null
@@ -136,12 +142,6 @@ jobs:
           R CMD config CXXFLAGS
           R CMD config CXXPICFLAGS
           g++ --version
-
-      - name: Run BiocCheck
-        uses: grimbough/bioc-actions/run-BiocCheck@v1
-        with:
-          arguments: '--no-check-bioc-views --no-check-bioc-help'
-          error-on: 'error'
 
       - name: Build, Install, Check
         id: build-install-check
