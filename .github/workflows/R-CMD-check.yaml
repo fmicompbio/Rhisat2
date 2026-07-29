@@ -179,7 +179,7 @@ jobs:
           arguments: '--no-check-bioc-views --no-check-bioc-help'
           error-on: 'never'
 
-     - name: Test coverage
+      - name: Test coverage
         if: matrix.config.os == 'macOS-latest'
         run: |
           install.packages("covr")
