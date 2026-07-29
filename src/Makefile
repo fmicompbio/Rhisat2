@@ -210,9 +210,11 @@ ifeq (64,$(BITS))
   	BITS_FLAG = -m64
   endif
 endif
-SSE_FLAG =
-ifeq (0, $(AARCH64))
-  SSE_FLAG=-msse2
+SSE_FLAG=-msse2
+SIMDE_DEF=
+ifneq (,$(findstring aarch64,$(shell $(CXX) -dumpmachine))$(findstring arm64,$(shell $(CXX) -dumpmachine)))
+	SSE_FLAG=
+	SIMDE_DEF=-DUSESIMDE
 endif
 
 DEBUG_FLAGS    = -O0 -g3 $(BITS_FLAG) $(SSE_FLAG)
@@ -322,7 +324,7 @@ DEFS=-fno-strict-aliasing \
      $(PREF_DEF) \
      $(MM_DEF) \
      $(SHMEM_DEF) \
-     -DUSESIMDE
+     $(SIMDE_DEF)
 
 #
 # hisat-bp targets
