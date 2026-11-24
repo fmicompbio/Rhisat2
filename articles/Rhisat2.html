@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rhisat2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.29.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
                         <h4 data-toc-skip class="author">Charlotte
 Soneson</h4>
             
-            <h4 data-toc-skip class="date">2026-11-22</h4>
+            <h4 data-toc-skip class="date">2026-11-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/fmicompbio/Rhisat2/blob/devel/vignettes/Rhisat2.Rmd" class="external-link"><code>vignettes/Rhisat2.Rmd</code></a></small>
       <div class="hidden name"><code>Rhisat2.Rmd</code></div>
@@ -127,7 +127,7 @@ for inspection, without executing it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/hisat2_build.html">hisat2_build</a></span><span class="op">(</span>references<span class="op">=</span><span class="va">refs</span>, outdir<span class="op">=</span><span class="va">td</span>, prefix<span class="op">=</span><span class="st">"myindex"</span>,</span>
 <span>                   force<span class="op">=</span><span class="cn">TRUE</span>, strict<span class="op">=</span><span class="cn">TRUE</span>, execute<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T//Rtmppk9Kap/myindex'"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "'/Users/runner/work/_temp/Library/Rhisat2/hisat2-build' '/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr1.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr2.fa','/Users/runner/work/_temp/Library/Rhisat2/extdata/refs/chr3.fa' '/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T//Rtmp7cmZrb/myindex'"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="aligning-reads-to-the-genome-index">Aligning reads to the genome index<a class="anchor" aria-label="anchor" href="#aligning-reads-to-the-genome-index"></a>
@@ -184,8 +184,8 @@ starting from an annotation file in gtf or gff3 format, or from a
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hisat2_version.html">hisat2_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "/Users/runner/work/_temp/Library/Rhisat2/hisat2 version 2.2.1"               </span></span>
 <span><span class="co">#&gt; [2] "64-bit"                                                                      </span></span>
-<span><span class="co">#&gt; [3] "Built on sjc20-bb713-e8a6a22a-0c10-4e7c-b55e-9943ab91043b-A2C8251B09A0.local"</span></span>
-<span><span class="co">#&gt; [4] "Sun Nov 22 11:48:49 UTC 2026"                                                </span></span>
+<span><span class="co">#&gt; [3] "Built on chi22-dq225-1c767503-ae33-4894-98e4-505af2af3824-9E2996A04172.local"</span></span>
+<span><span class="co">#&gt; [4] "Tue Nov 24 19:24:21 UTC 2026"                                                </span></span>
 <span><span class="co">#&gt; [5] "Compiler: InstalledDir: /Library/Developer/CommandLineTools/usr/bin"         </span></span>
 <span><span class="co">#&gt; [6] "Options: -O3 -m64  -funroll-loops -g3 -std=c++11"                            </span></span>
 <span><span class="co">#&gt; [7] "Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}"</span></span></code></pre></div>
@@ -382,7 +382,7 @@ starting from an annotation file in gtf or gff3 format, or from a
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] Rhisat2_1.29.1   BiocStyle_2.41.0</span></span>
+<span><span class="co">#&gt; [1] Rhisat2_1.31.0   BiocStyle_2.41.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] tidyselect_1.2.1            dplyr_1.2.1                 blob_1.3.0                 </span></span>
@@ -394,7 +394,7 @@ starting from an annotation file in gtf or gff3 format, or from a
 <span><span class="co">#&gt; [19] rlang_1.3.0                 sass_0.5.0                  tools_4.6.2                </span></span>
 <span><span class="co">#&gt; [22] igraph_2.3.4                yaml_2.3.12                 rtracklayer_1.73.0         </span></span>
 <span><span class="co">#&gt; [25] knitr_1.52                  prettyunits_1.2.0           S4Arrays_1.13.3            </span></span>
-<span><span class="co">#&gt; [28] bit_4.6.0                   curl_8.1.0                  DelayedArray_0.39.8        </span></span>
+<span><span class="co">#&gt; [28] bit_4.6.0                   curl_8.2.0                  DelayedArray_0.39.8        </span></span>
 <span><span class="co">#&gt; [31] abind_1.4-8                 BiocParallel_1.47.0         txdbmaker_1.9.0            </span></span>
 <span><span class="co">#&gt; [34] BiocGenerics_0.59.13        desc_1.4.3                  grid_4.6.2                 </span></span>
 <span><span class="co">#&gt; [37] stats4_4.6.2                biomaRt_2.69.3              SummarizedExperiment_1.43.0</span></span>
